@@ -262,10 +262,10 @@ li {list-style:none;}
     }
     .search-filter-item-container > div.active {
         background-color: #03254C;
-        padding:6px 0 2px 0;
-        line-height: 20px;
     }
     .search-filter-item-container > div:nth-child(1) {
+        padding:6px 0 2px 0;
+        line-height: 20px;
         text-align: center;
         font-weight: bold;
         color: #03254C;
