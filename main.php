@@ -9,9 +9,9 @@ include "top.php";
   .modal-header .close {
     padding: 0px;
     margin:0px;
-}
+    }
 
-html, body {
+    html, body {
         margin: 0; height: 100%; overflow: hidden; 
     }
 
@@ -192,15 +192,9 @@ $(document).ready(function(e) {
                 data: {},
                 success: function(data) {
                     data = JSON.parse(data);
-
-                    var youtube = data[0].guide_operation_guide_movie;
-                    var youtubeId = youtube.split("?v=")[1];
-
-
-
+                    var youtubeId = data[0].guide_operation_guide_movie;
 
                     onYouTubePlayerAPIReady(youtubeId);
-
 
                     function onYouTubePlayerAPIReady(videoId) {
                         player = new YT.Player('useinfoPlayer', {
