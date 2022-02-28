@@ -673,7 +673,7 @@ include "top.php";
                         $(document).on("click", ".btn-summaray", function(){
                             var summaray = $(this).data("summaray");
 
-                            $(".modal-summaray-content").text(summaray);
+                            $(".modal-summaray-content").html(summaray);
                             $(".modal-summaray-popup, .modal-summaray-bg").show();
                         })
                         $(document).on("click", ".modal-summaray-popup-btn-close", function(){
