@@ -6,9 +6,9 @@ include "top.php";
 ?>
 <body>
 <style>
-  .modal-header .close {
-    padding: 0px;
-    margin:0px;
+    .modal-header .close {
+        padding: 0px;
+        margin:0px;
     }
 
     html, body {

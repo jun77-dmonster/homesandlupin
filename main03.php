@@ -604,8 +604,6 @@ include "top.php";
                     });
                 });
 
-                console.log(sql);
-
                 $.ajax({
                     type: 'POST',
                     url: 'ok/main03_ok.php?type=search',
@@ -617,7 +615,6 @@ include "top.php";
                         $('.search-result-container div').remove();
 
                         for(var i = 0; i < data.length; i++) {
-                            console.log(data[i]);
                             var html = "<div class='search-result-item-container'>";
                                     html += "<div class='search-result-img'><img src='/data/boardgames/" + data[i].games_img_file + "' alt='GAME' title='GAME'></div>";
                                         html += "<div class='search-result-content-container'>";
