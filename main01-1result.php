@@ -346,6 +346,11 @@ include "top.php";
 
         $(".game-num-container > div").eq(parseInt(getParam("num")) - 1).addClass("active");
 
+        $(".game-num-container > div").click(function(event){
+            event.preventDefault();
+
+            window.location.href = 'main01-1result.php?num=' + $(this).text().split("인")[0];
+        });
 
         function ladderInitialize() {
             var heightNode = 10;
@@ -477,8 +482,12 @@ include "top.php";
                         if(resultArr[i] || resultArr[i] === 0) {
                             $(".answer-wrap-" + resultArr[i]).css({
                                 backgroundColor: colorArr[i],
+
                             });
-                            $(".modal-game-table-container > div").eq(resultArr[i]).append("<div><img src='img/ladder/i" + i + ".png' alt='user' title='user'><div class='user-num-container'><div><span>" + (resultArr[i] + 1) + "</span><span>" + unitArr[i] + "</span></div></div></div>");
+                            $(".answer-wrap-" + resultArr[i]).find("span").css({
+                                color: '#0D2449',
+                            });
+                            $(".modal-game-table-container > div").eq(resultArr[i]).append("<div><img src='img/ladder/i" + i + ".png' alt='user' title='user'><div class='user-num-container' style='background-color:" + colorArr[i] + "'><div><span style='color: #0D2449'>" + (resultArr[i] + 1) + "</span><span style='color: #0D2449'>" + unitArr[i] + "</span></div></div></div>");
                         }
                         // for(var k = 0; k < resultArr.length; k++) {
                         //     if(i == resultArr[k])

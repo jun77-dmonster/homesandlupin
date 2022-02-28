@@ -45,7 +45,7 @@ include "top.php";
 <div class="container-fluid h-100" >
   <div class="row h-100">
 
-      <div style="position: absolute; width: 1100px; height: 500px; overflow: hidden; left:50%; transform: translateX(-50%); bottom: 0; z-index: 100;">
+      <div style="position: absolute; width: 1100px; height: 550px; overflow: hidden; left:50%; transform: translateX(-50%); bottom: 0; z-index: 100;">
           <canvas id='canvas' width='1100' height='500'>
               Canvas not supported, use another browser.
           </canvas>
@@ -82,7 +82,7 @@ include "top.php";
 
         <div class="ruletbox">
 
-            <img src="img/homesSelctor.png" style=" z-index: 100; top:120px; position:absolute; left:520px;">
+            <img src="img/homesSelctor.png" style=" z-index: 100; top:70px; position:absolute; left:520px;">
 <!--            <img src="img/homesleft.png" style=" bottom:100px; position:absolute; left:30px;">-->
 <!--            <img src="img/startcircle_nostart.png" style=" bottom:-30px; position:absolute; left:390px;">-->
 <!--            <img src="img/homesright.png" style=" bottom:100px; position:absolute; left:620px;">-->
