@@ -1110,12 +1110,11 @@ li {list-style:none;}
         width: calc(100% - 112px);
         margin: 16px 56px 0 56px;
         float: left;
-        background-color: gray;
-        height: 540px;
-        overflow: hidden;
+        /* background-color: gray; */
     }
     .main02-2-img-container img {
         width: 100%;
+        display:block;
     }
 
     .main05-container {
