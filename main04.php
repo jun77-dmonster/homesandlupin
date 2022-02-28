@@ -152,9 +152,9 @@ include "top.php";
 
                         $(".basket-option-radio-container").append("<p class='modal-option-subject-title'>수량</p>");
                         var html = "<div class='count-container'>";
-                                html += "<div>-</div>";
-                                html += "<div>1</div>";
                                 html += "<div>+</div>";
+                                html += "<div>1</div>";
+                                html += "<div>-</div>";
                             html += "</div>";
 
                         // var btnData = "data-";
