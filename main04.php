@@ -320,13 +320,13 @@ include "top.php";
                 // }
             })
 
-            $(document).on("click", ".count-container > div:nth-child(1)", function(event) {
+            $(document).on("click", ".count-container > div:nth-child(3)", function(event) {
                 var count = parseInt($(event.target).parent().find("div").eq(1).text());
                 count++;
                 $($(event.target).parent().find("div").eq(1)).text(count);
             })
 
-            $(document).on("click", ".count-container > div:nth-child(3)", function(event) {
+            $(document).on("click", ".count-container > div:nth-child(1)", function(event) {
                 var count = parseInt($(event.target).parent().find("div").eq(1).text());
 
                 if(count === 1)
