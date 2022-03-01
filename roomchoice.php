@@ -3,6 +3,14 @@ include "common.php";
 
 $branch_cd = get_session('branch_cd');
 
+$sql = "SELECT `branch_cd`, `room_cd`, `room_no` FROM DM_T_BRANCH_ROOM WHERE branch_cd='" . $_SESSION['branch_cd'] . "' AND room_delete_fl = 'T' ";
+$result = sql_query($sql);
+
+$room = [];
+for($i=0; $row = sql_fetch_array($result); $i++) {
+    array_push($room, $row);
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,7 +26,7 @@ $branch_cd = get_session('branch_cd');
 </head>
 <body>
 <style>
-    html, body {
+    html, body {   
         margin: 0; height: 100%; overflow: hidden; 
     }
 </style>
@@ -48,17 +56,10 @@ $branch_cd = get_session('branch_cd');
     <input type="hidden" name="branch_cd" value="<?=$branch_cd?>">
     <input type="hidden" name="branch_cdcommon" value="B0000">
     <select name="room_no" id="room_no" class="form-control" id="exampleFormControlSelect1">
-      <option value="">선택하세요</option>
-      <option value="1">1</option>
-      <option value="2">2</option>
-      <option value="3">3</option>
-      <option value="4">4</option>
-      <option value="5">5</option>
-      <option value="6">6</option>
-      <option value="7">7</option>
-      <option value="8">8</option>
-      <option value="9">9</option>
-      <option value="10">10</option>
+        <option value="">선택하세요</option>
+        <?php foreach($room as $key => $data):?>
+            <option value="<?php echo $data['room_no']?>"><?php echo $data['room_no']?></option>
+        <?php endforeach;?>
     </select>
   </div>
 
@@ -68,8 +69,5 @@ $branch_cd = get_session('branch_cd');
 </div>
     </div>
 </div>
-
-
-
 </body>
 </html>

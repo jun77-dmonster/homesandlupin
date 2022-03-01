@@ -68,8 +68,6 @@ include "top.php";
 
                 data = JSON.parse(data);
 
-                console.log(data);
-
                 $(".main02-2-img-container img").attr("src", "data/branch/" + data.guide_player2_img);
 
                 $(".main02-2-tab-container > div").click(function(){

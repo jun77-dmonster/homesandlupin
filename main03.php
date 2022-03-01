@@ -717,7 +717,6 @@ include "top.php";
 
             $(document).on("click", ".search-filter-item-container div:not(:first-child)", function(event){
 
-
                 $(event.target).toggleClass("active");
                 search();
 
