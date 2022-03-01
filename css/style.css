@@ -267,7 +267,6 @@ li {list-style:none;}
         padding:6px 0 2px 0;
         line-height: 20px;
         text-align: center;
-        font-weight: bold;
         color: #03254C;
         background-color: #fff;
         margin-right: 36px;
@@ -327,9 +326,9 @@ li {list-style:none;}
         transform: translateY(-50%);
     }
     .search-result-content-container {
-        width: calc(100% - 225px - 163px);
+        width: calc(100% - 225px - 163px - 10px);
         float: left;
-        margin-left: 30px;
+        margin-left: 40px;
     }
     .search-result-content-container > * {
         font-family: NotoSansKR-Regular;
@@ -387,9 +386,9 @@ li {list-style:none;}
         height: 60px;
         text-align: center;
         font-size: 24px;
-        font-weight: bold;
+        /*font-weight: bold;*/
         line-height: 60px;
-        font-family: AggroB;
+        font-family: AggroM;
     }
 
     #topBtn {
@@ -434,10 +433,11 @@ li {list-style:none;}
     .search-result-info-title {
         background-color: #002852;
         color: #fff;
-        height: 36px;
-        font-weight: bold;
+        height: 32px;
+        /*font-weight: bold;*/
         text-align: center;
-        line-height: 36px;
+        font-family: NotoSansKR-Regular;
+        line-height: 28px;
     }
 
     .search-result-info-content {
@@ -456,7 +456,9 @@ li {list-style:none;}
         float: left;
         text-align: center;
         font-weight: bold;
+        font-size: 12px;
         color: gray;
+        margin-top: -2.5px;
     }
 
     .search-result-text-container {
@@ -2194,7 +2196,7 @@ li {list-style:none;}
         width: 100%;
         float: left;
         font-size: 42px;
-        font-weight: bold;
+        /*font-weight: bold;*/
         font-family: AggroM;
         color: #675579;
         text-align: center;
@@ -2206,8 +2208,8 @@ li {list-style:none;}
         padding: 32px;
         color: #000;
         font-size: 20px;
-        font-weight: bold;
-        font-family: NotoSansKR-Bold;
+        /*font-weight: bold;*/
+        font-family: NotoSansKR-Regular;
         overflow-y: auto;
         line-height: 26px;
         word-break: break-all;
@@ -2239,8 +2241,7 @@ li {list-style:none;}
     .modal-staff-title {
         color: #fff;
         font-size: 36px;
-        font-family: NotoSansKR-Bold;
-        font-weight: bold;
+        font-family: NotoSansKR-Regular;
         text-align: center;
         line-height: 40px;
     }
@@ -2253,7 +2254,6 @@ li {list-style:none;}
     .mdoal-staff-btn-container > div {
         text-align: center;
         font-family: AggroM;
-        font-weight: bold;
         background-color: #fff;
         height: 53px;
         color: #3f2958;
@@ -2271,8 +2271,7 @@ li {list-style:none;}
         text-align: center;
         color: #7396b7;
         font-size: 16px;
-        font-weight: bold;
-        font-family: NotoSansKR-Bold;
+        font-family: NotoSansKR-Regular;
     }
 
     .modal-client-blue-popup {
