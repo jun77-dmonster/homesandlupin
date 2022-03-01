@@ -3,7 +3,7 @@ include "common.php";
 
 $branch_cd = get_session('branch_cd');
 
-$sql = "SELECT `branch_cd`, `room_cd`, `room_no` FROM DM_T_BRANCH_ROOM WHERE branch_cd='" . $_SESSION['branch_cd'] . "' AND room_delete_fl = 'T' ";
+$sql = "SELECT `branch_cd`, `room_cd`, `room_no` FROM DM_T_BRANCH_ROOM WHERE branch_cd='" . $_SESSION['branch_cd'] . "' AND room_delete_fl = 'F' ";
 $result = sql_query($sql);
 
 $room = [];
