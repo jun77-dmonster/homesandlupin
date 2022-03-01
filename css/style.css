@@ -1945,7 +1945,6 @@ li {list-style:none;}
         width: 100%;
         /* height: 415px; */
         float: left;
-        background-color: gray;
     }
     .modal-use-info-btn-container {
         width: 100%;
@@ -1978,7 +1977,6 @@ li {list-style:none;}
         border-radius: 16px;
         padding: 16px;
         min-width: 1005px;
-        min-height: 576px;
         background-color: #fff;
         position: fixed;
         top: 50%;
@@ -1990,7 +1988,6 @@ li {list-style:none;}
     .modal-wifi-image-container {
         width: 1005px;
         float: left;
-        background-color: gray;
         border-radius: 6px;
     }
 
