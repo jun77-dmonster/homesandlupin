@@ -13,8 +13,6 @@ if (!$mb_id || !$mb_password)
 
 $mb = get_branch_id($mb_id);
 
-
-
 // 차단된 아이디인가?
 /*
 if ($mb['mb_intercept_date'] && $mb['mb_intercept_date'] <= date("Ymd", G5_SERVER_TIME)) {
@@ -35,11 +33,13 @@ if ($mb['mb_leave_date'] && $mb['mb_leave_date'] <= date("Ymd", G5_SERVER_TIME))
 // 회원아이디를 입력해 보고 맞으면 또 비밀번호를 입력해보는 경우를 방지하기 위해서입니다.
 // 불법사용자의 경우 회원아이디가 틀린지, 비밀번호가 틀린지를 알기까지는 많은 시간이 소요되기 때문입니다.
 
+if ($mb['branch_withdrawal_fl'] === 'T') {
+    alert('탈퇴한 아이디이므로 접근하실 수 없습니다.');
+}
 
 if ((! (isset($mb['branch_manager_id']) && $mb['branch_manager_id']) || !branch_password_check($mb, $mb_password, $mb['branch_manager_pwd'])) ) {
 
     run_event('password_is_wrong', 'login', $mb);
-
     alert('가입된 회원아이디가 아니거나 비밀번호가 틀립니다.\\n비밀번호는 대소문자를 구분합니다.');
 }
 
