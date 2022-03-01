@@ -1013,7 +1013,7 @@ li {list-style:none;}
         text-align: center;
         background-color: #dad4de;
         color: #32224a;
-        font-family: "AggroB";
+        font-family: "AggroM";
         font-size: 48px;
         line-height: 48px;
         border-radius: 16px;
@@ -2413,8 +2413,8 @@ li {list-style:none;}
         display: none;
     }
     .modal-game-wheel-info-popup {
-        width: 770px;
-        min-height: 380px;
+        width: 780px;
+        min-height: 390px;
         float: left;
         background-color: #fff;
         border-radius: 32px;
@@ -2458,27 +2458,29 @@ li {list-style:none;}
     }
     .modal-game-youtube-btn-center {
         position: absolute;
-        left: 0;
-        right: 0;
-        width: 185px;
+        width: 170px;
+        /*width: 185px;*/
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
     }
     .modal-game-youtube-btn-center img {
-        margin-top: 6px;
+        margin-top: 18px;
         margin-left: 6px;
     }
     .modal-game-youtube-btn-center p,
     .modal-game-youtube-btn-center img {
         float: left;
         margin-bottom: 0;
+        font-weight: normal;
+        font-family: AggroM;
+        font-size: 30px;
+        line-height: 70px;
     }
 
     .modal-game-wheel-info-title {
         width: 100%;
         text-align: center;
-        font-weight: bold;
         font-family: AggroM;
         color: #002956;
         font-size: 42px;
@@ -2545,6 +2547,7 @@ li {list-style:none;}
         font-size: 36px;
         box-shadow: 4px 4px 4px rgba(0, 0, 0, .5);
         margin: 0 16px;
+        line-height: 70px;
     }
 
     .modal-popup-cart-blue {
