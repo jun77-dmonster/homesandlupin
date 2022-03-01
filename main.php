@@ -15,6 +15,20 @@ include "top.php";
         margin: 0; height: 100%; overflow: hidden; 
     }
 
+    .modal-use-info-image-container img{
+        display: none;
+    }
+
+    .guide-text{
+        display: none;
+        height: 415px;
+        text-align: center;
+        font-family:AggroM;
+        font-size:25px;
+        letter-spacing: -1px;
+        line-height:400px;
+    }
+
 </style>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="js/jquery.rwdImageMaps.min.js"></script>
@@ -62,6 +76,9 @@ $(document).ready(function(e) {
 
     <div class="modal-use-info-image-container">
         <img src="" alt="USEINFO" title="USEINFO">
+        <p class="guide-text">
+            이용안내 이미지가 없습니다. 관리자에게 문의해주세요!
+        </p>
     </div>
 
     <div class="modal-use-info-btn-container">
@@ -238,7 +255,6 @@ $(document).ready(function(e) {
             });
 
 
-
             $(".modal-use-info-movie-popup").show();
         });
 
@@ -258,7 +274,28 @@ $(document).ready(function(e) {
             success: function(data) {
                 data = JSON.parse(data);
 
-                $(".modal-use-info-image-container img").attr("src", "/data/branch/" + data[0].guide_file1);
+                // 지점 별 이용안내 이미지 없을 시 본사에서 등록한 이용안내 출력
+                var guideImage = "";
+                if(data[0].guide_file1 === "") {
+                    guideImage = "/data/basic/" + data[0].configImage.sc_basic_guide_img;
+                } else {
+                    guideImage = "/data/branch/" + data[0].guide_file1;
+                }
+
+                // 본사 이미지도 없을 때 안내 문구 출력
+                var img = new Image();
+                img.src = guideImage
+
+                // 이미지가 존재할 경우
+                img.onload = function () {
+                    $(".modal-use-info-image-container img").show();
+                    $(".modal-use-info-image-container img").attr("src", guideImage);
+                }
+                // 없을 경우
+                img.onerror = function () {
+                    $(".guide-text").show();
+                }
+
             }
         });
     });

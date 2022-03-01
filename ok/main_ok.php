@@ -11,6 +11,12 @@
             $result = sql_query($sql);
             $row = sql_fetch($sql);
 
+            $configImageSql = "SELECT sc_basic_guide_img FROM DM_T_SITE_CONFIG";
+            $query = sql_query($configImageSql);
+            $configImage = sql_fetch_array($query);
+
+            $row['configImage'] = $configImage;
+
             print_r(json_encode(array($row)));
 
             break;

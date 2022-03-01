@@ -28,6 +28,22 @@ if(!isset($_SESSION['branch_cd']) or !isset($_SESSION['branch_cdcommon'])){
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
 </head>
+<style>
+    .modal-wifi-image-container img{
+        display:none;
+    }
+
+    .modal-wifi-image-container .wifi-text{
+        display: none;
+        height: 415px;
+        text-align: center;
+        font-family:AggroM;
+        font-size:25px;
+        letter-spacing: -1px;
+        line-height:570px;
+        min-height: 576px;
+    }
+</style>
 <div class="header">
     <div class="searchbox">
         <a href="index.php"><img src="img/home.png" style="float: left;"></a> 
@@ -96,6 +112,9 @@ if(!isset($_SESSION['branch_cd']) or !isset($_SESSION['branch_cdcommon'])){
     </div>
     <div class="modal-wifi-image-container">
         <img src="" alt="WIFI" title="WIFI">
+        <p class="wifi-text">
+            와이파이 안내 이미지가 없습니다. 관리자에게 문의해주세요!
+        </p>
     </div>
 </div>
 <div class="modal-wifi-bg"></div>
@@ -137,8 +156,28 @@ if(!isset($_SESSION['branch_cd']) or !isset($_SESSION['branch_cdcommon'])){
             data: {},
             success: function(data) {
                 data = JSON.parse(data);
-                console.log(data[0].guide_file2);
-                $(".modal-wifi-image-container img").attr("src", "/data/branch/" + data[0].guide_file2);
+
+                // 지점 별 와이파이 이미지 없을 시 본사에서 등록한 와이파이 출력
+                var guideImage = "";
+                if(data[0].guide_file2 === "") {
+                    guideImage = "/data/basic/" + data[0].wifiImage.sc_basic_wife_img;
+                } else {
+                    guideImage = "/data/branch/" + data[0].guide_file2;
+                }
+                
+                // 본사 이미지도 없을 때 안내 문구 출력
+                var img = new Image();
+                img.src = guideImage
+
+                // 이미지가 존재할 경우
+                img.onload = function () {
+                    $(".modal-wifi-image-container img").show();
+                    $(".modal-wifi-image-container img").attr("src", guideImage);
+                }
+                // 없을 경우
+                img.onerror = function () {
+                    $(".wifi-text").show();
+                }
             }
         });
 
