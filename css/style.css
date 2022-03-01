@@ -2461,7 +2461,7 @@ li {list-style:none;}
     }
     .modal-game-youtube-btn-center {
         position: absolute;
-        width: 150px;
+        width: 170px;
         /*width: 185px;*/
         top: 50%;
         left: 50%;
@@ -2484,7 +2484,6 @@ li {list-style:none;}
     .modal-game-wheel-info-title {
         width: 100%;
         text-align: center;
-        font-weight: bold;
         font-family: AggroM;
         color: #002956;
         font-size: 42px;
