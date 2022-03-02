@@ -1048,17 +1048,18 @@ li {list-style:none;}
     .search-list-item-container:not(:first-child) > div:first-child {
         background-color: #8fabb6;
     }
-    .search-list-item-container > div > p {
+    .search-list-item-container > div p {
         line-height: 48px;
         color: #fff;
     }
-    .search-list-item-container > div > p:first-child {
-        margin-top: 23px;
+    .search-list-item-container .text-layout {
+        position: absolute;
+        width:100%;
+        top:50%;
+        left:50%;
+        transform: translate(-50%, -50%);
     }
-    .search-list-item-container:not(:first-child) > div > p:first-child {
-        margin-top: 31px;
-    }
-    .search-list-item-container > div > p:nth-child(2) {
+    .search-list-item-container > div .sub-title {
         line-height: 16px;
         font-size: 16px;
     }

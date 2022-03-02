@@ -11,21 +11,6 @@ include "top.php";
 
 </style>
 
-
-
-
-<!--<div class="container-fluid h-100" >-->
-<!--  <div class="row h-100">-->
-<!--   -->
-<!--        <div class="scorebox">-->
-<!--            -->
-<!--            <a href="main02-1.php"><img src="img/recommandback.png" style="margin-right:50px;"></a>-->
-<!--           -->
-<!--           -->
-<!--        </div>-->
-<!---->
-<!--</div>-->
-
 <div class="modal-bg"></div>
 <div class="modal-game-wheel-popup">
     <div class="modal-game-wheel-info-popup">
@@ -124,8 +109,10 @@ include "top.php";
         <div class="search-list-container">
             <div class="search-list-item-container">
                 <div>
-                    <p>인원</p>
-                    <p>[필수선택]</p>
+                    <div class="text-layout">
+                        <p>인원</p>
+                        <p class="sub-title">[필수선택]</p>
+                    </div>
                 </div>
                 <div data-item_cd="01005001"><span>2인</span></div>
                 <div data-item_cd="01005002"><span>3인</span></div>
@@ -136,18 +123,22 @@ include "top.php";
             </div>
             <div class="search-list-item-container">
                 <div>
-                    <p>난이도</p>
+                    <div class="text-layout">
+                        <p>난이도</p>
+                    </div>
                 </div>
-                <div data-item_cd="01002001"><span>아주쉬움</span></div>
+                <div data-item_cd="01002001"><span>아주<br>쉬움</span></div>
                 <div data-item_cd="01002002"><span>쉬움</span></div>
                 <div data-item_cd="01002003"><span>보통</span></div>
                 <div data-item_cd="01002004"><span>어려움</span></div>
-                <div data-item_cd="01002005"><span>매우어려움</span></div>
+                <div data-item_cd="01002005"><span>매우<br>어려움</span></div>
                 <div data-item_cd="01002006"><span>마스터</span></div>
             </div>
             <div class="search-list-item-container">
                 <div>
-                    <p>장르</p>
+                    <div class="text-layout">
+                        <p>장르</p>
+                    </div>
                 </div>
                 <div></div>
                 <div></div>
@@ -679,8 +670,20 @@ include "top.php";
 
                 $(".search-list-item-container:nth-child(3) > div:not(:first-child)").each(function(i, item){
                     console.log(data[i]);
+                    console.log(data[i].item_nm.length);
+                
+                    fontSize = '';
+                    if(data[i].item_nm.length > 4)
+                    {
+                        fontSize = "style=font-size:32px";
+                    }
+                    else if(data[i].item_nm.length > 3)
+                    {
+                        fontSize = "style=font-size:38px;";
+                    }
+                    
                     $(this).attr("data-item_cd", data[i].item_cd);
-                    $(this).append("<span>" + data[i].item_nm + "</span>");
+                    $(this).append("<span " + fontSize + ">" + data[i].item_nm + "</span>");
                 });
 
             }
