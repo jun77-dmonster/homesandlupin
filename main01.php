@@ -7,7 +7,7 @@ include "top.php";
   
     html, body {
         margin: 0; height: 100%; overflow: hidden; 
-        background-image: url(./img/punishBg.jpg);
+        background-image: url(./img/holmesBg2.jpg);
         background-position: center center;
         background-repeat: no-repeat;
         background-attachment: fixed;
