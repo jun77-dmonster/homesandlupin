@@ -29,6 +29,10 @@ include "top.php";
         line-height:400px;
     }
 
+    .modal-use-info-movie-popup-btn-close{
+        z-index: 99999;
+    }
+
 </style>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="js/jquery.rwdImageMaps.min.js"></script>
@@ -97,6 +101,7 @@ $(document).ready(function(e) {
     </div>
     <div class="modal-use-info-movie-container">
         <div class="use-info-player-container">
+            <div style="position:absolute;background-color:#000;width:100%;height:100px;z-index:99900"></div>
             <div id="useinfoPlayer"></div>
         </div>
     </div>
@@ -209,7 +214,9 @@ $(document).ready(function(e) {
                 data: {},
                 success: function(data) {
                     data = JSON.parse(data);
-                    var youtubeId = data[0].guide_operation_guide_movie;
+                    var youtube = data[0].guide_operation_guide_movie;
+                    var youtubeId = youtube.split("?v=")[1];
+                    // var youtubeId = data[0].guide_operation_guide_movie;
 
                     onYouTubePlayerAPIReady(youtubeId);
 
