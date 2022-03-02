@@ -19,6 +19,9 @@ include "top.php";
         <div class='basket-option-btn-container'><button class='basket-option-btn'>담기</button></div>
     </div>
 </div>
+<div class="modal-menu-blue-popup">
+    필수 옵션에 체크해주세요
+</div>
 <div class="modal-popup-cart-blue">
     <div class="modal-popup-cart-title">주문이 완료되었습니다.</div>
     <div class="modal-popup-cart-btn-container">
@@ -69,10 +72,14 @@ include "top.php";
             var productList = [];
             var optionList = [];
             var optionNameList = [];
+            var subjectArr = [];
+            var optionNameList = [];
 
             $(document).on("click", ".modal-popup-btn-close", function(event){
                 $(".modal-popup, .modal-bg").toggle();
                 optionList = [];
+                optionNameList = [];
+                subjectArr = [];
                 optionNameList = [];
             });
 
@@ -96,10 +103,42 @@ include "top.php";
                 //     }
                 // }
 
-                var subjectArr = $(event.currentTarget).data('beverage_option_subject').split(",");
+                /*
+                *
+                * subjectArr = 옵션 제목이 저장된 배열
+                *            = 0번째 순서는 필수 옵션
+                *
+                * optionList = 옵션 전체 데이터
+                *
+                * */
 
-                if(subjectArr[0] != "")
-                    $(".basket-option-radio-container").append("<div class='modal-option-subject-container' data-beverage_cd='" + $(event.currentTarget).data('beverage_cd') + "'><p class='modal-option-subject-title option-title-0' data-title='"+ subjectArr[0] +"'>" + subjectArr[0] + "(필수)</p></div>");
+                subjectArr = $(event.currentTarget).data('beverage_option_subject').split(",");
+
+
+
+
+
+                // if(subjectArr[0] == "") {
+                //     return false;
+                // }
+
+
+                var titleCheck = "(필수)";
+
+                for(var i = 0; i < subjectArr.length; i++) {
+                    if(i === 0 && subjectArr[i] != "")
+                        titleCheck = "(필수)";
+
+                    if(i > 0 && subjectArr[i] != "")
+                        titleCheck = "(선택)";
+
+                    if(subjectArr[i] == "")
+                        titleCheck = "";
+
+                    if(subjectArr.length > 0 && subjectArr[0] != "")
+                        $(".basket-option-radio-container").append("<div class='modal-option-subject-container' data-beverage_cd='" + $(event.currentTarget).data('beverage_cd') + "'><p class='modal-option-subject-title option-title-0' data-title='"+ subjectArr[i] +"'>" + subjectArr[i] + titleCheck + "</p></div>");
+                }
+
 
 
                 $.ajax({
@@ -111,45 +150,59 @@ include "top.php";
                         var data = JSON.parse(data);
 
                         optionList = data;
+                        console.log(optionNameList.length);
 
-                        for(var i = 0; i < data.length; i++) {
+                        for(var i = 0; i < optionList.length; i++) {
+                            optionNameList.push(optionList[i].beverage_op_id.split(chr(30)));
+                        }
+                        console.log(optionNameList.length);
 
-                            var opIdSplit = data[i].beverage_op_id.split(chr(30));
-                            optionNameList.push([opIdSplit[0], opIdSplit[1]]);
+
+
+                        var check = "";
+                        console.log(optionNameList, data);
+                        for(var i = 0; i < optionNameList.length; i++) {
+
+                            if(optionNameList[i][0] == check)
+                                continue;
+
+                            console.log(i, data[i]);
                             var html = "<label class='radio-label'>";
-                            //data[i].beverage_op_id
-                                html += "<span data-name='" + opIdSplit[i % 2] + "'>" + opIdSplit[i % 2] + "(+" + data[i].beverage_op_price + "원)</span>";
-                                html += "<input type='radio' name='option0' value='" + data[i].beverage_op_no + "' data-option='" + optionNameList[i][0] + "' data-price='" + data[i].beverage_op_price + "' autocomplete='off''>";
-                                html += "<span class='checkmark'></span>";
+                            html += "<span data-name='" + optionNameList[i][0] + "'>" + optionNameList[i][0] + "(+" + data[i].beverage_op_price + ")</span>";
+                            html += "<input type='checkbox' name='option0' value='" + data[i].beverage_op_no + "' data-option='" + data[i].beverage_op_id + "' data-optionName='" + optionNameList[i][0] + "' data-price='" + data[i].beverage_op_price + "' autocomplete='off''>";
+                            html += "<span class='checkmark'></span>";
                             html += "</label>";
 
+                            $(".modal-option-subject-container").eq(0).append(html);
 
-                            if(i % 2 == 0) {
-
-                                $(".modal-option-subject-container").eq(0).append(html);
-                            }
-
+                            check = optionNameList[i][0];
                         }
 
-                        $(".basket-option-radio-container label:nth-child(2) input").attr("checked", true);
+                        // var html = "<label class='radio-label'>";
+                        // html += "<span data-name='" + data[i].beverage_op_id + "'>" + data[i].beverage_op_id + "(+" + data[i].beverage_op_price + ")</span>";
+                        // html += "<input type='checkbox' name='option0' value='" + data[i].beverage_op_no + "' data-option='" + data[i].beverage_op_id + "' data-price='" + data[i].beverage_op_price + "' autocomplete='off''>";
+                        // html += "<span class='checkmark'></span>";
+                        // html += "</label>";
+                        //
+                        // $(".modal-option-subject-container").eq(0).append(html);
 
-                        // for(var i = 0; i < (optionNameList.length / 2); i++) {
+
+                        // for(var i = 0; i < data.length; i++) {
                         //
-                        //     if(optionNameList[i][0] == $(".basket-option-radio-container .modal-option-subject-container:nth-child(1) label:nth-child(2) span:nth-child(1)").data("name")) {
-                        //
-                        //         var html = "<label class='radio-label'>";
-                        //         //data[i].beverage_op_id
-                        //         html += "<span>" + optionNameList[i][1] + "(+" + data[i].beverage_op_price + "원)</span>";
-                        //         html += "<input type='radio' name='option1' value='" + data[i].beverage_op_no + "' data-option='" + optionNameList[i][1] + "' data-price='" + optionList[i].beverage_op_price + "'>";
+                        //     var html = "<label class='radio-label'>";
+                        //         html += "<span data-name='" + data[i].beverage_op_id + "'>" + data[i].beverage_op_id + "(+" + data[i].beverage_op_price + ")</span>";
+                        //         html += "<input type='checkbox' name='option0' value='" + data[i].beverage_op_no + "' data-option='" + data[i].beverage_op_id + "' data-price='" + data[i].beverage_op_price + "' autocomplete='off''>";
                         //         html += "<span class='checkmark'></span>";
-                        //         html += "</label>";
+                        //     html += "</label>";
                         //
-                        //         $(".modal-option-subject-container").eq(1).append(html);
-                        //         $(".basket-option-radio-container .modal-option-subject-container:nth-child(2) label:nth-child(2) input").attr("checked", true);
-                        //     }
+                        //     $(".modal-option-subject-container").eq(0).append(html);
+                        //
                         // }
-
-
+                        //
+                        // $(".basket-option-radio-container label:nth-child(2) input").attr("checked", true);
+                        //
+                        //
+                        //
                         $(".basket-option-radio-container").append("<p class='modal-option-subject-title'>수량</p>");
                         var html = "<div class='count-container'>";
                                 html += "<div>-</div>";
@@ -157,7 +210,6 @@ include "top.php";
                                 html += "<div>+</div>";
                             html += "</div>";
 
-                        // var btnData = "data-";
                         $(".basket-option-radio-container").append(html);
 
                     }
@@ -169,7 +221,63 @@ include "top.php";
 
             })
 
+
+            $(document).on("change", ".radio-label input", function(event){
+
+
+                var subjectIndex = $(event.target).parent().parent().index();
+
+                var nowIndex = subjectIndex + 1;
+
+                var checkboxIndex = $(event.target).parent().index();
+
+                if(subjectIndex == 0) {
+                    $(event.target).parent().siblings().find("input").each(function (i, item) {
+                        $(item).attr("checked", false);
+                    });
+
+                }
+
+                if(!$(event.target).is(":checked")) {
+                    $($(".modal-option-subject-container").eq(nowIndex)).find("label").remove();
+                } else {
+                    $($(".modal-option-subject-container").eq(nowIndex)).find("label").remove();
+
+
+
+                    if(subjectArr.length - 1 === nowIndex) {
+                        var check = "";
+                        for(var i = 0; i < optionNameList.length; i++) {
+
+                            if(optionNameList[i][nowIndex] == check || $(event.target).attr("data-optionName") != optionNameList[i][nowIndex - 1])
+                                continue;
+
+                            var html = "<label class='radio-label' style='width: 100%;'>";
+                            html += "<span data-name='" + optionNameList[i][nowIndex] + "'>" + optionNameList[i][nowIndex] + "(+" + optionList[i].beverage_op_price + ")</span>";
+                            html += "<input type='checkbox' name='option0' data-optionname='" + optionNameList[i][nowIndex] + "' value='" + optionList[i].beverage_op_no + "' data-option='" + optionList[i].beverage_op_id + "' data-price='" + optionList[i].beverage_op_price + "' autocomplete='off''>";
+                            html += "<span class='checkmark'></span>";
+                            html += "</label>";
+
+                            $(".modal-option-subject-container").eq(nowIndex).append(html);
+
+                            check = optionNameList[i][nowIndex];
+                        }
+                    }
+                }
+
+
+            })
+
+            $(document).on("click", ".modal-menu-blue-popup", function(event){
+                $(".modal-menu-blue-popup").stop().hide(1);
+            })
+
             $(document).on("click", ".basket-option-btn", function(event){
+
+                if($(".modal-option-subject-container:nth-child(1) input:checked").length === 0) {
+                    return $(".modal-menu-blue-popup").stop().show(1).delay(1500).hide(1);
+                }
+
                 var productPrice = parseInt($(".modal-product-item-container .product-price").data("price"));
                 var productNameKR = $(".modal-product-item-container .product-title-kr").text();
                 var productNameEN = $(".modal-product-item-container .product-title-en").text();
@@ -178,15 +286,17 @@ include "top.php";
                 var productOptionFullName = "";
                 var productSelectedOptionName = "";
                 var productOptionPrice = 0;
-
+                var io_id = "";
 
                 $(".basket-product-list-container > div").remove();
                 $(".radio-label").each(function(i, item){
                     if($($(item).find("input")).prop("checked")) {
-                        productOptionPrice = parseInt($($(item).find("input")).data("price"));
-                        productOptions += $($(item).find("input")).data("option") + ", ";
-                        productSelectedOptionName = $($(item).find("input")).data("option");
+                        console.log(parseInt($($(item).find("input")).data("price")), $($(item).find("input")).data("option") + ", ", $($(item).find("input")).data("option"), $($(item).find("span").eq(0)).text());
+                        productOptionPrice += parseInt($($(item).find("input")).data("price"));
+                        productOptions += $($(item).find("input")).data("optionname") + "(+" + parseInt($($(item).find("input")).data("price")) + ")" + ", ";
+                        productSelectedOptionName += $($(item).find("input")).data("option") + ", ";
                         productOptionFullName = $($(item).find("span").eq(0)).text();
+                        io_id += $($(item).find("input")).data("optionname") + chr(30);
                     }
                 });
 
@@ -196,10 +306,23 @@ include "top.php";
 
                 var ct_option = "";
 
-                if($(".option-title-0").data("title") !== undefined)
-                    ct_option = $(".option-title-0").data("title") + ":" + productSelectedOptionName;
+                // if($(".option-title-0").data("title") !== undefined)
+                //     ct_option = $(".option-title-0").data("title") + ":" + productSelectedOptionName;
 
-                console.log($(".option-title-0").data("title"), ct_option);
+                $(".option-title-0").each(function(i, item){
+                    ct_option += $(this).data("title") + ":";
+
+                    $($($(item).parent()).find("label")).each(function(k, ktem){
+                        console.log($(ktem).find("input").prop("checked"));
+                        if($(ktem).find("input").prop("checked")) {
+                            ct_option += $($(ktem).find("input")).data("optionname") + chr(30);
+                            // console.log($(ktem).data("optionname"));
+                        }
+                    });
+
+                    ct_option += "/";
+                });
+
                 productList.push({
                     productNameKR: productNameKR,
                     productCount: productCount,
@@ -211,7 +334,8 @@ include "top.php";
                     productOptionPrice: productOptionPrice,
                     productCd: $(".modal-product-item-container > div").data("beverage_cd"),
                     productOptionTitle: $(".modal-option-subject-title").data("title"),
-                    ct_option: ct_option,
+                    ct_option: ct_option.substr(0, ct_option.length - 2),
+                    io_id: io_id
                 });
 
                 basketTotalPrice = 0;
@@ -239,6 +363,8 @@ include "top.php";
                 $(".total-price div span:nth-child(1)").text(basketTotalPrice);
 
                 $(".modal-popup, .modal-bg").toggle();
+
+                optionNameList = [];
             })
 
             $(document).on("click", ".btn-order", function(event){
@@ -263,7 +389,7 @@ include "top.php";
                     url: "ok/main04_ok.php?type=cart",
                     data: { productList: productList },
                     success: function(data) {
-                        console.log(data);
+
                         productList = [];
                         $(".total-price > div > span:nth-child(1)").text(0);
 
@@ -285,10 +411,10 @@ include "top.php";
 
                 $(".total-price div span:first-child").text(totalPrice);
 
-                console.log(productList);
+
                 // delete productList[$($(event.target).parent().parent().parent().parent().parent()).index()];
                 productList.splice($($(event.target).parent().parent().parent().parent().parent()).index(), 1);
-                console.log(productList);
+
                 $($(event.target).parent().parent().parent().parent().parent()).remove();
             });
 

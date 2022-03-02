@@ -822,8 +822,8 @@ li {list-style:none;}
         -ms-user-select: none;
         user-select: none;
         float: left;
-        /*margin-left: 24px;*/
-        width: 100%;
+        margin-right: 24px;
+        /*width: 100%;*/
     }
 
     .radio-label span:nth-child(1) {
@@ -853,9 +853,9 @@ li {list-style:none;}
     }
 
     /* On mouse-over, add a grey background color */
-    .radio-label:hover input ~ .checkmark {
-        background-color: #3F2958;
-    }
+    /*.radio-label:hover input ~ .checkmark {*/
+    /*    background-color: #3F2958;*/
+    /*}*/
 
     /* When the radio button is checked, add a blue background */
     .radio-label input:checked ~ .checkmark {
@@ -2078,11 +2078,11 @@ li {list-style:none;}
     }
     .bookmark-btn-left-container {
         left: 27px;
-        background-image: url(../../img/left.png);
+        background-image: url(../img/left.png);
     }
     .bookmark-btn-right-container {
         right: 27px;
-        background-image: url(../../img/right.png);
+        background-image: url(../img/right.png);
     }
 
     .bookmark-item-component {
@@ -2399,7 +2399,7 @@ li {list-style:none;}
 
     .wheel-body {
         margin: 0; height: 100%; overflow: hidden;
-        background-image: url(../img/punishBg.jpg);
+        background-image: url(../img/holmesBg2.jpg);
         background-position: center center;
         background-repeat: no-repeat;
         background-attachment: fixed;
@@ -2602,3 +2602,21 @@ li {list-style:none;}
         margin-top: 36px;
     }
 
+    .modal-menu-blue-popup {
+        width: 520px;
+        height: 105px;
+        border-radius: 32px;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 350;
+        line-height: 105px;
+        font-size: 30px;
+        color: #fff;
+        background-color: #012956;
+        font-family: "NotoSansKR-Regular";
+        text-align: center;
+        font-weight: bold;
+        display: none;
+    }

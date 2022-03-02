@@ -18,6 +18,7 @@
 
             $arr = array();
 
+
             for($i=0; $row=sql_fetch_array($result); $i++) {
                 array_push($arr, $row);
             }
@@ -95,8 +96,7 @@
 //            echo "<br>";
 //            echo count($productList);
             foreach($productList as $item) {
-
-                $sql = "INSERT INTO DM_T_CART (od_id, branch_cd, room_cd, beverage_cd, ct_status, ct_price, ct_option, ct_qty, io_id, io_type, io_price, ct_time, ct_ip, ct_direct, ct_select) VALUES ('".$od_id."','".$branch_cd."','".$room_cd."','".$item['productCd']."','".$ct_status."','".$item['productPrice']."','".$item['ct_option']."','".$item['productCount']."','".$item['productSelectedOptionName']."','".$io_type."','".$item['productOptionPrice']."',NOW(),'".$ct_ip."','".$ct_direct."', '".$ct_select."')";
+                $sql = "INSERT INTO DM_T_CART (od_id, branch_cd, room_cd, beverage_cd, ct_status, ct_price, ct_option, ct_qty, io_id, io_type, io_price, ct_time, ct_ip, ct_direct, ct_select) VALUES ('".$od_id."','".$branch_cd."','".$room_cd."','".$item['productCd']."','".$ct_status."','".$item['productPrice']."','".$item['ct_option']."','".$item['productCount']."','".$item['io_id']."','".$io_type."','".$item['productOptionPrice']."',NOW(),'".$ct_ip."','".$ct_direct."', '".$ct_select."')";
                 $result = sql_query($sql);
 
                 $od_cart_price += $item['productTotalPrice'];
