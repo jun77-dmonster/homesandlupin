@@ -15,7 +15,7 @@
             $query = sql_query($configImageSql);
             $configImage = sql_fetch_array($query);
 
-            $row['configImage'] = $configImage;
+            $row['configImage'] = $configImage['sc_basic_guide_img'];
 
             print_r(json_encode(array($row)));
 

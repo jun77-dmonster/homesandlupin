@@ -284,10 +284,7 @@ $(document).ready(function(e) {
                 // 지점 별 이용안내 이미지 없을 시 본사에서 등록한 이용안내 출력
                 var guideImage = "";
                 if(data[0].guide_file1 === "") {
-                    if(data[0].configImage.sc_basic_guide_img != '')
-                    {
-                        guideImage = "/data/basic/" + data[0].configImage.sc_basic_guide_img;
-                    }
+                    guideImage = "/data/basic/" + data[0].configImage;
                 } else {
                     guideImage = "/data/branch/" + data[0].guide_file1;
                 }

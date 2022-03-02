@@ -156,14 +156,11 @@ if(!isset($_SESSION['branch_cd']) or !isset($_SESSION['branch_cdcommon'])){
             data: {},
             success: function(data) {
                 data = JSON.parse(data);
-
+                
                 // 지점 별 와이파이 이미지 없을 시 본사에서 등록한 와이파이 출력
                 var guideImage = "";
                 if(data[0].guide_file2 === "") {
-                    if(data[0].wifiImage.sc_basic_wife_img != '')
-                    {
-                        guideImage = "/data/basic/" + data[0].wifiImage.sc_basic_wife_img;
-                    }
+                    guideImage = "/data/basic/" + data[0].wifiImage;
                 } else {
                     guideImage = "/data/branch/" + data[0].guide_file2;
                 }
