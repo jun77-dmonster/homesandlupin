@@ -1429,6 +1429,17 @@ li {list-style:none;}
     .score-right-container .score > div > div {
         background-color: #587f98;
     }
+    .score > div > div > div {
+        position: relative;
+    }
+
+    .score img {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+
 
     .btn-reset-container {
         width: 100%;

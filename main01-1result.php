@@ -420,7 +420,7 @@ include "top.php";
                 reSetCheckFootPrint();
                 var _this = $(e.target);
                 _this.attr('disabled', true).css({
-                    'color': '#000',
+                    'color': '#03254c',
                 })
                 var node = _this.attr('data-node');
                 var color = _this.attr('data-color');
@@ -617,7 +617,7 @@ include "top.php";
                     color = color_data[i]
                     var x = userList[i].split('-')[0] * 1;
                     var y = userList[i].split('-')[1] * 1;
-                    var left = x * 180 - 45
+                    var left = x * 180 - 40
                     switch (x) {
                         case 2:
                             left += 3
@@ -635,7 +635,8 @@ include "top.php";
                         default:
                             break;
                     }
-                    html += '<div class="user-wrap"  data-index=' + i + ' style="top:-40px;left:' + (left + 11) + 'px">';
+
+                    html += '<div class="user-wrap"  data-index=' + i + ' style="top:-40px;left:' + (left + 10) + 'px">';
                     html += '<img class="ladder-start" style="cursor:pointer" src="img/ladder/i' + x + '.png" data-color="' + color + '" data-node="' + userList[i] + '" width="100"/>'
                     html += '</div>'
                 }
@@ -654,7 +655,7 @@ include "top.php";
                     var x = resultList[i].split('-')[0] * 1;
                     var y = resultList[i].split('-')[1] * 1 + 1;
                     var node = x + "-" + y;
-                    var left = x * 180 - 33
+                    var left = x * 180 - 35
                     switch (x) {
                         case 2:
                             left += 3
@@ -690,7 +691,7 @@ include "top.php";
                         var node = x + '-' + y;
                         var nodeInfo = GLOBAL_FOOT_PRINT[node];
                         if (nodeInfo["change"] && nodeInfo["draw"]) {
-                            stokeLine(x, y, 'w', 'r', 'black', '15')
+                            stokeLine(x, y, 'w', 'r', '#03254b', '15')
                         } else {
 
                         }
@@ -749,7 +750,7 @@ include "top.php";
                 for (var y = 0; y < heightNode - 1; y++) {
                     html += '<tr>';
                     for (var x = 0; x < widthNode - 1; x++) {
-                        html += '<td style="width:189px; height:50px; border-left:15px solid black; border-right:15px solid black;"></td>';
+                        html += '<td style="width:189px; height:50px; border-left:15px solid #03254b; border-right:15px solid #03254b;"></td>';
                     }
                     html += '</tr>';
                 }
@@ -816,7 +817,8 @@ include "top.php";
                             .css({
                                 'position': 'absolute',
                                 'left': left,
-                                'top': top
+                                'top': top,
+                                backgroundColor: '#03254b'
                             });
                         ladder.append(node);
                     }
