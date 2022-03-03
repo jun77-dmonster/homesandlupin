@@ -1534,6 +1534,7 @@ li {list-style:none;}
         float: left;
         min-height: 415px;
         width: calc( (100% / 4) - (116px / 4));
+        position: relative;
     }
     .time-container:nth-child(1),
     .time-container:nth-child(4) {
@@ -1573,13 +1574,17 @@ li {list-style:none;}
         font-size: 180px;
         line-height: 340px;
         position: relative;
+        z-index: 10;
     }
     .time-add {
         position: absolute;
-        width: 191.8px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        top: 55px;
         height: 308px;
         z-index: 500;
-        top: 55px;
+        /*width: calc( (100% / 4) - (116px / 4));*/
         border-radius: 32px;
         background-color: #302148;
         background-repeat: no-repeat;
