@@ -39,8 +39,8 @@ include "top.php";
             <div class="score">
                 <div>
                     <div>
-                        <div></div>
-                        <div></div>
+                        <div><img src="" alt="COUNT" title="COUNT"></div>
+                        <div><img src="" alt="COUNT" title="COUNT"></div>
                     </div>
                 </div>
             </div>
@@ -59,8 +59,8 @@ include "top.php";
             <div class="score">
                 <div>
                     <div>
-                        <div></div>
-                        <div></div>
+                        <div><img src="" alt="COUNT" title="COUNT"></div>
+                        <div><img src="" alt="COUNT" title="COUNT"></div>
                     </div>
                 </div>
             </div>
@@ -123,8 +123,8 @@ include "top.php";
                 else
                     score0 = score[0] + "";
 
-                $(".score-left-container .score div div div:first-child").text(score0[0]);
-                $(".score-left-container .score div div div:last-child").text(score0[1]);
+                $(".score-left-container .score div div div:first-child img").attr("src", "img/count/" + score0[0] + ".png");
+                $(".score-left-container .score div div div:last-child img").attr("src", "img/count/" + score0[1] + ".png");
             }
 
             function rightScoreHTMLUpdate() {
@@ -135,8 +135,8 @@ include "top.php";
                 else
                     score1 = score[1] + "";
 
-                $(".score-right-container .score div div div:first-child").text(score1[0]);
-                $(".score-right-container .score div div div:last-child").text(score1[1]);
+                $(".score-right-container .score div div div:first-child img").attr("src", "img/count/" + score1[0] + ".png");
+                $(".score-right-container .score div div div:last-child img").attr("src", "img/count/" + score1[1] + ".png");
             }
 
             rightScoreHTMLUpdate();

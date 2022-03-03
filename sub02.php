@@ -80,6 +80,7 @@ include "top.php";
                         <img src="img/upArrow.png" alt="UPARROW" title="UPARROW">
                     </div>
                     <div class="time">0</div>
+                    <div class="time-add"></div>
                     <div class="down-arrow">
                         <img src="img/downArrow.png" alt="DOWNARROW" title="DOWNARROW">
                     </div>
@@ -89,6 +90,7 @@ include "top.php";
                         <img src="img/upArrow.png" alt="UPARROW" title="UPARROW">
                     </div>
                     <div class="time">0</div>
+                    <div class="time-add"></div>
                     <div class="down-arrow">
                         <img src="img/downArrow.png" alt="DOWNARROW" title="DOWNARROW">
                     </div>
@@ -104,6 +106,7 @@ include "top.php";
                         <img src="img/upArrow.png" alt="UPARROW" title="UPARROW">
                     </div>
                     <div class="time">0</div>
+                    <div class="time-add"></div>
                     <div class="down-arrow">
                         <img src="img/downArrow.png" alt="DOWNARROW" title="DOWNARROW">
                     </div>
@@ -113,6 +116,7 @@ include "top.php";
                         <img src="img/upArrow.png" alt="UPARROW" title="UPARROW">
                     </div>
                     <div class="time">0</div>
+                    <div class="time-add"></div>
                     <div class="down-arrow">
                         <img src="img/downArrow.png" alt="DOWNARROW" title="DOWNARROW">
                     </div>
@@ -224,6 +228,9 @@ include "top.php";
                 $(".time-colon").css({
                     height: '415px'
                 });
+                $(".time-add").css({
+                    top: '50px'
+                });
 
                 // $(".time").css({
                 //     marginTop: '0'
@@ -252,6 +259,9 @@ include "top.php";
                 }
 
                 $($(this).parent().find(".time")).text(num);
+                $($(this).parent().find(".time-add")).css({
+                    backgroundImage: 'url(img/count/' + num + '.png)'
+                });
             });
 
             $(".down-arrow").click(function(){
@@ -264,6 +274,9 @@ include "top.php";
                 }
 
                 $($(this).parent().find(".time")).text(num);
+                $($(this).parent().find(".time-add")).css({
+                    backgroundImage: 'url(img/count/' + num + '.png)'
+                });
             });
 
 
@@ -309,6 +322,9 @@ include "top.php";
                 $(".time-colon").css({
                     height: '308px'
                 });
+                $(".time-add").css({
+                    top: 0
+                });
                 // $(".time").css({
                 //     marginTop: '55px'
                 // });
@@ -322,12 +338,20 @@ include "top.php";
             });
 
             $(".quick-tab-container > div").click(function(){
+                timerClear();
                 var dataTime = $($(this).find("p:first-child")).data("time");
 
                 $(".time-container:nth-child(1) .time").text(dataTime[0]);
                 $(".time-container:nth-child(2) .time").text(dataTime[1]);
                 $(".time-container:nth-child(4) .time").text(dataTime[2]);
                 $(".time-container:nth-child(5) .time").text(dataTime[3]);
+
+
+                $(".time-container:nth-child(1) .time-add").css({ backgroundImage: 'url("img/count/' + dataTime[0] + '.png")'});
+                $(".time-container:nth-child(2) .time-add").css({ backgroundImage: 'url("img/count/' + dataTime[1] + '.png")'});
+                $(".time-container:nth-child(4) .time-add").css({ backgroundImage: 'url("img/count/' + dataTime[2] + '.png")'});
+                $(".time-container:nth-child(5) .time-add").css({ backgroundImage: 'url("img/count/' + dataTime[3] + '.png")'});
+
 
                 $(".btn-timer-start").click();
             });
@@ -366,6 +390,13 @@ include "top.php";
                 $(".time-container:nth-child(2) .time").text(newMin[1]);
                 $(".time-container:nth-child(4) .time").text(newSecond[0]);
                 $(".time-container:nth-child(5) .time").text(newSecond[1]);
+
+
+                $(".time-container:nth-child(1) .time-add").css({ backgroundImage: 'url(img/count/' + newMin[0] + '.png)' });
+                $(".time-container:nth-child(2) .time-add").css({ backgroundImage: 'url(img/count/' + newMin[1] + '.png)' });
+                $(".time-container:nth-child(4) .time-add").css({ backgroundImage: 'url(img/count/' + newSecond[0] + '.png)' });
+                $(".time-container:nth-child(5) .time-add").css({ backgroundImage: 'url(img/count/' + newSecond[1] + '.png)' });
+
 
                 sum--;
             }

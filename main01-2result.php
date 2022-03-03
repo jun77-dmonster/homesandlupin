@@ -227,10 +227,11 @@ include "top.php";
                     {
                         // Do basic alert of the segment text.
                         // $('#ruletpop').modal('show');
-                        console.log('indicatedSegment', indicatedSegment.image)
+                        console.log(indicatedSegment)
 
                         var index = parseInt( ((arr.length - 1) / 2) ) + indicatedSegment.index + 1;
                             index = index >= arr.length ? index % arr.length : index;
+
 
                         // alert("You have won " + indicatedSegment.text);
                         // $(".modal-penalty-popup-image-container img").attr("src", indicatedSegment.image);

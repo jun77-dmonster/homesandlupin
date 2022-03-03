@@ -78,16 +78,16 @@ if(!isset($_SESSION['branch_cd']) or !isset($_SESSION['branch_cdcommon'])){
                     <span>FAQ</span>
                 </div>
             </button>
-            <button onclick="window.location.href='sub02.php'">
-                <div>
-                    <img src="img/timer-icon.png" alt="WIFI" title="WIFI">
-                    <span>타이머</span>
-                </div>
-            </button>
             <button onclick="window.location.href='sub03.php'">
                 <div>
                     <img src="img/kg-icon.png" alt="WIFI" title="WIFI">
                     <span>스코어</span>
+                </div>
+            </button>
+            <button onclick="window.location.href='sub02.php'">
+                <div>
+                    <img src="img/timer-icon.png" alt="WIFI" title="WIFI">
+                    <span>타이머</span>
                 </div>
             </button>
             <button id="btn-wifi">

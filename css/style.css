@@ -1568,11 +1568,23 @@ li {list-style:none;}
         background-color: #302148;
         text-align: center;
         line-height: 308px;
-        font-weight: bold;
         font-family: AggroM;
         color: #fff;
         font-size: 180px;
         line-height: 340px;
+        position: relative;
+    }
+    .time-add {
+        position: absolute;
+        width: 191.8px;
+        height: 308px;
+        z-index: 500;
+        top: 55px;
+        border-radius: 32px;
+        background-color: #302148;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-image: url("../img/count/0.png");
     }
     .up-arrow,
     .down-arrow {
