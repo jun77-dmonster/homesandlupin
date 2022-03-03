@@ -395,63 +395,51 @@ include "top.php";
                     console.log(data);
 
                     var arr = [];
-                    var limit = data.length < 10 ? data.length : 10;
-                    // limit = 10;
-                    for(var i = 0; i < limit; i++) {
-                        let color = '';
-                        let index = i+1;
-                        switch(index) {
-                            case 1:
-                                color =  '#eae56f';
-                                break;
-                            case 2:
-                                color =  '#89f26e';
-                                break;
-                            case 3:
-                                color =  '#7de6ef';
-                                break;
-                            case 4:
-                                color =  '#e7706f';
-                                break;
-                            case 5:
-                                color =  '#eae56f';
-                                break;
-                            case 6:
-                                color =  '#89f26e';
-                                break;
-                            case 7:
-                                color =  '#7de6ef';
-                                break;
-                            case 8:
-                                color =  '#e7706f';
-                                break;
-                            case 9:
-                                color =  '#191919';
-                                break;
-                            case 10:
-                                color =  '#FFFFFF';
-                                break;
-                            default:
-                                break;
-                        };
-                        console.log(data[i]);
-                        arr.push({
-                            'image': "data/boardgames/" + data[i].games_img_file,
-                            'index': i,
-                            'title': data[i].games_nm,
-                            'content': data[i].games_content,
-                            'theme': data[i].games_theme,
-                            'youtube': data[i].games_youtube,
-                            'min': data[i].recommend_player_max_cnt,
-                            'max': data[i].recommend_player_max_cnt,
-                            'level': data[i].games_level,
-                            'games_cd': data[i].games_cd,
-                            // 'image': "img/number/" + (index) + '.jpg',
-                            // 'index': i,
-                            // 'title': index,
-                            // 'content': index,
-                            // 'fillStyle' : color
-                        });
+                    // var limit = data.length < 10 ? data.length : 10;
+                    // // limit = 10;
+                    // for(var i = 0; i < limit; i++) {
+                    //
+                    //     arr.push({
+                    //         'image': "data/boardgames/" + data[i].games_img_file,
+                    //         'index': i,
+                    //         'title': data[i].games_nm,
+                    //         'content': data[i].games_content,
+                    //         'theme': data[i].games_theme,
+                    //         'youtube': data[i].games_youtube,
+                    //         'min': data[i].recommend_player_max_cnt,
+                    //         'max': data[i].recommend_player_max_cnt,
+                    //         'level': data[i].games_level,
+                    //         'games_cd': data[i].games_cd,
+                    //         // 'image': "img/number/" + (index) + '.jpg',
+                    //         // 'index': i,
+                    //         // 'title': index,
+                    //         // 'content': index,
+                    //         // 'fillStyle' : color
+                    //     });
+                    // }
+
+                    arrayPush();
+
+                    function arrayPush() {
+                        for(var i = 0; i < data.length; i++) {
+                            if(arr.length < 10) {
+                                arr.push({
+                                    'image': "data/boardgames/" + data[i].games_img_file,
+                                    'index': i,
+                                    'title': data[i].games_nm,
+                                    'content': data[i].games_content,
+                                    'theme': data[i].games_theme,
+                                    'youtube': data[i].games_youtube,
+                                    'min': data[i].recommend_player_max_cnt,
+                                    'max': data[i].recommend_player_max_cnt,
+                                    'level': data[i].games_level,
+                                    'games_cd': data[i].games_cd,
+                                });
+                            }
+                        }
+
+                        if(arr.length < 10)
+                            arrayPush();
                     }
 
                     console.log(arr);

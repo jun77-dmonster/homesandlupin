@@ -151,18 +151,30 @@ include "top.php";
                     console.log(data);
 
                     var arr = [];
-                    for(var i = 0; i < data.length; i++) {
-                        arr.push({
-                            'image': "data/penalty/" + data[i].penalty_img,
-                            'index': i,
-                            'title': data[i].penalty_title,
-                            'content': data[i].penalty_content,
-                        });
+
+                    arrayPush();
+
+                    function arrayPush() {
+                        for(var i = 0; i < data.length; i++) {
+                            if(arr.length < 10) {
+                                arr.push({
+                                    'image': "data/penalty/" + data[i].penalty_img,
+                                    'index': i,
+                                    'title': data[i].penalty_title,
+                                    'content': data[i].penalty_content,
+                                });
+                            }
+                        }
+
+                        if(arr.length < 10)
+                            arrayPush();
                     }
+
+                    console.log(arr);
 
                     let theWheel = new Winwheel({
                         //'numSegments'  : 10,         // Number of segments
-                        'numSegments': data.length,
+                        'numSegments': arr.length,
                         'outerRadius'  : 390,       // The size of the wheel.
                         'centerX'      : 550,       // Used to position on the background correctly.
                         'centerY'      : 500,
