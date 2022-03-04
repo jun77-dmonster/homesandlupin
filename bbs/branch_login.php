@@ -49,8 +49,13 @@ if ((! (isset($mb['branch_manager_id']) && $mb['branch_manager_id']) || !branch_
 // 회원아이디 세션 생성
 set_session('ss_branch_id', $mb['branch_manager_id']);
 set_session('branch_cd', $mb['branch_cd']);
+
 // FLASH XSS 공격에 대응하기 위하여 회원의 고유키를 생성해 놓는다. 관리자에서 검사함 - 110106
 set_session('ss_branch_key', md5($mb['branch_reg_dt'] . get_real_client_ip() . $_SERVER['HTTP_USER_AGENT']));
+
+//setcookie("ss_branch_id", $mb['branch_manager_id'], (time() + 8600) * 30,'/');
+//setcookie("branch_cd", $mb['branch_cd'], (time() + 8600) * 30,'/');
+//setcookie("ss_branch_key", md5($mb['branch_reg_dt'] . get_real_client_ip() . $_SERVER['HTTP_USER_AGENT']), (time() + 8600) * 30,'/');
 
 
 if ($url) {

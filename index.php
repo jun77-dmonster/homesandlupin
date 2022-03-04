@@ -2,6 +2,73 @@
 include "common.php";
 session_start();
 
+//$isCookieLogin = false;
+//
+//if(isset($_COOKIE['ss_branch_id']) && $_COOKIE['ss_branch_id'] != "") {
+//    $isCookieLogin = true;
+//} else {
+//    $isCookieLogin = false;
+//}
+//if(isset($_COOKIE['branch_cd']) && $_COOKIE['branch_cd'] != "") {
+//    $isCookieLogin = true;
+//} else {
+//    $isCookieLogin = false;
+//}
+//if(isset($_COOKIE['ss_branch_key']) && $_COOKIE['ss_branch_key'] != "") {
+//    $isCookieLogin = true;
+//} else {
+//    $isCookieLogin = false;
+//}
+//if(isset($_COOKIE['branch_cdcommon']) && $_COOKIE['branch_cdcommon'] != "") {
+//    $isCookieLogin = true;
+//} else {
+//    $isCookieLogin = false;
+//}
+//if(isset($_COOKIE['branch_cd']) && $_COOKIE['branch_cd'] != "") {
+//    $isCookieLogin = true;
+//} else {
+//    $isCookieLogin = false;
+//}
+//if(isset($_COOKIE['room_no']) && $_COOKIE['room_no'] != "") {
+//    $isCookieLogin = true;
+//} else {
+//    $isCookieLogin = false;
+//}
+//if(isset($_COOKIE['room_cd']) && $_COOKIE['room_cd'] != "") {
+//    $isCookieLogin = true;
+//} else {
+//    $isCookieLogin = false;
+//}
+//if(isset($_COOKIE['room_string']) && $_COOKIE['room_string'] != "") {
+//    $isCookieLogin = true;
+//} else {
+//    $isCookieLogin = false;
+//}
+//if(isset($_COOKIE['branch_string']) && $_COOKIE['branch_string'] != "") {
+//    $isCookieLogin = true;
+//} else {
+//    $isCookieLogin = false;
+//}
+//
+//if($isCookieLogin) {
+//
+//    set_session('ss_branch_id', $_COOKIE['ss_branch_id']);
+//    set_session('branch_cd', $_COOKIE['branch_cd']);
+//
+//    set_session('ss_branch_key', $_COOKIE['ss_branch_key']);
+//    set_session('branch_cdcommon', $_COOKIE['branch_cdcommon']);
+//    set_session('branch_cd', $_COOKIE['branch_cd']);
+//    set_session('room_no', $_COOKIE['room_no']);
+//    set_session('room_cd', $_COOKIE['room_cd']);
+//    set_session('room_string', $_COOKIE['room_string']);
+//    set_session('branch_string', $_COOKIE['branch_string']);
+//
+//    echo "<script>window.location.href='/main.php';</script>";
+//    return false;
+//}
+
+
+
 if(isset($_SESSION['branch_cd']) or isset($_SESSION['branch_cdcommon'])){
   echo "<meta http-equiv='refresh' content='0;url=main.php'>";
 } else {

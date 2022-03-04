@@ -18,6 +18,8 @@ $row1 = sql_fetch_array($result1);
 
 if($room_no < 10) {
     $room_string = "0".$room_no;
+} else {
+    $room_string = $room_no;
 }
 
 if($row) {
@@ -31,9 +33,14 @@ if($row) {
     set_session('branch_string', $row1['branch_nm']);
 
 
+    setcookie("branch_cdcommon", $branch_cdcommon, (time() + 8600) * 30,'/');
+    setcookie("branch_cd", $branch_cd, (time() + 8600) * 30,'/');
+    setcookie("room_no", $room_no, (time() + 8600) * 30,'/');
+    setcookie("room_cd", $row['room_cd'], (time() + 8600) * 30,'/');
+    setcookie("room_string", $room_string, (time() + 8600) * 30,'/');
+    setcookie("branch_string", $row1['branch_nm'], (time() + 8600) * 30,'/');
 
     goto_url("/main.php");
-
 }
 
 
