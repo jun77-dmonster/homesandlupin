@@ -124,7 +124,7 @@ $().ready(function () {
         <div class="qrcode-container">
             <div class="qrcode-center">
                 <img src="img/qrtext.png">
-                <img src="img/qrcode.png">
+                <img src="img/qrcode/main05_qr.png">
             </div>
         </div>
     </div>

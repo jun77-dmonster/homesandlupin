@@ -3,11 +3,21 @@
 include "common.php";
 session_start();
 
-$branch_cd = get_session('branch_cd');
-$room_cd = get_session('room_cd');
+$sql = "SELECT branch_cd FROM DM_T_BRANCH WHERE branch_nm='" . $_GET['branch_nm'] . "'";
+$result = sql_fetch($sql);
+
+//echo $result['branch_cd'];
+
+$sql1 = "SELECT room_cd FROM DM_T_BRANCH_ROOM WHERE branch_cd ='" . $result['branch_cd'] . "'";
+$result1 = sql_fetch($sql1);
+
+echo $result1['room_cd'];
+
+$branch_cd = $_SESSION['branch_cd'];
+$room_cd = $_SESSION['room_cd'];
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -37,7 +47,7 @@ $room_cd = get_session('room_cd');
 
 <script type="text/javascript">
 
-    $().ready(function () {
+    $(document).ready(function () {
         $("#alertStart").click(function () {
             var customer_content = $('#customtextarea').val();
             var branch_cd = $('#branch_cd').val();
@@ -92,9 +102,9 @@ $room_cd = get_session('room_cd');
                 <p>해당 내용은 <span style="color:#FF8C00;">홈즈앤루팡 보드게임카페 본사</span>로 전달됩니다.</p>
                 <p>이용 중 불편 사항은 <span style="color:#FF8C00;">카운터에 문의</span>해주시면 빠르게 도와드리겠습니다. :)</p>
             </div>
-            <form action="customer/insertrq.php" name="customform" id="customform" method="post">
-                <input type="hidden" name="branch_cd"  id="branch_cd" value="<?=$branch_cd?>">
-                <input type="hidden" name="room_cd" id="room_cd" value="<?=$room_cd?>">
+            <form action="ok/main05_ok.php?type=qrcode" id="customform" method="post">
+                <input type="hidden" name="branch_cd"  id="branch_cd" value="<?=$result['branch_cd']?>">
+                <input type="hidden" name="room_cd" id="room_cd" value="<?=$result1['room_cd']?>">
                 <input type="hidden" name="write_gubun" id="write_gubun" value="web">
                 <textarea name="customer_content" id="customtextarea" style="width:80%; height:200px;"></textarea>
                 <p><a href="#" id="alertStart"><img src="img/submitbtn.png"></a></p>
