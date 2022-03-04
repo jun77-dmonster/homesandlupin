@@ -134,6 +134,10 @@ $(document).ready(function(e) {
     <area target="" alt="로그아웃2" title="로그아웃2" href="#" class="logout-btn-2" coords="56,603,53,646,93,648,94,603" shape="poly">
     <area target="" alt="로그아웃3" title="로그아웃3" href="#" class="logout-btn-3" coords="57,536,56,581,96,582,99,537" shape="poly">
     <area target="" alt="로그아웃4" title="로그아웃4" href="#" class="logout-btn-4" coords="60,469,55,516,98,519,100,473" shape="poly">
+
+    <area target="" alt="reload0" title="reload0" class="reload-btn-0" href="" coords="228,143,221,174,230,188,257,209,273,210,274,189,266,166,257,153,242,145" shape="poly">
+    <area target="" alt="reload1" title="reload1" class="reload-btn-1" href="" coords="187,149,184,160,187,167,198,164,199,154,195,148" shape="poly">
+    <area target="" alt="reload2" title="reload2" class="reload-btn-2" href="" coords="145,134,137,138,132,148,143,151,152,143,158,134" shape="poly">
 </map>
 
 <!-- Modal -->
@@ -172,6 +176,7 @@ $(document).ready(function(e) {
         var player;
 
         var logoutArr = [];
+        var reloadArr = [];
 
         $("[class*='logout-btn-']").click(function(){
             switch($(this).attr("class")) {
@@ -193,7 +198,26 @@ $(document).ready(function(e) {
             }
 
             if(logoutArr[0] && logoutArr[1] && logoutArr[2] && logoutArr[3] && logoutArr[4]) {
-                window.location.href='logout.php';
+                window.location.href='/logout.php';
+            }
+        });
+
+        $("[class*='reload-btn-']").click(function(event){
+            event.preventDefault();
+            switch($(this).attr("class")) {
+                case "reload-btn-0":
+                    reloadArr[0] = true;
+                    break;
+                case "reload-btn-1":
+                    reloadArr[1] = true;
+                    break;
+                case "reload-btn-2":
+                    reloadArr[2] = true;
+                    break;
+            }
+
+            if(reloadArr[0] && reloadArr[1] && reloadArr[2]) {
+                window.location.href='/main.php';
             }
         });
 
