@@ -13,9 +13,82 @@ include "top.php";
         background-size: cover;
     }
 
+    /* 썸네일  */
+    .player-container{
+        position: relative;
+        font-family: NotoSansKR-Regular;
+    }
+
+    #bookmark-container{
+        position: absolute;
+        width: 100%;
+        bottom: 20%;
+        background:rgba(200, 200, 200, .5);
+        z-index: 30;
+    }
+    .bookmark-item-list-container-slide{
+        padding: 7px 0;
+        margin:0 auto;
+        width: 80%;
+        font-size: 0;
+        overflow:hidden;
+    }
+    .bookmark-item-list-container{
+        position: relative;
+        width:1000%;
+        left:0;
+        transition: all 0.5s ease-out;
+    }
+    .bookmark-btn-left-container,
+    .bookmark-btn-right-container {
+        position: absolute;
+        width: 36px;
+        height: 36px;
+        top: 50%;
+        transform: translateY(-50%);
+        border-radius: 50%;
+        background-color: #597491;
+        background-size: cover;
+        background-position: center;
+    }
+    .bookmark-btn-left-container {
+        left: 27px;
+        background-image: url(../img/left.png);
+    }
+    .bookmark-btn-right-container {
+        right: 27px;
+        background-image: url(../img/right.png);
+    }
+    .bookmark-item-component {
+        margin-right:15px;
+        display: inline-block;
+        width: 135px;
+    }
+    .bookmark-item-component:last-child {
+        margin-right: 0;
+    }
+    .bookmark-item {
+        position: relative;
+        padding: 5px 0;
+        width: 100%;
+        height: 50px;
+        text-align: center;
+        overflow: hidden;
+        background: rgba(30, 30, 30, .5);
+    }
+    .bookmark-item-title {
+        position: absolute;
+        width: 80%;
+        top: 50%;
+        left: 50%;
+        color: #fff;
+        font-size: 15px;
+        transform: translate(-50%, -50%);
+    }
+    .bookmark-item-time {
+        display: none;
+    }
 </style>
-
-
 
 <div class="modal-search-player-bg"></div>
 <div class="modal-search-player-popup">
@@ -36,28 +109,25 @@ include "top.php";
                 </div>
             </div>
         </div>
-        <div class="player-container">
-            <div id="player"></div>
-        </div>
-        <div id="bookmark-container">
-            <div class="bookmark-title-container">북마크</div>
+        <div id="bookmark-container" style="z-index: 1000">
             <div class="bookmark-item-container">
-                <div class="bookmark-btn-left-container">
-<!--                    <img src="" alt="LEFTBTN" title="LEFTBTN">-->
-                </div>
-                <div class="bookmark-item-list-container">
-                    <div class="bookmark-item-component">
-                        <div class="bookmark-item">
-                            <div class="bookmark-item-title">게임 소개</div>
-                            <div class="bookmark-item-content"></div>
+                <div class="bookmark-btn-left-container"></div>
+                <div class="bookmark-item-list-container-slide">
+                    <div class="bookmark-item-list-container">
+                        <div class="bookmark-item-component">
+                            <div class="bookmark-item">
+                                <div class="bookmark-item-title">게임 소개</div>
+                                <div class="bookmark-item-content"></div>
+                            </div>
+                            <div class="bookmark-item-time">00:45</div>
                         </div>
-                        <div class="bookmark-item-time">00:45</div>
                     </div>
                 </div>
-                <div class="bookmark-btn-right-container">
-<!--                    <img src="" alt="RIGHTBTN" title="RIGHTBTN">-->
-                </div>
+                <div class="bookmark-btn-right-container"></div>
             </div>
+        </div>
+        <div class="player-container"  style="z-index: -1">
+            <div id="player"></div>
         </div>
     </div>
     <div class="modal-search-player-bookmark-container"></div>
@@ -87,52 +157,19 @@ include "top.php";
 
             <div class="search-filter-container">
                 <div class="search-filter-item-container">
-<!--                    <div>인원구성</div>-->
-<!--                    <div>2인</div>-->
-<!--                    <div>3인</div>-->
-<!--                    <div>4인</div>-->
-<!--                    <div>5인</div>-->
-<!--                    <div>6인</div>-->
-<!--                    <div>7인+</div>-->
                 </div>
 
                 <div class="search-filter-item-container">
-<!--                    <div>난이도</div>-->
-<!--                    <div>아주쉬움</div>-->
-<!--                    <div>쉬움</div>-->
-<!--                    <div>보통</div>-->
-<!--                    <div>어려움</div>-->
-<!--                    <div>매우어려움</div>-->
-<!--                    <div>마스터</div>-->
                 </div>
 
 
                 <div class="search-filter-item-container">
-<!--                    <div>장르/테마</div>-->
-<!--                    <div>직원추천</div>-->
-<!--                    <div>전략</div>-->
-<!--                    <div>추리</div>-->
-<!--                    <div>협력/팀전</div>-->
-<!--                    <div>웃음폭탄</div>-->
-<!--                    <div>마피아</div>-->
-<!--                    <div>순발력</div>-->
                 </div>
 
                 <div class="search-filter-item-container hidden">
-<!--                    <div>플레이시간</div>-->
-<!--                    <div>10분미만</div>-->
-<!--                    <div>10분</div>-->
-<!--                    <div>30분</div>-->
-<!--                    <div>60분</div>-->
-<!--                    <div>90분+</div>-->
                 </div>
 
                 <div class="search-filter-item-container hidden">
-<!--                    <div>설명시간</div>-->
-<!--                    <div>5분미만</div>-->
-<!--                    <div>5분~10분</div>-->
-<!--                    <div>10분~15분</div>-->
-<!--                    <div>15분+</div>-->
                 </div>
 
                 <div class="search-filter-more-item-container">
@@ -141,135 +178,6 @@ include "top.php";
             </div>
 
             <div class="search-result-container">
-                <div class="search-result-item-container">
-                    <div class="search-result-img"></div>
-                    <div class="search-result-content-container">
-                        <div class="search-result-title">
-                            <p>게임이름</p>
-                            <img src="img/best.png" alt="BEST" title="BEST">
-                            <img src="img/new.png" alt="NEW" title="NEW">
-                        </div>
-                        <div class="search-result-info-container">
-                            <div class="search-result-info">
-                                <div class="search-result-info-title">추천인원</div>
-                                <div class="search-result-info-content">2~4인</div>
-                                <div class="search-result-info-footer">가능인원: 2~6</div>
-                            </div>
-                            <div class="search-result-info">
-                                <div class="search-result-info-title">플레이시간</div>
-                                <div class="search-result-info-content">30분</div>
-                            </div>
-                            <div class="search-result-info">
-                                <div class="search-result-info-title">설명시간</div>
-                                <div class="search-result-info-content">10분</div>
-                            </div>
-                            <div class="search-result-info">
-                                <div class="search-result-info-title">장르</div>
-                                <div class="search-result-info-content">전략</div>
-                            </div>
-                            <div class="search-result-info">
-                                <div class="search-result-info-title">난이도</div>
-                                <div class="search-result-info-content">보통</div>
-                            </div>
-                        </div>
-
-                        <div class="search-result-text-container">
-                            <p>게임 설명~ 어쩌구 저쩌구 이런 저런 게임입니다. 아주 재미있어요~! 진짜로!! 우하하하^ㅇ^!!</p>
-                            <p>#숫자타일 #추상전략게임 #유명한게임 #컴플레또_비슷한게임</p>
-                        </div>
-                    </div>
-                    <div class="search-result-btn-container">
-                        <div class="play"></div>
-                        <div>게임요약</div>
-                    </div>
-
-                </div>
-                <div class="search-result-item-container">
-                    <div class="search-result-img"></div>
-                    <div class="search-result-content-container">
-                        <div class="search-result-title">
-                            <p>게임이름</p>
-                            <img src="img/best.png" alt="BEST" title="BEST">
-                            <img src="img/new.png" alt="NEW" title="NEW">
-                        </div>
-                        <div class="search-result-info-container">
-                            <div class="search-result-info">
-                                <div class="search-result-info-title">추천인원</div>
-                                <div class="search-result-info-content">2~4인</div>
-                                <div class="search-result-info-footer">가능인원: 2~6</div>
-                            </div>
-                            <div class="search-result-info">
-                                <div class="search-result-info-title">플레이시간</div>
-                                <div class="search-result-info-content">30분</div>
-                            </div>
-                            <div class="search-result-info">
-                                <div class="search-result-info-title">설명시간</div>
-                                <div class="search-result-info-content">10분</div>
-                            </div>
-                            <div class="search-result-info">
-                                <div class="search-result-info-title">장르</div>
-                                <div class="search-result-info-content">전략</div>
-                            </div>
-                            <div class="search-result-info">
-                                <div class="search-result-info-title">난이도</div>
-                                <div class="search-result-info-content">보통</div>
-                            </div>
-                        </div>
-
-                        <div class="search-result-text-container">
-                            <p>게임 설명~ 어쩌구 저쩌구 이런 저런 게임입니다. 아주 재미있어요~! 진짜로!! 우하하하^ㅇ^!!</p>
-                            <p>#숫자타일 #추상전략게임 #유명한게임 #컴플레또_비슷한게임</p>
-                        </div>
-                    </div>
-                    <div class="search-result-btn-container">
-                        <div class="content"></div>
-                        <div>게임요약</div>
-                    </div>
-
-                </div>
-                <div class="search-result-item-container">
-                    <div class="search-result-img"></div>
-                    <div class="search-result-content-container">
-                        <div class="search-result-title">
-                            <p>게임이름</p>
-                            <img src="img/best.png" alt="BEST" title="BEST">
-                            <img src="img/new.png" alt="NEW" title="NEW">
-                        </div>
-                        <div class="search-result-info-container">
-                            <div class="search-result-info">
-                                <div class="search-result-info-title">추천인원</div>
-                                <div class="search-result-info-content">2~4인</div>
-                                <div class="search-result-info-footer">가능인원: 2~6</div>
-                            </div>
-                            <div class="search-result-info">
-                                <div class="search-result-info-title">플레이시간</div>
-                                <div class="search-result-info-content">30분</div>
-                            </div>
-                            <div class="search-result-info">
-                                <div class="search-result-info-title">설명시간</div>
-                                <div class="search-result-info-content">10분</div>
-                            </div>
-                            <div class="search-result-info">
-                                <div class="search-result-info-title">장르</div>
-                                <div class="search-result-info-content">전략</div>
-                            </div>
-                            <div class="search-result-info">
-                                <div class="search-result-info-title">난이도</div>
-                                <div class="search-result-info-content">보통</div>
-                            </div>
-                        </div>
-
-                        <div class="search-result-text-container">
-                            <p>게임 설명~ 어쩌구 저쩌구 이런 저런 게임입니다. 아주 재미있어요~! 진짜로!! 우하하하^ㅇ^!!</p>
-                            <p>#숫자타일 #추상전략게임 #유명한게임 #컴플레또_비슷한게임</p>
-                        </div>
-                    </div>
-                    <div class="search-result-btn-container">
-                        <div class="staff"></div>
-                        <div>게임요약</div>
-                    </div>
-
-                </div>
             </div>
 
 </div>
@@ -299,7 +207,6 @@ include "top.php";
 
         $(function(){
 
-            console.log(player);
 
             var globalVideoId = "";
 
@@ -332,6 +239,7 @@ include "top.php";
                 $(".player-container").append("<div id='player'></div>");
 
                 var youtube = $(this).attr("data-games_youtube");
+                var games_cd = $(this).attr("data-games_cd");
 
                 if(youtube == "")
                     return false;
@@ -342,17 +250,22 @@ include "top.php";
                     youtubeId = youtube.split("/")[3];
                 else
                     youtubeId = youtubeId[1];
-
-                //https://www.youtube.com/watch?v=svkTqTCm62o
-
                 globalVideoId = youtubeId;
 
                 onYouTubePlayerAPIReady(youtubeId);
+                $.ajax({
+                    type: 'POST',
+                    url: "ok/main03_ok.php?type=count",
+                    data: { games_cd: games_cd },
+                    success: function(data) {
+                        console.log(data);
+                    }
+                });
 
 
                 function onYouTubePlayerAPIReady(videoId) {
                     player = new YT.Player('player', {
-                        height: $(window).height() - 240,
+                        height: $(window).height(),
                         width: $(document).width(),
                         // videoId: 'XWv6VEoFm5c',
                         videoId: videoId,
@@ -402,8 +315,6 @@ include "top.php";
 
                 var games_cd = $(this).data("games_cd");
 
-                console.log(games_cd);
-
                 $.ajax({
                     type: 'POST',
                     url: 'ok/main03_ok.php?type=timestamp',
@@ -414,11 +325,9 @@ include "top.php";
                         $(".bookmark-item-list-container > div").remove();
 
                         for(var i = 0; i < data.length; i++) {
-                            console.log(data[i]);
                             var html = '<div class="bookmark-item-component">';
                                 html += '<div class="bookmark-item">';
                                     html += '<div class="bookmark-item-title">' + data[i].youtube_thumb_title + '</div>';
-                                    html += '<div class="bookmark-item-content"><img src="' + data[i].youtube_img_thumb + '" alt="THUMBNAIL" title="THUMBNAIL"></div>';
                                 html += '</div>'
                                 html += '<div class="bookmark-item-time">' + data[i].youtube_paly_min + ':' + data[i].youtube_paly_sec + '</div>';
                             html += '</div>';
@@ -462,24 +371,17 @@ include "top.php";
             })
 
             $(document).on("click", ".bookmark-btn-left-container", function(){
-                var bookmarkCount = $(".bookmark-item-component").length;
-
-                if(bookmarkIndex > 0) {
-                    bookmarkIndex--;
-                } else {
-                    bookmarkIndex = bookmarkCount - 1;
+                var left = $(".bookmark-item-list-container").css("left");
+                if(parseInt(left) === 0)
+                {
+                    return false;
                 }
-
-                $(".bookmark-item-component").eq(bookmarkIndex).click();
+                $(".bookmark-item-list-container").css("left", parseInt(left) + 150 + "px")
             })
             $(document).on("click", ".bookmark-btn-right-container", function(){
-                var bookmarkCount = $(".bookmark-item-component").length;
-                if(bookmarkIndex < bookmarkCount) {
-                    bookmarkIndex++;
-                } else {
-                    bookmarkIndex = 0;
-                }
-                $(".bookmark-item-component").eq(bookmarkIndex).click();
+                var left = $(".bookmark-item-list-container").css("left");
+                $(".bookmark-item-list-container").css("left", parseInt(left) - 150 + "px")
+              
             })
 
             $(document).on("click", ".modal-popup-btn-close", function(){
@@ -609,7 +511,6 @@ include "top.php";
                     url: 'ok/main03_ok.php?type=search',
                     data: { sql: sql },
                     success: function(data) {
-                        console.log(data);
                         var data = JSON.parse(data);
 
                         $('.search-result-container div').remove();
@@ -656,9 +557,12 @@ include "top.php";
                                 html += "<div class='search-result-btn-container'>";
                                     var btnClass = "content";
                                     if(data[i].games_youtube != "")
+                                    {
                                         btnClass = "play";
-                                    if(data[i].staff_call == "T")
+                                    } else if(data[i].staff_call == "T")
+                                    {
                                         btnClass = "staff";
+                                    }
                                     html += "<div class='" + btnClass + "' data-games_cd='" + data[i].games_cd + "' data-games_youtube='" + data[i].games_youtube + "'></div>";
                                     html += "<div class='btn-summaray' data-summaray='" + data[i].games_summaray + "'>게임요약</div>";
                                 html += "</div>";

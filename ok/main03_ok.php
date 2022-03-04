@@ -59,10 +59,19 @@
         break;
 
         case "timestamp":
+            $sql = 
+            "SELECT
+                *
+            FROM
+                DM_T_GAMES_YOUTUBE_TIMESTAMP
+            WHERE
+                display_fl='T' 
+            AND
+                delete_fl='F'
+            AND
+                games_cd='".$_POST['games_cd']."'";
 
-            $sql = "SELECT * FROM DM_T_GAMES_YOUTUBE_TIMESTAMP WHERE display_fl='T' AND delete_fl='F' AND games_cd='".$_POST['games_cd']."'";
             $result = sql_query($sql);
-            $row = sql_fetch_array($result);
 
             $arr = array();
 
@@ -78,6 +87,25 @@
 
             $sql = "INSERT INTO DM_T_GAMES_REQUEST_DESCRIPTION (branch_cd, room_cd, games_cd, request_reg_dt) VALUES ('".$_SESSION['branch_cd']."','".$_SESSION['room_cd']."','".$_POST['games_cd']."',NOW())";
             echo sql_query($sql);
+
+        break;
+
+        case "count":
+
+            $sql = "SELECT * FROM DM_T_GAMES_COUNT WHERE 1=1 AND branch_cd='".$_SESSION['branch_cd']."' AND games_cd='".$_POST['games_cd']."'";
+            $result = sql_query($sql);
+            $row = sql_fetch_array($result);
+
+            if($row === [])
+            {
+                $sql = "INSERT INTO DM_T_GAMES_COUNT (games_cd, branch_cd, games_play_movie_cnt, count_reg_dt) VALUES ('".$_POST['games_cd']."', '".$_SESSION['branch_cd']."', 1, NOW())";
+                sql_query($sql);
+            }
+            else
+            {
+                $sql = "UPDATE  DM_T_GAMES_COUNT set games_play_movie_cnt = games_play_movie_cnt+1 WHERE uid = '".$row['uid']."'";
+                sql_query($sql);
+            }
 
         break;
     }
