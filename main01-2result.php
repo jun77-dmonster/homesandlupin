@@ -4,9 +4,9 @@ include "top.php";
 <style>
     .col-14 {text-align: center;}
 
-  
+
     html, body {
-        margin: 0; height: 100%; overflow: hidden; 
+        margin: 0; height: 100%; overflow: hidden;
         background-image: url(./img/holmesBg2.jpg);
         background-position: center center;
         background-repeat: no-repeat;
@@ -70,14 +70,14 @@ include "top.php";
                 top: 165px;
                 transform: rotate(22deg);
             "/>
-          <img src="img/startcircle_nostart.png"
+          <img src="img/wheel/startcircle.png"
                id="startCircle"
                style="
                 position: absolute;
                 top: 325px;
                 left: 385px;
             "/>
-          <div class="touch">touch!</div>
+<!--          <div class="touch">touch!</div>-->
       </div>
 
         <div class="ruletbox">
@@ -134,9 +134,13 @@ include "top.php";
 
             var dataList = [];
 
+            var isWheel = true;
+
             $(document).on("click", ".modal-penalty-popup-btn-close", function(){
                 $(".modal-penalty-popup, .modal-bg").hide();
             })
+
+
 
             $.ajax({
 
@@ -254,13 +258,23 @@ include "top.php";
                         $(".modal-penalty-popup-penalty-title").text(arr[index].title);
                         $(".modal-penalty-popup-penalty-content").text(arr[index].content);
                         $(".modal-penalty-popup, .modal-bg").show();
+
+                        $("#startCircle").attr("src", "img/wheel/startcircle_nostart.png");
+                        isWheel = true;
                     }
 
                     $(document).on("click", "#startCircle, .modal-penalty-popup-btn-container button", function(){
-                        $(".modal-penalty-popup, .modal-bg, .touch").hide();
-                        resetWheel();
-                        theWheel.startAnimation();
+
+                        if(isWheel) {
+                            isWheel = false;
+                            $("#startCircle").attr("src", "img/wheel/startBtn_none.png");
+                            $(".modal-penalty-popup, .modal-bg, .touch").hide();
+                            resetWheel();
+                            theWheel.startAnimation();
+                        }
                     })
+
+
 
                 }
 

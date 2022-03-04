@@ -184,14 +184,14 @@ include "top.php";
 <!--                top: 165px;-->
 <!--                transform: rotate(22deg);-->
 <!--            "/>-->
-            <img src="img/startcircle_nostart.png"
+            <img src="img/wheel/startcircle.png"
                  id="startCircle"
                  style="
                 position: absolute;
                 top: 325px;
                 left: 385px;
             "/>
-            <div class="touch">touch!</div>
+<!--            <div class="touch">touch!</div>-->
         </div>
 
         <div class="ruletbox">
@@ -230,6 +230,8 @@ include "top.php";
         var globalVideoId = "";
 
         var listIndex = 0;
+
+        var isWheel = true;
 
         $(document).on("click", ".modal-game-youtube-btn", function(event){
 
@@ -626,24 +628,35 @@ include "top.php";
 
                         $(".modal-game-wheel-info-category-list:nth-child(3) p:nth-child(2)").text(themeText);
                         $(".modal-game-wheel-popup, .modal-bg").show();
+
+                        $("#startCircle").attr("src", "img/wheel/startcircle_nostart.png");
+                        isWheel = true;
                     }
 
-                    $(document).on("click", "#startCircle, .modal-penalty-popup-btn-container button", function(){
-                        $(".modal-game-wheel-popup, .modal-bg, .touch").hide();
-                        resetWheel();
-                        theWheel1.startAnimation();
+                    $(document).on("click", "#startCircle, .modal-game-wheel-btn-container button:nth-child(2)", function(){
+                        if(isWheel) {
+                            isWheel = false;
+                            $("#startCircle").attr("src", "img/wheel/startBtn_none.png");
+                            $(".modal-game-wheel-popup, .modal-bg, .touch").hide();
+                            resetWheel();
+                            theWheel1.startAnimation();
+                        }
                     });
 
-                    $(document).on("click", ".modal-game-wheel-btn-container button:nth-child(2)", function(event){
-                        $(".modal-game-wheel-popup, .modal-bg, .touch").hide();
-                        resetWheel();
-                        theWheel1.startAnimation();
-                    })
+                    // $(document).on("click", ".modal-game-wheel-btn-container button:nth-child(2)", function(event){
+                    //     $(".modal-game-wheel-popup, .modal-bg, .touch").hide();
+                    //     resetWheel();
+                    //     theWheel1.startAnimation();
+                    // })
 
                 }
             });
 
         });
+
+        $(document).on("click", ".modal-bg", function(){
+            $(".modal-game-wheel-popup, .modal-bg").hide();
+        })
 
         $.ajax({
             type: 'POST',
