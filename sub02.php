@@ -200,12 +200,18 @@ include "top.php";
 
             $(".btn-timer-re-setting").click(function(){
                 $(".time").text(0);
+                $(".time-add").css({
+                    backgroundImage: 'url("img/count/0.png")',
+                });
             });
             $(".btn-timer-power").click(function(){
 
                 timerClear();
 
                 $(".time").text(0);
+                $(".time-add").css({
+                    backgroundImage: 'url("img/count/0.png")',
+                });
 
                 // $(".header").css({
                 //     display: 'block'
@@ -213,11 +219,17 @@ include "top.php";
                 // $(".sub02-container").css({
                 //     height: 'calc(100% - 98px)'
                 // });
-                // $(".sub02-timer-container").css({
-                //     width: '80%',
-                //     transition: '.2s',
-                //     backgroundColor: '#fff'
-                // });
+                $(".sub02-timer-set-container").css({
+                    marginTop: '11px'
+                });
+                $(".sub02-btn-center-container").css({
+                    marginTop: '0'
+                });
+                $(".sub02-timer-container").css({
+                    width: '80%',
+                    transition: '.2s',
+                    backgroundColor: '#fff',
+                });
                 $(".sub02-timer-container").css({
                     transition: '.2s',
                     backgroundColor: '#fff'
@@ -307,11 +319,17 @@ include "top.php";
                 // $(".sub02-container").css({
                 //     height: '100%'
                 // });
-                // $(".sub02-timer-container").css({
-                //     width: '100%',
-                //     transition: '.2s',
-                //     backgroundColor: '#03254b'
-                // });
+                $(".sub02-timer-set-container").css({
+                    marginTop: '55px'
+                });
+                $(".sub02-btn-center-container").css({
+                    marginTop: '-55px'
+                });
+                $(".sub02-timer-container").css({
+                    width: '100%',
+                    transition: '.2s',
+                    backgroundColor: '#03254b',
+                });
                 $(".sub02-timer-container").css({
                     transition: '.2s',
                     backgroundColor: '#03254b'
