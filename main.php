@@ -217,7 +217,8 @@ $(document).ready(function(e) {
             }
 
             if(reloadArr[0] && reloadArr[1] && reloadArr[2]) {
-                window.location.href='/main.php';
+                alert("이용자 정보가 초기화 되었습니다.");
+                window.location.href='/index.php';
             }
         });
 
