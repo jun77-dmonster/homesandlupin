@@ -126,7 +126,7 @@ include "top.php";
                 <div class="bookmark-btn-right-container"></div>
             </div>
         </div>
-        <div class="player-container"  style="z-index: -1">
+        <div class="player-container"  style="z-index: 0">
             <div id="player"></div>
         </div>
     </div>
