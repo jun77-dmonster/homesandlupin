@@ -45,8 +45,9 @@ include "top.php";
 <div class="container-fluid h-100" >
   <div class="row h-100">
 
-      <div style="position: absolute; width: 1100px; height: 550px; overflow: hidden; left:50%; transform: translateX(-50%); bottom: 0; z-index: 100;">
-          <canvas id='canvas' width='1100' height='500'>
+<!--      overflow: hidden;-->
+      <div style="position: absolute; width: 1100px; height: 525px;  left:50%; transform: translateX(-50%); bottom: 0; z-index: 100;">
+          <canvas id='canvas' width='1100' height='500' style="margin-top: 25px;">
               Canvas not supported, use another browser.
           </canvas>
           <div style="
@@ -70,6 +71,8 @@ include "top.php";
                 top: 165px;
                 transform: rotate(22deg);
             "/>
+<!--          <div class="wheel-left-container"></div>-->
+<!--          <div class="wheel-right-container"></div>-->
           <img src="img/startcircle_nostart.png"
                id="startCircle"
                style="

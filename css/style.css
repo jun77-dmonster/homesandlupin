@@ -1812,6 +1812,24 @@ li {list-style:none;}
         padding: 0.5em 0;
         line-height: 1.45em;
     }
+    .wheel-left-container {
+        position: absolute;
+        width: 550px;
+        height: 500px;
+        left: -50px;
+        bottom: 0;
+        z-index: 50;
+        /*transform: rotate(-5deg);*/
+        background-image: url("../img/homesleft.png");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+
+    }
+
+    #startCircle {
+        z-index: 150;
+    }
 
     .star-container {
         width: 100%;
