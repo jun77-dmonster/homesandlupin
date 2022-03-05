@@ -11,7 +11,6 @@ $result = sql_fetch($sql);
 $sql1 = "SELECT room_cd FROM DM_T_BRANCH_ROOM WHERE branch_cd ='" . $result['branch_cd'] . "'";
 $result1 = sql_fetch($sql1);
 
-echo $result1['room_cd'];
 
 $branch_cd = $_SESSION['branch_cd'];
 $room_cd = $_SESSION['room_cd'];
