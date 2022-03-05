@@ -4,13 +4,20 @@ include "../common.php";
 $branch_cd = $_POST['branch_cd'];
 $room_no = $_POST['room_no'];
 $branch_cdcommon = $_POST['branch_cdcommon'];
-$pwd = get_encrypt_string($_POST['room_pwd']);
+//$pwd = get_encrypt_string($_POST['room_pwd']);
+$pwd = $_POST['room_pwd'];
 $room_string = "";
-//AND room_pwd = '" .$pwd. "'
-$sql = "select * from DM_T_BRANCH_ROOM where branch_cd = '$branch_cd' and room_no = '$room_no'";
+
+$sql = "select * from DM_T_BRANCH_ROOM where branch_cd = '$branch_cd' and room_no = '$room_no' AND room_pwd_enc = '" .$pwd. "'";
+
+
 
 $result = sql_query($sql);
 $row = sql_fetch_array($result);
+
+//echo $pwd;
+//print_r($row);
+//return false;
 
 $sql1 = "SELECT * FROM DM_T_BRANCH WHERE branch_cd = '". $branch_cd . "'";
 $result1 = sql_query($sql1);
@@ -39,38 +46,45 @@ if($row) {
 //    setcookie("branch_string", $row1['branch_nm'], (time() + 8600) * 30,'/');
 
 
+?>
 
+    <div
+            id="room_check_container"
+            data-branch_cdcommon="<?PHP echo $_SESSION['branch_cdcommon']?>"
+            data-branch_cd="<?PHP echo $_SESSION['branch_cd']?>"
+            data-room_no="<?PHP echo $_SESSION['room_no']?>"
+            data-room_cd="<?PHP echo $_SESSION['room_cd']?>"
+            data-room_string="<?PHP echo $_SESSION['room_string']?>"
+            data-branch_string="<?PHP echo $_SESSION['branch_string']?>"
+    >
+    </div>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script>
+
+        $(function(){
+
+            localStorage.setItem("branch_cdcommon", $("#room_check_container").data("branch_cdcommon"));
+            localStorage.setItem("branch_cd", $("#room_check_container").data("branch_cd"));
+            localStorage.setItem("room_no", $("#room_check_container").data("room_no"));
+            localStorage.setItem("room_cd", $("#room_check_container").data("room_cd"));
+            localStorage.setItem("room_string", $("#room_check_container").data("room_string"));
+            localStorage.setItem("branch_string", $("#room_check_container").data("branch_string"));
+
+            window.location.href = "/main.php";
+        });
+
+    </script>
+
+<?php
 
 //    goto_url("/main.php");
+} else {
+    echo "<script>alert('룸 비밀번호를 확인 해 주세요.'); window.location.href='/roomchoice.php';</script>";
+    return false;
 }
 
 
 ?>
 
-<div
-        id="room_check_container"
-        data-branch_cdcommon="<?PHP echo $_SESSION['branch_cdcommon']?>"
-        data-branch_cd="<?PHP echo $_SESSION['branch_cd']?>"
-        data-room_no="<?PHP echo $_SESSION['room_no']?>"
-        data-room_cd="<?PHP echo $_SESSION['room_cd']?>"
-        data-room_string="<?PHP echo $_SESSION['room_string']?>"
-        data-branch_string="<?PHP echo $_SESSION['branch_string']?>"
->
-</div>
 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-<script>
-
-    $(function(){
-
-        localStorage.setItem("branch_cdcommon", $("#room_check_container").data("branch_cdcommon"));
-        localStorage.setItem("branch_cd", $("#room_check_container").data("branch_cd"));
-        localStorage.setItem("room_no", $("#room_check_container").data("room_no"));
-        localStorage.setItem("room_cd", $("#room_check_container").data("room_cd"));
-        localStorage.setItem("room_string", $("#room_check_container").data("room_string"));
-        localStorage.setItem("branch_string", $("#room_check_container").data("branch_string"));
-
-        window.location.href = "/main.php";
-    });
-
-</script>
