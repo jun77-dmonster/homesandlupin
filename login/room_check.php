@@ -4,8 +4,9 @@ include "../common.php";
 $branch_cd = $_POST['branch_cd'];
 $room_no = $_POST['room_no'];
 $branch_cdcommon = $_POST['branch_cdcommon'];
+$pwd = get_encrypt_string($_POST['room_pwd']);
 $room_string = "";
-
+//AND room_pwd = '" .$pwd. "'
 $sql = "select * from DM_T_BRANCH_ROOM where branch_cd = '$branch_cd' and room_no = '$room_no'";
 
 $result = sql_query($sql);

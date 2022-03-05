@@ -34,10 +34,16 @@ for($i=0; $row = sql_fetch_array($result); $i++) {
   function onChklogin() {
      
     var room_no = $("#room_no option:selected").val();
+    var pwd = $("input[type='password']").val();
 
     if(room_no  == "") {
       alert('룸을 선택해주세요.');
       return false;
+    }
+
+    if(pwd == "") {
+        alert("룸 비밀번호를 입력 해 주세요.");
+        return false;
     }
 
     document.logincheck.submit();
@@ -47,6 +53,11 @@ for($i=0; $row = sql_fetch_array($result); $i++) {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+<style>
+    input[type="password"] {
+        margin-top: 12px;
+    }
+</style>
 <div class="container h-100">
     <div class="row align-items-center h-100">
         <div class="col-6 mx-auto">
@@ -61,6 +72,7 @@ for($i=0; $row = sql_fetch_array($result); $i++) {
             <option value="<?php echo $data['room_no']?>"><?php echo $data['room_no']?></option>
         <?php endforeach;?>
     </select>
+        <input type="password" name="room_pwd" class="form-control" placeholder="룸 비밀번호를 입력 해 주세요.">
   </div>
 
   <button type="button" onclick="onChklogin();" class="btn btn-primary">로그인</button>

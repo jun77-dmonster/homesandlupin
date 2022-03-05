@@ -168,16 +168,24 @@ if(isset($_SESSION['branch_cd']) or isset($_SESSION['branch_cdcommon'])){
 <script>
     $(function(){
         if(localStorage.branch_string && localStorage.branch_cd && localStorage.branch_cdcommon && localStorage.room_cd && localStorage.room_string && localStorage.room_no) {
-            <?PHP
-            set_session('branch_string', localStorage.branch_string);
-            set_session('branch_cd', localStorage.branch_cd);
-            set_session('branch_cdcommon', localStorage.branch_cdcommon);
-            set_session('room_cd', localStorage.room_cd);
-            set_session('room_string', localStorage.room_string);
-            set_session('room_no', localStorage.room_no);
-            ?>
 
-            window.location.href='/main.php';
+
+            $.ajax({
+                type: 'POST',
+                url: '/login/setLocalStorage.php',
+                data: {
+                    branch_string: localStorage.branch_string,
+                    branch_cd: localStorage.branch_cd,
+                    branch_cdcommon: localStorage.branch_cdcommon,
+                    room_cd: localStorage.room_cd,
+                    room_string: localStorage.room_string,
+                    room_no: localStorage.room_no,
+                },
+                succcess: function(data){
+                    window.location.href='/main.php';
+                }
+            });
+
         }
     });
 </script>

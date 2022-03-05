@@ -2,14 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="92d665e2-75c4-46b1-ae25-8aeac10dacbb" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/login/removeLocalStorage.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/login/setLocalStorage.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/session/sess_fr2bbsankuo1cfoidmvfnam49m" beforeDir="false" afterPath="$PROJECT_DIR$/data/session/sess_fr2bbsankuo1cfoidmvfnam49m" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/login/logout.php" beforeDir="false" afterPath="$PROJECT_DIR$/login/logout.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/login/room_check.php" beforeDir="false" afterPath="$PROJECT_DIR$/login/room_check.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.php" beforeDir="false" afterPath="$PROJECT_DIR$/main.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/roomchoice.php" beforeDir="false" afterPath="$PROJECT_DIR$/roomchoice.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,7 +57,7 @@
       <workItem from="1644717720396" duration="93241000" />
       <workItem from="1645119404371" duration="136996000" />
       <workItem from="1646118631519" duration="58835000" />
-      <workItem from="1646383972044" duration="6031000" />
+      <workItem from="1646383972044" duration="8210000" />
     </task>
     <servers />
   </component>

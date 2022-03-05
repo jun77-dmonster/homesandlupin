@@ -127,7 +127,7 @@ $(document).ready(function(e) {
     <area target="" alt="게임검색" title="게임검색" href="main03.php" coords="680,225,678,437,726,449,753,462,769,469,785,482,820,446,852,414,889,375,934,332,883,291,819,254,752,235" shape="poly">
     <area target="" alt="메뉴주문" title="메뉴주문" href="main04.php" coords="794,494,943,344,1001,421,1017,450,1039,519,1046,557,1049,599,963,597,908,599,836,596" shape="poly">
     <area target="" alt="고객의소리" title="고객의소리" href="main05.php" coords="836,612,1050,612,1044,663,1037,693,1030,721,1015,757,1000,792,992,802,924,802,876,803,826,748,790,713" shape="poly">
-    <area target="" alt="로그아웃" title="로그아웃" href="logout.php" coords="88,362,106,368,114,384,111,409,99,419,74,421,60,411,55,389,60,371,70,362" shape="poly">
+<!--    <area target="" alt="로그아웃" title="로그아웃" href="logout.php" coords="88,362,106,368,114,384,111,409,99,419,74,421,60,411,55,389,60,371,70,362" shape="poly">-->
 
     <area target="" alt="로그아웃0" title="로그아웃0" href="#" class="logout-btn-0" coords="51,733,50,764,88,766,92,733" shape="poly">
     <area target="" alt="로그아웃1" title="로그아웃1" href="#" class="logout-btn-1" coords="53,677,50,711,92,713,93,680" shape="poly">
