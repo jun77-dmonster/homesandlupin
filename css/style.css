@@ -1775,16 +1775,17 @@ li {list-style:none;}
         width: 99.8784px;
         height: 67.456px;
         margin-top: 17.41500px;
+        padding: 1em 0;
+        line-height: 2.6em;
     }
     .user-num-container > div {
-        height: 67.456px;
         text-align: center;
     }
     .user-num-container > div > span {
         font-size: 32px;
         font-weight: bold;
         font-family: AggroM;
-        line-height: 67.456px;
+        /*line-height: 67.456px;*/
     }
     .user-num-container > div > span:first-child {
         color: #fff;
@@ -1808,6 +1809,8 @@ li {list-style:none;}
         font-family: AggroM;
         font-size: 34px;
         border-radius: 37.536px;
+        padding: 0.5em 0;
+        line-height: 1.4em;
     }
 
     .star-container {

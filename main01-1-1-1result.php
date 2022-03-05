@@ -232,7 +232,9 @@ include "top.php";
     </div>
 
     <div class="modal-game-re-btn-container">
-        <button class="btn-re-game">다시하기</button>
+        <button class="btn-re-game">
+            <span>다시하기</span>
+        </button>
     </div>
 
 </div>
