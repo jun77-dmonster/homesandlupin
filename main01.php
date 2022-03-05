@@ -31,7 +31,7 @@ include "top.php";
    
         <div class="scorebox">
             
-                <a href="main01-1.php"><img src="img/sadaribox.png" style="margin-right:50px;"></a>
+                <a href="main01-1-1-1result.php?num=2"><img src="img/sadaribox.png" style="margin-right:50px;"></a>
 
         
                 <a href="main01-2result.php"><img src="img/ruletbox.png"></a>

@@ -1743,6 +1743,7 @@ li {list-style:none;}
 
     .btn-result-view {
         opacity: .5;
+        display: none;
     }
 
     .modal-game-table-container {
@@ -2648,4 +2649,28 @@ li {list-style:none;}
         text-align: center;
         font-weight: bold;
         display: none;
+    }
+
+    .add-container {
+        width: 910px;
+        height: 330px;
+        position: fixed;
+        background-size: cover;
+        background-position: center;
+        background-image: url("../img/add/add1.png");
+        z-index: 50;
+        left: calc( (100% - 266.56px - 910px) / 2 );
+        top: 260px;
+    }
+    .add-btn {
+        width: 267px;
+        height: 90px;
+        background-size: cover;
+        background-position: center;
+        background-image: url("../img/add/add2.png");
+        z-index: 55;
+        position: fixed;
+        left: calc( (100% - 266.56px - 267px) / 2 );
+        top: 455px;
+        cursor: pointer;
     }
