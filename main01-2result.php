@@ -47,7 +47,7 @@ include "top.php";
 
 <!--      overflow: hidden;-->
       <div style="position: absolute; width: 1100px; height: 525px;  left:50%; transform: translateX(-50%); bottom: 0; z-index: 100;">
-          <canvas id='canvas' width='1100' height='500' style="margin-top: 25px;">
+          <canvas id='canvas' width='1100' height='525' style="margin-top: 25px;">
               Canvas not supported, use another browser.
           </canvas>
           <div style="
@@ -73,7 +73,7 @@ include "top.php";
             "/>
 <!--          <div class="wheel-left-container"></div>-->
 <!--          <div class="wheel-right-container"></div>-->
-          <img src="img/startcircle_nostart.png"
+          <img src="img/wheel/startcircle.png"
                id="startCircle"
                style="
                 position: absolute;
@@ -85,7 +85,7 @@ include "top.php";
 
         <div class="ruletbox">
 
-            <img src="img/homesSelctor.png" style=" z-index: 100; top:70px; position:absolute; left:520px;">
+            <img src="img/homesSelctor.png" style=" z-index: 100; top:120px; position:absolute; left:520px;">
 <!--            <img src="img/homesleft.png" style=" bottom:100px; position:absolute; left:30px;">-->
 <!--            <img src="img/startcircle_nostart.png" style=" bottom:-30px; position:absolute; left:390px;">-->
 <!--            <img src="img/homesright.png" style=" bottom:100px; position:absolute; left:620px;">-->
@@ -136,6 +136,8 @@ include "top.php";
         $(function(){
 
             var dataList = [];
+
+            var isWheel = true;
 
             $(document).on("click", ".modal-penalty-popup-btn-close", function(){
                 $(".modal-penalty-popup, .modal-bg").hide();
@@ -259,12 +261,19 @@ include "top.php";
                         $(".modal-penalty-popup-penalty-title").text(arr[index].title);
                         $(".modal-penalty-popup-penalty-content").text(arr[index].content);
                         $(".modal-penalty-popup, .modal-bg").show();
+
+                        $("#startCircle").attr("src", "img/wheel/startcircle_nostart.png");
+                        isWheel = true;
                     }
 
                     $(document).on("click", "#startCircle, .modal-penalty-popup-btn-container button", function(){
-                        $(".modal-penalty-popup, .modal-bg, .touch").hide();
-                        resetWheel();
-                        theWheel.startAnimation();
+                        if(isWheel) {
+                            isWheel = false;
+                            $("#startCircle").attr("src", "img/wheel/startBtn_none.png");
+                            $(".modal-penalty-popup, .modal-bg, .touch").hide();
+                            resetWheel();
+                            theWheel.startAnimation();
+                        }
                     })
 
                 }
