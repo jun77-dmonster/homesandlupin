@@ -220,13 +220,13 @@ include "top.php";
                 //     height: 'calc(100% - 98px)'
                 // });
                 $(".sub02-timer-set-container").css({
-                    marginTop: '11px'
+                    marginTop: '11px',
                 });
                 $(".sub02-btn-center-container").css({
                     marginTop: '0'
                 });
                 $(".sub02-timer-container").css({
-                    width: '80%',
+                    width: '1070px',
                     transition: '.2s',
                     backgroundColor: '#fff',
                 });
@@ -242,6 +242,9 @@ include "top.php";
                 });
                 $(".time-add").css({
                     top: '50px'
+                });
+                $(".sub02-quick-container").css({
+                    width: '20%'
                 });
 
                 // $(".time").css({
@@ -320,7 +323,9 @@ include "top.php";
                 //     height: '100%'
                 // });
                 $(".sub02-timer-set-container").css({
-                    marginTop: '55px'
+                    marginTop: '55px',
+                    left: '50%',
+                    transform: 'translateX(-50%)'
                 });
                 $(".sub02-btn-center-container").css({
                     marginTop: '-55px'
@@ -342,6 +347,9 @@ include "top.php";
                 });
                 $(".time-add").css({
                     top: 0
+                });
+                $(".sub02-quick-container").css({
+                    width: '0'
                 });
                 // $(".time").css({
                 //     marginTop: '55px'

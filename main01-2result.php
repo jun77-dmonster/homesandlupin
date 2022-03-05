@@ -80,7 +80,7 @@ include "top.php";
                 top: 325px;
                 left: 385px;
             "/>
-          <div class="touch">touch!</div>
+<!--          <div class="touch">touch!</div>-->
       </div>
 
         <div class="ruletbox">

@@ -982,8 +982,7 @@ li {list-style:none;}
         text-align: center;
         font-size: 42px;
         color: #3F2958;
-        font-family: "AggroB";
-        font-weight: bold;
+        font-family: "AggroM";
     }
     .search-list-container {
         width: 100%;
@@ -1103,10 +1102,10 @@ li {list-style:none;}
         border-radius: 16px;
         background-color: #53416b;
         text-align: center;
-        line-height: 75px;
+        line-height: 70px;
         color: #fff;
         font-weight: bold;
-        font-size: 24px;
+        font-size: 30px;
         font-family: "NotoSansKR-Bold";
     }
     .main02-2-tab-container > div.active {
@@ -1161,7 +1160,7 @@ li {list-style:none;}
     }
     #client-textarea {
         width: 100%;
-        height: 400px;
+        height: 350px;
         float: left;
         background-color: #ececec;
         border: none;
@@ -1174,7 +1173,7 @@ li {list-style:none;}
         text-align: center;
         float: left;
         width: 100%;
-        margin-top: 16px;
+        margin-top: 32px;
     }
     .client-btn {
         font-family: AggroM;
@@ -1468,7 +1467,7 @@ li {list-style:none;}
         overflow: hidden;
     }
     .sub02-timer-container {
-        width: 80%;
+        width: 1070px;
         height: 100%;
         float: left;
         padding: 64px 72px;
@@ -1536,7 +1535,7 @@ li {list-style:none;}
     }
 
     .sub02-timer-set-container {
-        width: 100%;
+        width: 926px;
         float: left;
         position: relative;
         margin-top: 11px;
@@ -2351,7 +2350,7 @@ li {list-style:none;}
     .modal-client-title {
         width: 100%;
         float: left;
-        margin-top: 72px;
+        margin-top: 120px;
         color: #fff;
         font-weight: bold;
         font-size: 30px;
@@ -2526,8 +2525,11 @@ li {list-style:none;}
         transform: translate(-50%, -50%);
     }
     .modal-game-youtube-btn-center img {
-        margin-top: 18px;
+        margin-top: 40px;
         margin-left: 6px;
+        padding: 0 !important;
+        float: right !important;
+        line-height: 0 !important;
     }
     .modal-game-youtube-btn-center p,
     .modal-game-youtube-btn-center img {
@@ -2536,15 +2538,21 @@ li {list-style:none;}
         font-weight: normal;
         font-family: AggroM;
         font-size: 30px;
-        line-height: 70px;
+
     }
+     .modal-game-youtube-btn-center p {
+         line-height: 1.8em;
+         padding: 1em 0;
+         margin-left: 0.3em;
+         margin-top: 0.1em;
+     }
 
     .modal-game-wheel-info-title {
         width: 100%;
         text-align: center;
         font-family: AggroM;
         color: #002956;
-        font-size: 42px;
+        font-size: 34px;
     }
     .modal-game-wheel-info-content {
         width: 100%;

@@ -638,7 +638,7 @@ include "top.php";
                         if(isWheel) {
                             isWheel = false;
                             $("#startCircle").attr("src", "img/wheel/startBtn_none.png");
-                            $(".modal-game-wheel-popup, .modal-bg, .touch").hide();
+                            $(".modal-game-wheel-popup, .modal-search-player-bg, .modal-bg, .touch").hide();
                             resetWheel();
                             theWheel1.startAnimation();
                         }
