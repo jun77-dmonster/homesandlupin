@@ -1,5 +1,10 @@
 <?php
 include "top.php";
+$keyword = '';
+if(!empty($_GET['keyword']))
+{
+    $keyword = $_GET['keyword'];
+}
 ?>
 <style>
     .col-14 {text-align: center;}
@@ -22,12 +27,12 @@ include "top.php";
     #bookmark-container{
         position: absolute;
         width: 100%;
-        bottom: 20%;
-        background:rgba(200, 200, 200, .5);
+        bottom: 0%;
+        background:#051f3a;
         z-index: 30;
     }
     .bookmark-item-list-container-slide{
-        padding: 7px 0;
+        padding: 30px 0;
         margin:0 auto;
         width: 80%;
         font-size: 0;
@@ -62,7 +67,7 @@ include "top.php";
     .bookmark-item-component {
         margin-right:15px;
         display: inline-block;
-        width: 135px;
+        width: 160px;
     }
     .bookmark-item-component:last-child {
         margin-right: 0;
@@ -71,10 +76,10 @@ include "top.php";
         position: relative;
         padding: 5px 0;
         width: 100%;
-        height: 50px;
+        height: 90px;
         text-align: center;
         overflow: hidden;
-        background: rgba(30, 30, 30, .5);
+        background: #000;
     }
     .bookmark-item-title {
         position: absolute;
@@ -84,6 +89,7 @@ include "top.php";
         color: #fff;
         font-size: 15px;
         transform: translate(-50%, -50%);
+        line-height:23px;
     }
     .bookmark-item-time {
         display: none;
@@ -143,7 +149,6 @@ include "top.php";
 </div>
 <div class="modal-summaray-bg"></div>
 
-
 <div class="modal-staff-blue-popup">
     <div class="modal-staff-title">카운터에 직원 설명이<br>요청되었습니다.<br>잠시 기다려주세요:)</div>
     <div class="mdoal-staff-btn-container">
@@ -152,46 +157,33 @@ include "top.php";
     <div class="modal-staff-sub-title">※매장 상황에 따라 설명이 지연될 수 있으니 양해 바랍니다</div>
 </div>
 
+<div class="y-scroll-container" data-keyword="<?PHP echo $keyword;?>">
+    <div class="search-filter-container">
+        <div class="search-filter-item-container">
+        </div>
+        <div class="search-filter-item-container">
+        </div>
+        <div class="search-filter-item-container">
+        </div>
 
-<div class="y-scroll-container" data-keyword="<?PHP echo isset($_GET['keyword']) && $_GET['keyword'] ? $_GET['keyword'] : '';?>">
+        <div class="search-filter-item-container hidden">
+        </div>
 
-            <div class="search-filter-container">
-                <div class="search-filter-item-container">
-                </div>
+        <div class="search-filter-item-container hidden">
+        </div>
 
-                <div class="search-filter-item-container">
-                </div>
-
-
-                <div class="search-filter-item-container">
-                </div>
-
-                <div class="search-filter-item-container hidden">
-                </div>
-
-                <div class="search-filter-item-container hidden">
-                </div>
-
-                <div class="search-filter-more-item-container">
-                    <div>+ 더보기</div>
-                </div>
-            </div>
-
-            <div class="search-result-container">
-            </div>
-
+        <div class="search-filter-more-item-container">
+            <div>+ 더보기</div>
+        </div>
+    </div>
+    <div class="search-result-container">
+    </div>
 </div>
     <div id="topBtn">
         <img src="img/top.png" alt="TOP" title="TOP">
     </div>
 
-
-
-
-
     <script>
-
-
         // Load the IFrame Player API code asynchronously.
         var tag = document.createElement('script');
         tag.src = "https://www.youtube.com/player_api";
@@ -202,12 +194,7 @@ include "top.php";
         // YouTube player after the API code downloads.
         var player;
 
-
-
-
         $(function(){
-
-
             var globalVideoId = "";
 
             var listIndex = 0;
@@ -223,9 +210,8 @@ include "top.php";
                 $.ajax({
                     type: 'POST',
                     url: "ok/main03_ok.php?type=staff",
-                    data: { games_cd: games_cd },
+                    data: { games_cd: games_cd},
                     success: function(data) {
-                        console.log(data);
                         $(".modal-staff-blue-popup").show();
                     }
                 });
@@ -256,12 +242,8 @@ include "top.php";
                 $.ajax({
                     type: 'POST',
                     url: "ok/main03_ok.php?type=count",
-                    data: { games_cd: games_cd },
-                    success: function(data) {
-                        console.log(data);
-                    }
+                    data: { games_cd: games_cd, type: 'play' },
                 });
-
 
                 function onYouTubePlayerAPIReady(videoId) {
                     player = new YT.Player('player', {
@@ -274,6 +256,10 @@ include "top.php";
                             'onStateChange': onPlayerStateChange
                         }
                     });
+                    function bookmark()
+                    {
+                        //$("#bookmark-container").toggle();
+                    }
                     function onPlayerReady(event) {
                         // player = event.target;
                         event.target.playVideo();
@@ -282,6 +268,7 @@ include "top.php";
                     }
                     var done = false;
                     function onPlayerStateChange(event) {
+                        bookmark();
                         if (event.data == YT.PlayerState.PLAYING && !done) {
                             setTimeout(stopVideo, 6000);
                             done = true;
@@ -293,14 +280,13 @@ include "top.php";
 
                     // when video ends
                     function onPlayerStateChange(event) {
+                        bookmark();
                         if(event.data === 0) {
                             //동영상 끝난 후 이벤트
                             $(".player-200-popup").show();
                         }
                     }
-
                 }
-
 
                 $(document).on("click", ".player-btn-container > div:first-child", function(){
                     var duration = player.getDuration();
@@ -311,7 +297,6 @@ include "top.php";
                 $(document).on("click", ".player-btn-container > div:last-child", function(){
                     $($(".search-result-item-container").eq(listIndex).find(".btn-summaray")).click();
                 });
-
 
                 var games_cd = $(this).data("games_cd");
 
@@ -338,8 +323,6 @@ include "top.php";
                     }
                 });
 
-
-
                 $(".modal-search-player-bg, .modal-search-player-popup").toggle();
             });
 
@@ -354,20 +337,9 @@ include "top.php";
 
                 var sec = (parseInt(timeSplit[0]) * 60) + parseInt(timeSplit[1]);
 
-                // if(player.seekTo) {
                     var duration = player.getDuration();
                     player.seekTo(sec, true)
-                // }
 
-                //넘길 초 넣어서 쓰시면됩니다.
-                // function bookmark(sec)
-                // {
-                //     if(player.seekTo) {
-                //         player.seekTo(sec, true)
-                //     }
-                // }
-                //
-                // bookmark(sec);
             })
 
             $(document).on("click", ".bookmark-btn-left-container", function(){
@@ -402,7 +374,6 @@ include "top.php";
                     var categoryTitleArr = [];
 
                     for(var i = 0; i < data.length; i++) {
-                        // console.log(data[i]);
                         if(data[i].item_cd.length === 5) {
                             categoryTitleArr.push(data[i]);
                         }
@@ -450,66 +421,63 @@ include "top.php";
             function search() {
 
                 var keyword = $(".y-scroll-container").data("keyword");
-                // if(getParam("keyword")) {
-                //     keyword = getParam("keyword");
+
+                // var sql = "";
+                // if(keyword != "") {
+                //     sql = " games.games_nm LIKE '%" + keyword + "%' or games.games_hash_tag LIKE '%" + keyword + "%'";
                 // }
 
-                var sql = "";
-                if(keyword) {
-                    sql = " games.games_nm LIKE '%" + keyword + "%'";
-                }
+                // $(".search-filter-item-container").each(function(i, item){
+                //     $($(this).find("div.active")).each(function(k, ktem){
 
-                $(".search-filter-item-container").each(function(i, item){
-                    $($(this).find("div.active")).each(function(k, ktem){
+                //             switch(i) {
+                //                 case 0:
+                //                     if(sql == "")
+                //                         sql += " games.games_theme LIKE '%" + $(this).data("item_cd") + "%'";
+                //                     else
+                //                         sql += " OR games.games_theme LIKE '%" + $(this).data("item_cd") + "%'";
 
-                            switch(i) {
-                                case 0:
-                                    if(sql == "")
-                                        sql += " games.games_theme LIKE '%" + $(this).data("item_cd") + "%'";
-                                    else
-                                        sql += " OR games.games_theme LIKE '%" + $(this).data("item_cd") + "%'";
+                //                     break;
+                //                 case 1:
+                //                     if(sql == "")
+                //                         sql += " games.games_level='" + $(this).data("item_cd") + "'";
+                //                     else
+                //                         sql += " OR games.games_level='" + $(this).data("item_cd") + "'";
 
-                                    break;
-                                case 1:
-                                    if(sql == "")
-                                        sql += " games.games_level='" + $(this).data("item_cd") + "'";
-                                    else
-                                        sql += " OR games.games_level='" + $(this).data("item_cd") + "'";
+                //                     break;
+                //                 case 2:
+                //                     if(sql == "")
+                //                         sql += " games.play_time='" + $(this).data("item_cd") + "'";
+                //                     else
+                //                         sql += " OR games.play_time='" + $(this).data("item_cd") + "'";
 
-                                    break;
-                                case 2:
-                                    if(sql == "")
-                                        sql += " games.play_time='" + $(this).data("item_cd") + "'";
-                                    else
-                                        sql += " OR games.play_time='" + $(this).data("item_cd") + "'";
+                //                     break;
+                //                 case 3:
+                //                     if(sql == "")
+                //                         sql += " games.explain_time='" + $(this).data("item_cd") + "'";
+                //                     else
+                //                         sql += " OR games.explain_time='" + $(this).data("item_cd") + "'";
 
-                                    break;
-                                case 3:
-                                    if(sql == "")
-                                        sql += " games.explain_time='" + $(this).data("item_cd") + "'";
-                                    else
-                                        sql += " OR games.explain_time='" + $(this).data("item_cd") + "'";
-
-                                    break;
-                                case 4:
-                                    var cnt = parseInt($(this).text().split("인")[0]);
-                                    if(sql == "") {
-                                        sql += " (games.recommend_player_min_cnt <= " + cnt + " AND games.recommend_player_max_cnt >= " + cnt + ")";
-                                    } else {
-                                        sql += " OR (games.recommend_player_min_cnt <= " + cnt + " AND games.recommend_player_max_cnt >= " + cnt + ")";
-                                    }
+                //                     break;
+                //                 case 4:
+                //                     var cnt = parseInt($(this).text().split("인")[0]);
+                //                     if(sql == "") {
+                //                         sql += " (games.recommend_player_min_cnt <= " + cnt + " AND games.recommend_player_max_cnt >= " + cnt + ")";
+                //                     } else {
+                //                         sql += " OR (games.recommend_player_min_cnt <= " + cnt + " AND games.recommend_player_max_cnt >= " + cnt + ")";
+                //                     }
                                     
-                                    break;
-                            }
+                //                     break;
+                //             }
 
 
-                    });
-                });
+                //     });
+                // });
 
                 $.ajax({
                     type: 'POST',
                     url: 'ok/main03_ok.php?type=search',
-                    data: { sql: sql },
+                    data: { keyword: keyword },
                     success: function(data) {
                         var data = JSON.parse(data);
 
@@ -564,7 +532,7 @@ include "top.php";
                                         btnClass = "staff";
                                     }
                                     html += "<div class='" + btnClass + "' data-games_cd='" + data[i].games_cd + "' data-games_youtube='" + data[i].games_youtube + "'></div>";
-                                    html += "<div class='btn-summaray' data-summaray='" + data[i].games_summaray + "'>게임요약</div>";
+                                    html += "<div class='btn-summaray' data-games_cd='" + data[i].games_cd + "' data-summaray='" + data[i].games_summaray + "'>게임요약</div>";
                                 html += "</div>";
                             html += "</div>";
 
@@ -572,6 +540,12 @@ include "top.php";
                         }
 
                         $(document).on("click", ".btn-summaray", function(){
+                            var games_cd = $(this).data("games_cd");
+                            $.ajax({
+                                type: 'POST',
+                                url: "ok/main03_ok.php?type=count",
+                                data: { games_cd: games_cd, type: 'summary' },
+                            });
                             var summaray = $(this).data("summaray");
 
                             $(".modal-summaray-content").html(summaray);
