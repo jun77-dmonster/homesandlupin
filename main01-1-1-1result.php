@@ -206,7 +206,7 @@ include "top.php";
         top: 0px;
         width: 15px;
         height: 350px;
-        background-color: black;
+        background-color: #03254b;
         border-radius: 20px;
         z-index: -1;
     }
@@ -214,7 +214,7 @@ include "top.php";
 </style>
 
 
-<div class="modal-popup">
+<div class="modal-popup modal-game-result-popup">
     <div class="modal-popup-btn-close">
         <div></div>
         <div></div>
@@ -363,7 +363,7 @@ include "top.php";
         $(document).on("click", ".add-btn", function(){
             $(".add-container").stop().fadeOut(200);
 
-            
+
 
             $(".btn-result-view").stop().fadeIn(200);
 
@@ -626,7 +626,8 @@ include "top.php";
                             $(".answer-wrap-" + resultArr[i]).find("span").css({
                                 color: '#0D2449',
                             });
-                            $(".modal-game-table-container > div").eq(resultArr[i]).append("<div><img src='img/ladder/i" + i + ".png' alt='user' title='user'><div class='user-num-container' style='background-color:" + colorArr[i] + "'><div><span style='color: #0D2449'>" + (resultArr[i] + 1) + "</span><span style='color: #0D2449'>" + unitArr[i] + "</span></div></div></div>");
+                            // $(".modal-game-table-container > div").eq(resultArr[i]).append("<div><div class='user-num-container' style='background-color:" + colorArr[i] + "'><div><span style='color: #0D2449'>" + (resultArr[i] + 1) + "</span><span style='color: #0D2449'>" + unitArr[i] + "</span></div></div><img src='img/ladder/i" + i + ".png' alt='user' title='user'></div>");
+                            $(".modal-game-table-container > div").eq(resultArr[i]).append("<div><div class='user-num-container' style='background-color: #578097'><div><span style='color: #fff'>" + (resultArr[i] + 1) + "</span><span style='color: #8cabb7'>" + unitArr[i] + "</span></div></div><img src='img/ladder/i" + i + ".png' alt='user' title='user'></div>");
                         }
                         // for(var k = 0; k < resultArr.length; k++) {
                         //     if(i == resultArr[k])

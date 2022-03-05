@@ -1749,36 +1749,42 @@ li {list-style:none;}
     .modal-game-table-container {
         width: 100%;
         float: left;
-        margin-top: 16px;
         margin-bottom: 16px;
     }
     .modal-game-table-container > div {
         width: 50%;
-        height: 90px;
+        min-height: 90px;
         float: left;
         padding: 12px;
     }
     .modal-game-table-container > div img {
-        width: 66px;
+        width: 96.832px;
         float: left;
+        margin-left: 48px;
+    }
+    .modal-game-result-popup {
+        height: auto;
+        min-height: 470px;
     }
     .user-num-container {
         float: left;
-        width: 90px;
-        height: 60px;
-        margin-top: 3px;
-        margin-left: 16px;
+        min-width: 90px;
+        min-height: 60px;
         border-radius: 16px;
         background-color: #587f96;
+        width: 99.8784px;
+        height: 67.456px;
+        margin-top: 17.41500px;
     }
     .user-num-container > div {
+        height: 67.456px;
         text-align: center;
     }
     .user-num-container > div > span {
-        font-size: 24px;
+        font-size: 32px;
         font-weight: bold;
         font-family: AggroM;
-        line-height: 60px;
+        line-height: 67.456px;
     }
     .user-num-container > div > span:first-child {
         color: #fff;
@@ -1794,14 +1800,14 @@ li {list-style:none;}
     }
     .modal-game-re-btn-container button {
         border: none;
-        height: 60px;
-        width: 200px;
+        height: 75.072px;
+        width: 249.152px;
         background-color: #53416b;
         color: #fff;
-        line-height: 60px;
+        line-height: 75.072px;
         font-family: AggroM;
-        font-size: 26px;
-        border-radius: 33.5px;
+        font-size: 34px;
+        border-radius: 37.536px;
     }
 
     .star-container {
