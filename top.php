@@ -72,12 +72,7 @@ if(!isset($_SESSION['branch_cd']) or !isset($_SESSION['branch_cdcommon'])){
         </div>
         <div class="top-navigation-container">
 <!--            <button data-toggle="modal" data-target="#wifi">-->
-            <button onclick="window.location.href='sub01_.php'">
-                <div>
-                    <img src="img/answer-icon.png" alt="WIFI" title="WIFI">
-                    <span>FAQ</span>
-                </div>
-            </button>
+
             <button onclick="window.location.href='sub03.php'">
                 <div>
                     <img src="img/kg-icon.png" alt="WIFI" title="WIFI">
@@ -88,6 +83,12 @@ if(!isset($_SESSION['branch_cd']) or !isset($_SESSION['branch_cdcommon'])){
                 <div>
                     <img src="img/timer-icon.png" alt="WIFI" title="WIFI">
                     <span>타이머</span>
+                </div>
+            </button>
+            <button onclick="window.location.href='sub01_.php'">
+                <div>
+                    <img src="img/answer-icon.png" alt="WIFI" title="WIFI">
+                    <span>FAQ</span>
                 </div>
             </button>
             <button id="btn-wifi">
