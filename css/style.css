@@ -2018,7 +2018,7 @@ li {list-style:none;}
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        z-index: 150;
+        z-index: 1500;
         display: none;
     }
     .modal-wifi-image-container {

@@ -74,6 +74,7 @@ if(isset($_SESSION['branch_cd']) or isset($_SESSION['branch_cdcommon'])){
 } else {
 
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -117,6 +118,7 @@ if(isset($_SESSION['branch_cd']) or isset($_SESSION['branch_cdcommon'])){
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+
 <style>
     .login-logo-container {
         float: left;
@@ -163,7 +165,22 @@ if(isset($_SESSION['branch_cd']) or isset($_SESSION['branch_cdcommon'])){
 </div>
 
 
+<script>
+    $(function(){
+        if(localStorage.branch_string && localStorage.branch_cd && localStorage.branch_cdcommon && localStorage.room_cd && localStorage.room_string && localStorage.room_no) {
+            <?PHP
+            set_session('branch_string', localStorage.branch_string);
+            set_session('branch_cd', localStorage.branch_cd);
+            set_session('branch_cdcommon', localStorage.branch_cdcommon);
+            set_session('room_cd', localStorage.room_cd);
+            set_session('room_string', localStorage.room_string);
+            set_session('room_no', localStorage.room_no);
+            ?>
 
+            window.location.href='/main.php';
+        }
+    });
+</script>
 </body>
 </html>
 <?php } ?>

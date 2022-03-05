@@ -1,3 +1,4 @@
+
 <?php
 include "../common.php";
 //unset($_COOKIE['ss_branch_key']);
@@ -14,8 +15,13 @@ include "../common.php";
 //setcookie('room_cd', '', (time() + 8600) * 30, "/");
 //setcookie('room_string', '', (time() + 8600) * 30, "/");
 //setcookie('branch_string', '', (time() + 8600) * 30, "/");
+
+
+
 session_start();
 session_destroy();
 
+echo "<script>window.location.href='/index.php'</script>";
 
 ?>
+

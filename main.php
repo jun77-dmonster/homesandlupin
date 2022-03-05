@@ -198,10 +198,9 @@ $(document).ready(function(e) {
             }
 
             if(logoutArr[0] && logoutArr[1] && logoutArr[2] && logoutArr[3] && logoutArr[4]) {
-                window.location.href='/logout.php';
+                window.location.href='/login/removeLocalStorage.php';
             }
         });
-
         $("[class*='reload-btn-']").click(function(event){
             event.preventDefault();
             switch($(this).attr("class")) {
