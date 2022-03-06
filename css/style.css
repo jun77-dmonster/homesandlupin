@@ -1448,7 +1448,6 @@ li {list-style:none;}
     .btn-reset {
         width: 260px;
         height: 80px;
-        line-height: 80px;
         cursor: pointer;
         background-color: #03254c;
         color: #fff;
@@ -1457,6 +1456,22 @@ li {list-style:none;}
         text-align: center;
         border: none;
         border-radius: 16px;
+        line-height: 1em;
+    }
+
+    .startCircleClass {
+        top: 310px !important;
+    }
+
+    #wheelBackgroundImage {
+        width: 1045px;
+        height: 1000px;
+        position: absolute;
+        bottom: -90%;
+        /*background-image: url("../img/wheel/background.png");*/
+        background-size: cover;
+        background-position: center;
+        left: 3%;
     }
 
     .sub02-container {

@@ -70,7 +70,9 @@ include "top.php";
         </div>
 
         <div class="btn-reset-container">
-            <button class="btn-reset">초기화</button>
+            <button class="btn-reset">
+                <span>초기화</span>
+            </button>
         </div>
     </div>
 

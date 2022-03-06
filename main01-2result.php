@@ -57,24 +57,27 @@ include "top.php";
             position: absolute;
             top: 20px;
             left: 549px;">&nbsp;</div>
-          <img src="img/homesleft.png" style="
-                position: absolute;
-                left: -8px;
-                width: 500px;
-                top: 165px;
-                transform: rotate(-22deg);
-            "/>
-          <img src="img/homesright.png"style="
-                position: absolute;
-                right: -8px;
-                width: 500px;
-                top: 165px;
-                transform: rotate(22deg);
-            "/>
+<!--          <img src="img/homesleft.png" style="-->
+<!--                position: absolute;-->
+<!--                left: -8px;-->
+<!--                width: 500px;-->
+<!--                top: 165px;-->
+<!--                transform: rotate(-22deg);-->
+<!--            "/>-->
+<!--          <img src="img/homesright.png"style="-->
+<!--                position: absolute;-->
+<!--                right: -8px;-->
+<!--                width: 500px;-->
+<!--                top: 165px;-->
+<!--                transform: rotate(22deg);-->
+<!--            "/>-->
+          <img src="img/wheel/background.png" id="wheelBackgroundImage" alt="wheel_background" title="wheel_background">
 <!--          <div class="wheel-left-container"></div>-->
-<!--          <div class="wheel-right-container"></div>-->
+
+          <!--          <div class="wheel-right-container"></div>-->
           <img src="img/wheel/startcircle.png"
                id="startCircle"
+               class="startCircleClass"
                style="
                 position: absolute;
                 top: 325px;
