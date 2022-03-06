@@ -537,7 +537,18 @@ if(!empty($_GET['keyword']))
                             html += "</div>";
 
                             $(".search-result-container").append(html);
+
+
                         }
+
+                        $(".search-result-content-container").each(function(){
+                            if($(this).height() > 195) {
+                                var diff = ($(this).height() - 195) / 2 * -1;
+
+                                $(this).css({ marginTop: diff + 'px' });
+                            }
+                        });
+
 
                         $(document).on("click", ".btn-summaray", function(){
                             var games_cd = $(this).data("games_cd");
@@ -569,7 +580,7 @@ if(!empty($_GET['keyword']))
                                     },
                                     success: function(data) {
                                         if($(item).text())
-                                            $(item).text($(item).text() + ", " + data);
+                                            $(item).html($(item).text() + "<br>" + data);
                                         else
                                             $(item).text(data)
 

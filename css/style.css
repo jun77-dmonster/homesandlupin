@@ -331,6 +331,7 @@ li {list-style:none;}
         width: calc(100% - 225px - 163px - 10px);
         float: left;
         margin-left: 40px;
+        /*margin-top: -16px;*/
     }
     .search-result-content-container > * {
         font-family: NotoSansKR-Regular;
@@ -443,11 +444,11 @@ li {list-style:none;}
     }
 
     .search-result-info-content {
-        background-color: #fff;
+        /*background-color: #fff;*/
     }
 
     .search-result-info-content {
-        font-size: 24px;
+        font-size: 30px;
         font-weight: bold;
         text-align: center;
         margin-top: 16px;
