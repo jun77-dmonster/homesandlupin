@@ -93,7 +93,7 @@ include "top.php";
                 $(".basket-option-radio-container > *").remove();
                 $(".modal-popup > *:not(.modal-popup-btn-close)").remove();
                 $(".modal-popup").append("<div class='modal-product-item-container'></div><div class='modal-product-option-container'><div class='basket-option-radio-container'></div><div class='basket-option-btn-container'><button class='basket-option-btn'>담기</button></div></div>");
-                $(".modal-product-item-container").append($(event.currentTarget).parent().html());
+                $(".modal-product-item-container").append($(event.currentTarget).html());
 
                 // if($(event.currentTarget).data('beverage_option_subject')) {
                 //     var subjectArr = $(event.currentTarget).data('beverage_option_subject').split(",");
