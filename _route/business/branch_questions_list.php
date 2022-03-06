@@ -172,9 +172,20 @@ $colspan="8";
 
 </form>
 <script>
-function fNoticelist_submit(f){
+function questions_submit(f){
 
-	
+	if (!is_checked("chk[]")) {
+        alert(document.pressed+" 하실 항목을 하나 이상 선택하세요.");
+        return false;
+    }
+
+    if(document.pressed == "선택삭제") {
+        if(!confirm("선택한 공지사항을 정말 삭제시키겠습니까?")) {
+            return false;
+        }
+    }
+
+    return true;
 
 }
 </script>

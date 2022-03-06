@@ -406,6 +406,14 @@ $colspan="8";
 					for ($i=0; $row=sql_fetch_array($result); $i++) {
 						$theme = explode("|",$row['games_theme']);
 						$s_mod = "<a href='./board_games_register.php?w=u&amp;games_cd={$row['games_cd']}' class='board_copy btn btn_02'>정보수정</a>";
+						
+						$games_path = G5_DATA_PATH.'/boardgames/'.$row['games_cd'];
+						$thumb_path = G5_DATA_PATH.'/boardgames/'.$row['games_cd'].'/thumb';
+
+						$list_img = explode("/",$row['games_img_file']);
+
+						$tname = thumbnail($list_img[1],$games_path,$thumb_path,120,120,$is_create=false, $is_crop=true, $crop_mode='center', $is_sharpen=false, $um_value='80/0.5/3');
+
 					?>
 					<tr>
 						<td class="td_chk">

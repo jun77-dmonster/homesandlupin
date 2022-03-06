@@ -75,13 +75,13 @@ include_once ('../../admin.head.php');
 			<th>푸드 이름(한글)</th>
 			<td>
 				<div class="inputbox-wrap">
-				<input type="text" name="beverage_kor_nm" class="frm_input" value="<?php echo $row['beverage_kor_nm']?>" style='width:400px;' placeholder="한글, 숫자만 입력 가능합니다">
+				<input type="text" name="beverage_kor_nm" class="frm_input" value="<?php echo $row['beverage_kor_nm']?>" style='width:400px;' placeholder="한글, 숫자만 입력 가능합니다(20자내외)" maxlength="20">
 				</div>
 			</td>
 			<th>푸드 이름(영문)</th>
 			<td>
 				<div class="inputbox-wrap">
-				<input type="text" name="beverage_eng_nm" class="frm_input" value="<?php echo $row['beverage_eng_nm']?>" style='width:400px;' placeholder="영문, 숫자만 입력 가능합니다">
+				<input type="text" name="beverage_eng_nm" class="frm_input" value="<?php echo $row['beverage_eng_nm']?>" style='width:400px;' placeholder="영문, 숫자만 입력 가능합니다(30자내외)" maxlength="30">
 				</div>
 			</td>
 		</tr>
@@ -193,7 +193,8 @@ include_once ('../../admin.head.php');
                             <input type="text" name="opt1" value="" id="opt1" class="frm_input" size="50">
                         </td>
                     </tr>
-                    <tr>
+                    <!--
+					<tr>
                         <th scope="row">
                             <label for="opt2_subject">옵션2</label>
                             <input type="text" name="opt2_subject" value="<?php echo isset($opt_subject[1]) ? $opt_subject[1] : ''; ?>" id="opt2_subject" class="frm_input" size="15">
@@ -213,6 +214,7 @@ include_once ('../../admin.head.php');
                             <input type="text" name="opt3" value="" id="opt3" class="frm_input" size="50">
                         </td>
                     </tr>
+					-->
                     </tbody>
                     </table>
                     <div class="btn_confirm02 btn_confirm">
@@ -227,42 +229,45 @@ include_once ('../../admin.head.php');
                     <?php if($beverage_cd && $po_run) { ?>
                     //옵션항목설정
                     var arr_opt1 = new Array();
-                    var arr_opt2 = new Array();
-                    var arr_opt3 = new Array();
-                    var opt1 = opt2 = opt3 = '';
+                    //var arr_opt2 = new Array();
+                    //var arr_opt3 = new Array();
+                    //var opt1 = opt2 = opt3 = '';
+					var opt1 = '';
                     var opt_val;
 
                     $(".opt-cell").each(function() {
                         opt_val = $(this).text().split(" > ");
 
                         opt1 = opt_val[0];
-                        opt2 = opt_val[1];
-                        opt3 = opt_val[2];
+                        //opt2 = opt_val[1];
+                        //opt3 = opt_val[2];
 
                         if(opt1 && $.inArray(opt1, arr_opt1) == -1)
                             arr_opt1.push(opt1);
 
-                        if(opt2 && $.inArray(opt2, arr_opt2) == -1)
+                        /*
+						if(opt2 && $.inArray(opt2, arr_opt2) == -1)
                             arr_opt2.push(opt2);
 
                         if(opt3 && $.inArray(opt3, arr_opt3) == -1)
                             arr_opt3.push(opt3);
+						*/
                     });
 
 
                     $("input[name=opt1]").val(arr_opt1.join());
-                    $("input[name=opt2]").val(arr_opt2.join());
-                    $("input[name=opt3]").val(arr_opt3.join());
+                    //$("input[name=opt2]").val(arr_opt2.join());
+                    //$("input[name=opt3]").val(arr_opt3.join());
                     <?php } ?>
                     // 옵션목록생성
                     $("#option_table_create").click(function() {
                         var beverage_cd = $.trim($("input[name=beverage_cd]").val());
                         var opt1_subject = $.trim($("#opt1_subject").val());
-                        var opt2_subject = $.trim($("#opt2_subject").val());
-                        var opt3_subject = $.trim($("#opt3_subject").val());
+                        //var opt2_subject = $.trim($("#opt2_subject").val());
+                        //var opt3_subject = $.trim($("#opt3_subject").val());
                         var opt1 = $.trim($("#opt1").val());
-                        var opt2 = $.trim($("#opt2").val());
-                        var opt3 = $.trim($("#opt3").val());
+                        //var opt2 = $.trim($("#opt2").val());
+                        //var opt3 = $.trim($("#opt3").val());
                         var $option_table = $("#sit_option_frm");
 
                         if(!opt1_subject || !opt1) {
@@ -272,7 +277,7 @@ include_once ('../../admin.head.php');
 
                         $.post(
                             "<?php echo G5_ROUTE_URL; ?>/management/beverage/itemoption.php",
-                            { beverage_cd: beverage_cd, w: "<?php echo $w; ?>", opt1_subject: opt1_subject, opt2_subject: opt2_subject, opt3_subject: opt3_subject, opt1: opt1, opt2: opt2, opt3: opt3 },
+                            { beverage_cd: beverage_cd, w: "<?php echo $w; ?>", opt1_subject: opt1_subject, opt1: opt1 },
                             function(data) {
                                 $option_table.empty().html(data);
                             }
@@ -334,12 +339,218 @@ include_once ('../../admin.head.php');
                 </script>
 			</td>
 		</tr>
-		<!--
+		<?php
+		$spl_subject = explode(',', $row['beverage_supply_subject']);
+		$spl_count = count($spl_subject);
+		?>
 		<tr>
 			<th>추가옵션</th>
-			<td></td>
+			<td>
+				<div id="sit_supply_frm" class="sit_option tbl_frm01">
+                    <?php echo help('옵션항목은 콤마(,) 로 구분하여 여러개를 입력할 수 있습니다. 음료를 예로 들어 [옵션1 : 사이즈 , 옵션1 항목 : 스몰,레귤러,라지] , [옵션2 : 샷추가 , 옵션2 항목 : +1,+2,+3]<br><strong>옵션명과 옵션항목에 따옴표(\', ")는 입력할 수 없습니다.</strong>'); ?>
+                    <table>
+                    <caption>상품추가옵션 입력</caption>
+                    <colgroup>
+                        <col class="grid_4">
+                        <col>
+                    </colgroup>
+                    <tbody>
+                    <?php
+                    $i = 0;
+                    do {
+                        $seq = $i + 1;
+                    ?>
+                    <tr>
+                        <th scope="row">
+                            <label for="spl_subject_<?php echo $seq; ?>">추가<?php echo $seq; ?></label>
+                            <input type="text" name="spl_subject[]" id="spl_subject_<?php echo $seq; ?>" value="<?php echo $spl_subject[$i]; ?>" class="frm_input" size="15">
+                        </th>
+                        <td>
+                            <label for="spl_item_<?php echo $seq; ?>"><b>추가<?php echo $seq; ?> 항목</b></label>
+                            <input type="text" name="spl[]" id="spl_item_<?php echo $seq; ?>" value="" class="frm_input" size="40">
+                            <?php
+                            if($i > 0)
+                                echo '<button type="button" id="del_supply_row" class="btn_frmline">삭제</button>';
+                            ?>
+                        </td>
+                    </tr>
+                    <?php
+                        $i++;
+                    } while($i < $spl_count);
+                    ?>
+                    </tbody>
+                    </table>
+                    <!--<div id="sit_option_addfrm_btn"><button type="button" id="add_supply_row" class="btn_frmline">옵션추가</button></div>-->
+                    <div class="btn_confirm02 btn_confirm">
+                        <button type="button" id="supply_table_create">옵션목록생성</button>
+                    </div>
+                </div>
+                <div id="sit_option_addfrm"><?php include_once(G5_ROUTE_PATH.'/management/beverage/itemsupply.php'); ?></div>
+
+                <script>
+                $(function() {
+                    <?php if($beverage_cd && $ps_run) { ?>
+                    // 추가옵션의 항목 설정
+                    var arr_subj = new Array();
+                    var subj, spl;
+
+                    $("input[name='spl_subject[]']").each(function() {
+                        subj = $.trim($(this).val());
+
+						console.log(subj);
+
+                        if(subj && $.inArray(subj, arr_subj) == -1)
+                            arr_subj.push(subj);
+                    });
+
+                    for(i=0; i<arr_subj.length; i++) {
+                        var arr_spl = new Array();
+                        $(".spl-subject-cell").each(function(index) {
+                            subj = $(this).text();
+                            if(subj == arr_subj[i]) {
+                                spl = $(".spl-cell:eq("+index+")").text();
+                                arr_spl.push(spl);
+                            }
+                        });
+
+                        $("input[name='spl[]']:eq("+i+")").val(arr_spl.join());
+                    }
+                    <?php } ?>
+                    // 입력필드추가
+                    $("#add_supply_row").click(function() {
+                        var $el = $("#sit_supply_frm tr:last");
+                        var fld = "<tr>\n";
+                        fld += "<th scope=\"row\">\n";
+                        fld += "<label for=\"\">추가</label>\n";
+                        fld += "<input type=\"text\" name=\"spl_subject[]\" value=\"\" class=\"frm_input\" size=\"15\">\n";
+                        fld += "</th>\n";
+                        fld += "<td>\n";
+                        fld += "<label for=\"\"><b>추가 항목</b></label>\n";
+                        fld += "<input type=\"text\" name=\"spl[]\" value=\"\" class=\"frm_input\" size=\"40\">\n";
+                        fld += "<button type=\"button\" id=\"del_supply_row\" class=\"btn_frmline\">삭제</button>\n";
+                        fld += "</td>\n";
+                        fld += "</tr>";
+
+                        $el.after(fld);
+
+                        supply_sequence();
+                    });
+
+                    // 입력필드삭제
+                    $(document).on("click", "#del_supply_row", function() {
+                        $(this).closest("tr").remove();
+
+                        supply_sequence();
+                    });
+
+                    // 옵션목록생성
+                    $("#supply_table_create").click(function() {
+                        var beverage_cd = $.trim($("input[name=beverage_cd]").val());
+                        var subject = new Array();
+                        var supply = new Array();
+                        var subj, spl;
+                        var count = 0;
+                        var $el_subj = $("input[name='spl_subject[]']");
+                        var $el_spl = $("input[name='spl[]']");
+                        var $supply_table = $("#sit_option_addfrm");
+
+                        $el_subj.each(function(index) {
+                            subj = $.trim($(this).val());
+                            spl = $.trim($el_spl.eq(index).val());
+
+                            if(subj && spl) {
+                                subject.push(subj);
+                                supply.push(spl);
+                                count++;
+                            }
+                        });
+
+                        if(!count) {
+                            alert("추가옵션명과 추가옵션항목을 입력해 주십시오.");
+                            return false;
+                        }
+
+                        $.post(
+                            "<?php echo G5_ROUTE_URL; ?>/management/beverage/itemsupply.php",
+                            { beverage_cd: beverage_cd, w: "<?php echo $w; ?>", 'subject[]': subject, 'supply[]': supply },
+                            function(data) {
+                                $supply_table.empty().html(data);
+                            }
+                        );
+                    });
+
+                    // 모두선택
+                    $(document).on("click", "input[name=spl_chk_all]", function() {
+                        if($(this).is(":checked")) {
+                            $("input[name='spl_chk[]']").attr("checked", true);
+                        } else {
+                            $("input[name='spl_chk[]']").attr("checked", false);
+                        }
+                    });
+
+                    // 선택삭제
+                    $(document).on("click", "#sel_supply_delete", function() {
+                        var $el = $("input[name='spl_chk[]']:checked");
+                        if($el.length < 1) {
+                            alert("삭제하려는 옵션을 하나 이상 선택해 주십시오.");
+                            return false;
+                        }
+
+                        $el.closest("tr").remove();
+                    });
+
+                    // 일괄적용
+                    $(document).on("click", "#spl_value_apply", function() {
+                        if($(".spl_com_chk:checked").length < 1) {
+                            alert("일괄 수정할 항목을 하나이상 체크해 주십시오.");
+                            return false;
+                        }
+
+                        var spl_price = $.trim($("#spl_com_price").val());
+                        var spl_use = $("#spl_com_use").val();
+                        var $el = $("input[name='spl_chk[]']:checked");
+
+                        // 체크된 옵션이 있으면 체크된 것만 적용
+                        if($el.length > 0) {
+                            var $tr;
+                            $el.each(function() {
+                                $tr = $(this).closest("tr");
+
+                                if($("#spl_com_price_chk").is(":checked"))
+                                    $tr.find("input[name='spl_price[]']").val(spl_price);
+
+                                if($("#spl_com_use_chk").is(":checked"))
+                                    $tr.find("select[name='spl_use[]']").val(spl_use);
+                            });
+                        } else {
+                            if($("#spl_com_price_chk").is(":checked"))
+                                $("input[name='spl_price[]']").val(spl_price);
+
+                            if($("#spl_com_use_chk").is(":checked"))
+                                $("select[name='spl_use[]']").val(spl_use);
+                        }
+                    });
+                });
+
+                function supply_sequence()
+                {
+                    var $tr = $("#sit_supply_frm tr");
+                    var seq;
+                    var th_label, td_label;
+
+                    $tr.each(function(index) {
+                        seq = index + 1;
+                        $(this).find("th label").attr("for", "spl_subject_"+seq).text("추가"+seq);
+                        $(this).find("th input").attr("id", "spl_subject_"+seq);
+                        $(this).find("td label").attr("for", "spl_item_"+seq);
+                        $(this).find("td label b").text("추가"+seq+" 항목");
+                        $(this).find("td input").attr("id", "spl_item_"+seq);
+                    });
+                }
+                </script>
+
+			</td>
 		</tr>
-		-->
 		</table>
 
 	</div>

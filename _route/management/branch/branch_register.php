@@ -86,7 +86,7 @@ add_javascript(G5_POSTCODE_JS, 0);    //다음 주소 js
 			<?php if($w==""){?>
 			<input type="password" name="branch_manager_pwd" class="frm_input required" required style="width:350px; text-align:left;" maxlength="16" placeholder="비밀번호 16자이내 입력">
 			<?php }else{?>
-			<input type="password" name="branch_manager_pwd" class="frm_input" style="width:350px; text-align:left;" maxlength="16" placeholder="비밀번호 16자이내 입력">
+			<input type="password" name="branch_manager_pwd" class="frm_input" style="width:350px; text-align:left;" maxlength="16" placeholder="비밀번호 16자이내 입력"> 현재)비밀번호 : <?php echo $row['branch_manager_etc']?>
 			<?php }?>
 			</div>
 		</td>

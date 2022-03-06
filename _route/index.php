@@ -14,10 +14,55 @@ $r1 = sql_query("select * from {$DM['VOICE_CUSTOMER_TABLE']} order by customer_r
 $colspan = "3";
 
 $r2 = sql_query("select * from {$DM['QNA_TABLE']} order by reg_dt desc limit 0, 5 ");
+
+$r0 = sql_query("select * from {$DM['GAME_REQUEST_TABLE']} as t1 join {$DM['BRANCH_TABLE']} as t2 on t1.branch_cd=t2.branch_cd order by t1.od_time desc limit 0, 5 ");
 ?>
 
 <div style="padding:20px;">
-	
+
+<div id="index_left">
+
+	<div class="title_wrap">
+		<span class="table-tit">지점 게임 요청</span>
+
+		<div class="btn-wrap-left" style='width:calc(85% - 0px);'>
+			<button type="button" class="crmBtn type-white" onclick="location.href='./business/branch_games_request_list.php'">더보기</button>
+		</div>
+	</div>
+
+	<div class="content_wrap">
+
+		<table class="ncp_tbl marT15">
+		<thead>
+		<tr>
+			<th>지점명</th>
+			<th>신청일자</th>
+			<th>신청상태</th>
+		</tr>
+		</thead>
+		<tbody>
+		<?php
+			for ($i=0; $row=sql_fetch_array($r0); $i++) {
+		?>
+		<tr>
+			<td><a href="./business/branch_games_request_view.php?od_id=<?php echo $row['od_id']?>"><?php echo $row['branch_nm']?> (<?php echo $row['branch_cd']?>)</a></td>
+			<td class="td_datetime"><?php echo substr($row['od_time'],0,10)?></td>
+			<td class="td_mng"><?php echo $row['od_status']?></td>
+		</tr>
+		<?
+		}
+		if ($i == 0)
+		echo "<tr><td colspan=\"".$colspan."\" class=\"empty_table\">등록된 지점 요청이 없습니다</td></tr>";
+
+		?>
+		</tbody>
+		</table>
+
+	</div>
+
+</div>
+
+
 <div id="index_right">
 	
 	<div class="title_wrap">
@@ -97,7 +142,7 @@ $r2 = sql_query("select * from {$DM['QNA_TABLE']} order by reg_dt desc limit 0, 
 		<?
 		}
 		if ($i == 0)
-		echo "<tr><td colspan=\"".$colspan."\" class=\"empty_table\">등록된 고객의 소리가 없습니다</td></tr>";
+		echo "<tr><td colspan=\"".$colspan."\" class=\"empty_table\">등록된 지점 문의가 없습니다</td></tr>";
 
 		?>
 		</tbody>

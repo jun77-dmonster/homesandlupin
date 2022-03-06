@@ -61,6 +61,26 @@ if($option_count) {
     }
 }
 
+// 추가옵션
+sql_query(" delete from {$DM['BEVERAGE_OPTION_TABLE']} where beverage_op_type = '1' and beverage_code = '$beverage_cd' "); // 기존추가옵션삭제
+
+$supply_count = (isset($_POST['spl_id']) && is_array($_POST['spl_id'])) ? count($_POST['spl_id']) : array();
+if($supply_count) {
+    // 추가옵션명
+    $arr_spl = array();
+    for($i=0; $i<$supply_count; $i++) {
+        $post_spl_id = isset($_POST['spl_id'][$i]) ? preg_replace(G5_OPTION_ID_FILTER, '', strip_tags($_POST['spl_id'][$i])) : '';
+
+        $spl_val = explode(chr(30), $post_spl_id);
+        if(!in_array($spl_val[0], $arr_spl))
+            $arr_spl[] = $spl_val[0];
+    }
+
+    $beverage_supply_subject = implode(',', $arr_spl);
+
+	echo $beverage_supply_subject;
+}
+
 $beverage_path = G5_DATA_PATH.'/beverage';
 
 // 게시판 디렉토리 생성
@@ -114,6 +134,7 @@ $sql_common = " beverage_cate			= '{$beverage_cate}',
 				beverage_file			= '{$beverage_file}',
 				beverage_display_fl		= '{$beverage_display_fl}',
 				beverage_option_subject = '{$beverage_option_subject}',
+				beverage_supply_subject = '{$beverage_supply_subject}',
 				beverage_best_icon		= '{$beverage_best_icon}',
 				beverage_driect_order	= '{$beverage_driect_order}',
 				beverage_new_icon		= '{$beverage_new_icon}'";
@@ -153,6 +174,21 @@ if($option_count) {
     sql_query($sql);
 }
 
+// 추가옵션등록
+if($supply_count) {
+    $comma = '';
+    $sql = " INSERT INTO {$DM['BEVERAGE_OPTION_TABLE']}
+                    ( `beverage_op_id`, `beverage_op_type`, `beverage_code`, `beverage_op_price`, `beverage_op_use_fl` )
+                VALUES ";
+    for($i=0; $i<$supply_count; $i++) {
+        $sql .= $comma . " ( '{$_POST['spl_id'][$i]}', '1', '$beverage_cd', '{$_POST['spl_price'][$i]}', '{$_POST['spl_use'][$i]}' )";
+        $comma = ' , ';
+    }
+
+    sql_query($sql);
+}
+
+
 $qstr = "$qstr&amp;sca=$sca&amp;page=$page";
 
 if ($w == "u") {
@@ -164,6 +200,7 @@ if ($w == "u") {
 
 echo "<meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\">";
 ?>
+
 <script>
     if (confirm("계속 입력하시겠습니까?"))
         location.href = "<?php echo "./beverage_register.php?".str_replace('&amp;', '&', $qstr); ?>";

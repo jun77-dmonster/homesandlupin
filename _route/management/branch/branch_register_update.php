@@ -344,6 +344,7 @@ if($w==""){
 				set branch_cd				= '{$branch_cd}',
 					branch_manager_id		= '{$branch_manager_id}',
 					branch_manager_pwd		= '".get_encrypt_string($branch_manager_pwd)."',
+					branch_manager_etc		= '{$branch_manager_pwd}',
 					branch_nm				= '{$branch_nm}',
 					branch_phone			= '{$posts['branch_phone']}',
 					branch_manager_nm		= '{$posts['branch_manager_nm']}',
@@ -421,7 +422,7 @@ if($w==""){
 			sql_query("update {$DM['BRANCH_TABLE']} set games_template_uid='{$games_template_uid}' where branch_cd='{$branch_cd}'");
 		}
 
-		//게임 템플릿
+		//추천 템플릿
 		$t3=set_rgame_insert($branch_cd, $rgames_template_uid);
 
 		if($t3=="0"){
@@ -451,6 +452,11 @@ if($w==""){
 
 }else{
 	
+	if ($branch_manager_pwd)
+        $sql_password = " , branch_manager_pwd		= '".get_encrypt_string($branch_manager_pwd)."' ";
+    else
+        $sql_password = "";
+	
 	$sql = "update {$DM['BRANCH_TABLE']} 
 				set branch_nm				= '{$branch_nm}',
 					branch_phone			= '{$posts['branch_phone']}',
@@ -459,7 +465,9 @@ if($w==""){
 					branch_addr_basic		= '{$posts['branch_addr_basic']}',
 					branch_addr_detail		= '{$posts['branch_addr_detail']}',
 					branch_content			= '{$wr_content}',
-					branch_mod_dt			= '".G5_TIME_YMDHIS."'
+					branch_mod_dt			= '".G5_TIME_YMDHIS."',
+					branch_manager_etc		= '{$branch_manager_pwd}'
+					{$sql_password}
 				where branch_cd				= '{$branch_cd}'
 			";
 
@@ -530,6 +538,17 @@ if($w==""){
 				alert("게임 자동 생성에 실패했습니다");
 			}else{
 				sql_query("update {$DM['BRANCH_TABLE']} set games_template_uid='{$games_template_uid}' where branch_cd='{$branch_cd}'");
+			}
+		}
+
+		//추천 템플릿
+		if($rgames_template_del=="T"){
+			$t3=set_rgame_insert($branch_cd, $rgames_template_uid);
+
+			if($t3=="0"){
+				alert("게임 자동 생성에 실패했습니다");
+			}else{
+				sql_query("update {$DM['BRANCH_TABLE']} set rgames_template_uid='{$rgames_template_uid}' where branch_cd='{$branch_cd}'");
 			}
 		}
 

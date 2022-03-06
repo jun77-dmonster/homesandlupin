@@ -75,6 +75,15 @@ include "top.php";
             var subjectArr = [];
             var optionNameList = [];
 
+
+
+
+
+            var optionData = [];
+
+
+
+
             $(document).on("click", ".modal-popup-btn-close", function(event){
                 $(".modal-popup, .modal-bg").toggle();
                 optionList = [];
@@ -93,7 +102,8 @@ include "top.php";
                 $(".basket-option-radio-container > *").remove();
                 $(".modal-popup > *:not(.modal-popup-btn-close)").remove();
                 $(".modal-popup").append("<div class='modal-product-item-container'></div><div class='modal-product-option-container'><div class='basket-option-radio-container'></div><div class='basket-option-btn-container'><button class='basket-option-btn'>담기</button></div></div>");
-                $(".modal-product-item-container").append($(event.currentTarget).html());
+
+                $(".modal-product-item-container").append($(event.currentTarget).clone());
 
                 // if($(event.currentTarget).data('beverage_option_subject')) {
                 //     var subjectArr = $(event.currentTarget).data('beverage_option_subject').split(",");
@@ -112,7 +122,11 @@ include "top.php";
                 *
                 * */
 
-                subjectArr = $(event.currentTarget).data('beverage_option_subject').split(",");
+                var dataBeverageOptionSubject = $(event.currentTarget).data('beverage_option_subject').toString();
+
+
+                subjectArr = dataBeverageOptionSubject.split(",");
+
 
 
 
@@ -123,17 +137,18 @@ include "top.php";
                 // }
 
 
-                var titleCheck = "(필수)";
+                // var titleCheck = "(필수)";
+                var titleCheck = "";
 
                 for(var i = 0; i < subjectArr.length; i++) {
-                    if(i === 0 && subjectArr[i] != "")
-                        titleCheck = "(필수)";
-
-                    if(i > 0 && subjectArr[i] != "")
-                        titleCheck = "(선택)";
-
-                    if(subjectArr[i] == "")
-                        titleCheck = "";
+                    // if(i === 0 && subjectArr[i] != "")
+                    //     titleCheck = "(필수)";
+                    //
+                    // if(i > 0 && subjectArr[i] != "")
+                    //     titleCheck = "(선택)";
+                    //
+                    // if(subjectArr[i] == "")
+                    //     titleCheck = "";
 
                     if(subjectArr.length > 0 && subjectArr[0] != "")
                         $(".basket-option-radio-container").append("<div class='modal-option-subject-container' data-beverage_cd='" + $(event.currentTarget).data('beverage_cd') + "'><p class='modal-option-subject-title option-title-0' data-title='"+ subjectArr[i] +"'>" + subjectArr[i] + titleCheck + "</p></div>");
@@ -149,60 +164,69 @@ include "top.php";
 
                         var data = JSON.parse(data);
 
-                        optionList = data;
-                        console.log(optionNameList.length);
+                        optionData = data;
 
-                        for(var i = 0; i < optionList.length; i++) {
-                            optionNameList.push(optionList[i].beverage_op_id.split(chr(30)));
-                        }
-                        console.log(optionNameList.length);
+                        for(var i = 0; i < optionData.length; i++) {
+                            var optionSubject = optionData[i].beverage_op_id.split(chr(30))[0];
+                            var optionName = optionData[i].beverage_op_id.split(chr(30))[1];
 
-
-
-                        var check = "";
-                        console.log(optionNameList, data);
-                        for(var i = 0; i < optionNameList.length; i++) {
-
-                            if(optionNameList[i][0] == check)
+                            if(optionSubject === undefined || optionName === undefined)
                                 continue;
 
-                            console.log(i, data[i]);
                             var html = "<label class='radio-label'>";
-                            html += "<span data-name='" + optionNameList[i][0] + "'>" + optionNameList[i][0] + "(+" + data[i].beverage_op_price + ")</span>";
-                            html += "<input type='checkbox' name='option0' value='" + data[i].beverage_op_no + "' data-option='" + data[i].beverage_op_id + "' data-optionName='" + optionNameList[i][0] + "' data-price='" + data[i].beverage_op_price + "' autocomplete='off''>";
+                            html += "<span data-name='" + optionName + "'>" + optionName + "(+" + optionData[i].beverage_op_price + ")</span>";
+                            html += "<input type='checkbox' name='option0' value='" + optionData[i].beverage_op_no + "' data-option='" + optionData[i].beverage_op_id + "' data-optionName='" + optionName + "' data-price='" + optionData[i].beverage_op_price + "' autocomplete='off''>";
                             html += "<span class='checkmark'></span>";
                             html += "</label>";
 
-                            $(".modal-option-subject-container").eq(0).append(html);
-
-                            check = optionNameList[i][0];
+                            console.log(optionData[i].beverage_op_type);
+                            if(optionData[i].beverage_op_type == 0) {
+                                $($($(".modal-option-subject-container")[0]).find(".modal-option-subject-title")).text($($($(".modal-option-subject-container")[0]).find(".modal-option-subject-title")).data("title") + "(필수)");
+                                $($(".modal-option-subject-container")[0]).append(html);
+                            } else {
+                                $(".modal-option-subject-container").each(function(k, ktem){
+                                    console.log(ktem);
+                                    if($(ktem).find(".modal-option-subject-title").data("title") === optionSubject) {
+                                        $($(ktem).find(".modal-option-subject-title")).text($($(ktem).find(".modal-option-subject-title")).data("title") + "(선택)");
+                                        $(ktem).append(html);
+                                    } else {
+                                        $(ktem).remove();
+                                    }
+                                });
+                            }
                         }
 
-                        // var html = "<label class='radio-label'>";
-                        // html += "<span data-name='" + data[i].beverage_op_id + "'>" + data[i].beverage_op_id + "(+" + data[i].beverage_op_price + ")</span>";
-                        // html += "<input type='checkbox' name='option0' value='" + data[i].beverage_op_no + "' data-option='" + data[i].beverage_op_id + "' data-price='" + data[i].beverage_op_price + "' autocomplete='off''>";
-                        // html += "<span class='checkmark'></span>";
-                        // html += "</label>";
-                        //
-                        // $(".modal-option-subject-container").eq(0).append(html);
+                        // optionList = data;
+                        // console.log(optionNameList.length);
 
-
-                        // for(var i = 0; i < data.length; i++) {
+                        // for(var i = 0; i < optionList.length; i++) {
+                        //     optionNameList.push(optionList[i].beverage_op_id.split(chr(30)));
+                        //     console.log(data[i]);
+                        // }
+                        // console.log(optionNameList.length);
                         //
+                        //
+                        // var check = "";
+                        // console.log(optionNameList, data);
+                        // for(var i = 0; i < optionNameList.length; i++) {
+                        //
+                        //     if(optionNameList[i][0] == check)
+                        //         continue;
+                        //
+                        //     console.log(i, data[i]);
                         //     var html = "<label class='radio-label'>";
-                        //         html += "<span data-name='" + data[i].beverage_op_id + "'>" + data[i].beverage_op_id + "(+" + data[i].beverage_op_price + ")</span>";
-                        //         html += "<input type='checkbox' name='option0' value='" + data[i].beverage_op_no + "' data-option='" + data[i].beverage_op_id + "' data-price='" + data[i].beverage_op_price + "' autocomplete='off''>";
-                        //         html += "<span class='checkmark'></span>";
+                        //     html += "<span data-name='" + optionNameList[i][0] + "'>" + optionNameList[i][0] + "(+" + data[i].beverage_op_price + ")</span>";
+                        //     html += "<input type='checkbox' name='option0' value='" + data[i].beverage_op_no + "' data-option='" + data[i].beverage_op_id + "' data-optionName='" + optionNameList[i][0] + "' data-price='" + data[i].beverage_op_price + "' autocomplete='off''>";
+                        //     html += "<span class='checkmark'></span>";
                         //     html += "</label>";
                         //
                         //     $(".modal-option-subject-container").eq(0).append(html);
                         //
+                        //     check = optionNameList[i][0];
+                        //
                         // }
-                        //
-                        // $(".basket-option-radio-container label:nth-child(2) input").attr("checked", true);
-                        //
-                        //
-                        //
+
+
                         $(".basket-option-radio-container").append("<p class='modal-option-subject-title'>수량</p>");
                         var html = "<div class='count-container'>";
                                 html += "<div>-</div>";
@@ -274,7 +298,7 @@ include "top.php";
 
             $(document).on("click", ".basket-option-btn", function(event){
 
-                if($(".modal-option-subject-container:nth-child(1) input:checked").length === 0) {
+                if($(".modal-option-subject-container").length > 0 && $(".modal-option-subject-container:nth-child(1) input:checked").length === 0) {
                     return $(".modal-menu-blue-popup").stop().show(1).delay(1500).hide(1);
                 }
 

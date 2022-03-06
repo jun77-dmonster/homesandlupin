@@ -42,7 +42,7 @@
         break;
         case "option":
 
-            $sql = "SELECT beverage_op_no, beverage_op_id, beverage_op_type, beverage_op_price FROM DM_T_BEVERAGE_OPTION WHERE beverage_code='".$_POST['beverage_cd']."' AND beverage_op_use_fl='T'";
+            $sql = "SELECT beverage_op_no, beverage_op_id, beverage_op_type, beverage_op_price, beverage_code FROM DM_T_BEVERAGE_OPTION WHERE beverage_code='".$_POST['beverage_cd']."' AND beverage_op_use_fl='T'";
 
             $result = sql_query($sql);
 
@@ -54,6 +54,42 @@
 
             echo json_encode($arr);
 
+        break;
+        case "required_subject":
+
+
+
+        break;
+        case "choose_subject":
+
+
+
+        break;
+        case "required_option":
+            $sql = "SELECT beverage_op_no, beverage_op_id, beverage_op_type, beverage_op_price FROM DM_T_BEVERAGE_OPTION WHERE beverage_code='".$_POST['beverage_cd']."' AND beverage_op_use_fl='T' AND beverage_op_type = 0";
+
+            $result = sql_query($sql);
+
+            $arr = array();
+
+            for($i=0; $row = sql_fetch_array($result); $i++) {
+                array_push($arr, $row);
+            }
+
+            echo json_encode($arr);
+        break;
+        case "choose_option":
+            $sql = "SELECT beverage_op_no, beverage_op_id, beverage_op_type, beverage_op_price FROM DM_T_BEVERAGE_OPTION WHERE beverage_code='".$_POST['beverage_cd']."' AND beverage_op_use_fl='T' AND beverage_op_type = 1";
+
+            $result = sql_query($sql);
+
+            $arr = array();
+
+            for($i=0; $row = sql_fetch_array($result); $i++) {
+                array_push($arr, $row);
+            }
+
+            echo json_encode($arr);
         break;
         case "cart":
 

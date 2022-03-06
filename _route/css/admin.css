@@ -3376,12 +3376,21 @@ table.ncp_tbl .text-blue {
 	margin-left:5px;
 	font-size:14px
 }
+
 .table-tit-area .table-tit .num {
 	margin-right:2px;
 	font-weight:700;
 	font-family:Roboto;
 	color:#f22e31
 }
+
+.table-tit-area .table-tit .blue {
+	margin-right:2px;
+	font-weight:700;
+	font-family:Roboto;
+	color:#0000ff;
+}
+
 .table-tit-area .table-option-tit {
 	display:inline-block;
 	font-size:15px;

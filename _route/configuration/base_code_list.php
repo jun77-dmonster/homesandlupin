@@ -108,7 +108,7 @@ $colspan = 7;
 				<div class="btn-wrap-left">
 
 					<button type="button" class="crmBtn type-white" onclick="codeWrite('<?php echo $groupCd?>')">코드추가</button>
-					<button type="submit" name="act_button" value="선택삭제" onclick="document.pressed=this.value" class="crmBtn type-white">선택삭제</button>
+					<!--<button type="submit" name="act_button" value="선택삭제" onclick="document.pressed=this.value" class="crmBtn type-white">선택삭제</button>-->
 					<button type="submit" name="act_button" value="선택수정" onclick="document.pressed=this.value" class="crmBtn type-white">선택수정</button>
 
 				</div>

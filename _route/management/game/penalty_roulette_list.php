@@ -104,6 +104,14 @@ $colspan="7";
 
 						$penalty_dir = G5_DATA_URL.'/penalty';
 						$penalty_img = $penalty_dir."/".$row['penalty_img'];						
+
+						$penalty_path = G5_DATA_PATH.'/penalty/'.$row['uid'];
+						$thumb_path = G5_DATA_PATH.'/penalty/'.$row['uid'].'/thumb';
+
+						$list_img = explode("/",$row['penalty_img']);
+
+						$tname = thumbnail($list_img[1],$penalty_path,$thumb_path,120,120,$is_create=false, $is_crop=true, $crop_mode='center', $is_sharpen=false, $um_value='80/0.5/3');
+
 					?>
 					<tr>
 						<td class="td_chk">
@@ -111,7 +119,7 @@ $colspan="7";
 							<input type="hidden" name="uid[<?php echo $i ?>]" value="<?php echo $row['uid'] ?>" id="uid<?php echo $i ?>">
 						</td>
 						<td class="td_category"><?php echo ($row['gubun_apply']=="B0000")?"전체":get_branch_name($row['gubun_apply'])?></td>
-						<td class="td_img2"><img src="<?php echo $penalty_img?>" style='width:100px;'></td>
+						<td class="td_img2"><img src="<?php echo $penalty_img?>" style='width:70px;'></td>
 						<td class="td_addr"><?php echo $row['penalty_title']?></td>
 						<td class="td_num"><?php echo $row['penalty_cnt']?></td>
 						<td class="td_mng"><?php echo $row['penalty_main_display_fl']?></td>

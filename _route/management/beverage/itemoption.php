@@ -73,11 +73,8 @@ if($po_run) {
     <tbody>
     <?php
     if(isset($row['beverage_cd']) && $row['beverage_cd']) {
-        for($i=0; $row=sql_fetch_array($result); $i++) {
-            $opt_id = $row['beverage_op_id'];
-
-			echo $opt_id;
-
+        for($i=0; $row1=sql_fetch_array($result); $i++) {
+            $opt_id = $row1['beverage_op_id'];
             $opt_val = explode(chr(30), $opt_id);
 
             $opt_1 = $opt_val[0];
@@ -86,8 +83,8 @@ if($po_run) {
 
             $opt_2_len = strlen($opt_2);
             $opt_3_len = strlen($opt_3);
-            $opt_price = $row['beverage_op_price'];
-            $opt_use = $row['beverage_op_use_fl'];
+            $opt_price = $row1['beverage_op_price'];
+            $opt_use = $row1['beverage_op_use_fl'];
     ?>
     <tr>
         <td class="td_chk">
@@ -142,11 +139,11 @@ if($po_run) {
                                     where beverage_code = '{$post_it_id}'
                                       and beverage_op_id = '$opt_id'
                                       and beverage_op_type = '0' ";
-                        $row = sql_fetch($sql);
+                        $row2 = sql_fetch($sql);
 
-                        if($row) {
-                            $opt_price = (int)$row['beverage_op_price'];
-                            $opt_use = (int)$row['beverage_op_use_fl'];
+                        if($row2) {
+                            $opt_price = (int)$row2['beverage_op_price'];
+                            $opt_use = (int)$row2['beverage_op_use_fl'];
                         }
                     }
     ?>

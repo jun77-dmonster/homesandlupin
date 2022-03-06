@@ -14,7 +14,7 @@ include_once ('../admin.head.php');
 <input type="hidden" name="sod" value="<?php echo $sod ?>">
 <input type="hidden" name="page" value="<?php echo $page ?>">
 <input type="hidden" name="token" value="">
-<input type="hidden" name="youtubeCode" id="youtubeCode" value="<?php echo get_youtube_code($route['sc_operation_guide_movie'])?>">
+<input type="hidden" name="youtubeCode" id="youtubeCode" value="<?php echo $route['sc_operation_guide_movie']?>">
 
 <div class="box-view-wrap">
 
@@ -51,7 +51,7 @@ include_once ('../admin.head.php');
 
 							<div class="slide-item" style="width: 100%; display: inline-block;">
 
-								<div id="preViewYoutube"></div>
+								<div id="preViewYoutube" style='cursor:pointer'></div>
 
 								<span id="preViewYoutubeTitle" style='font-size:16px; display:inline-block; padding:10px; font-weight:bold;'></span>
 
@@ -343,8 +343,8 @@ $(function() {
 
 
 	$("#preViewYoutube").click(function(e){ 
-            var url = "<?php echo $route['sc_operation_guide_movie']?>";  
-            window.open(url, "_blank");
+            var basic = "https://www.youtube.com/watch?v="+"<?php echo $route['sc_operation_guide_movie']?>";
+            window.open(basic, "_blank");
 	});
 
 

@@ -6,8 +6,6 @@ check_demo();
 
 auth_check_menu($auth, $sub_menu, "w");
 
-check_admin_token();
-
 $upload_max_filesize = ini_get('upload_max_filesize');
 
 if (empty($_POST)) {
@@ -206,8 +204,10 @@ $sql = " update {$DM['SITE_CONFIG_TABLE']}
 				sc_basic_order_img			= '{$order_basic}',
 				sc_basic_guide_img			= '{$guide_basic}',
 				sc_basic_wife_img			= '{$wife_basic}',
+				sc_faq_text					= '{$sc_faq_text}',
 				sc_operation_guide_movie	= '{$sc_operation_guide_movie}'
 			where site_id = '{$DM['SITE_ID']}'"; 
 
 $r1=sql_query($sql);
 
+goto_url("./basic_image.php");

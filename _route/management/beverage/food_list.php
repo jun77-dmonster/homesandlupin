@@ -108,7 +108,7 @@ $colspan="11";
 
 </div>
 
-<form name="beverageList" id="beverageList" action="./beverage_list_update.php" onsubmit="return beverageList_submit(this);" method="post">
+<form name="beverageList" id="beverageList" action="./food_list_update.php" onsubmit="return beverageList_submit(this);" method="post">
 <input type="hidden" name="sst" value="<?php echo $sst ?>">
 <input type="hidden" name="sod" value="<?php echo $sod ?>">
 <input type="hidden" name="sfl" value="<?php echo $sfl ?>">

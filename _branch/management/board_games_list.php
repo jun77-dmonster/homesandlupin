@@ -387,15 +387,24 @@ $colspan="11";
 					<?php
 					for ($i=0; $row=sql_fetch_array($result); $i++) {
 						$games_dir = G5_DATA_URL.'/boardgames';
+						$games_path = G5_DATA_PATH.'/boardgames/'.$row['games_cd'];
+						$thumb_path = G5_DATA_PATH.'/boardgames/'.$row['games_cd'];
+						$thumb_url = G5_DATA_URL.'/boardgames/'.$row['games_cd'];
 						$game_img = $games_dir."/".$row['games_img_file'];						
-						//$game_img = get_games_image($row['games_cd'], 100, 100);
+
+						$list_img = explode("/",$row['games_img_file']);
+
 						$theme = explode("|",$row['games_theme']);
 						$filter = explode("|",$row['search_filtering_play_cnt']);
 						
-						$s_mod = "";
+
+						$tname = thumbnail($list_img[1],$games_path,$thumb_path,120,120,$is_create=false, $is_crop=true, $crop_mode='center', $is_sharpen=false, $um_value='80/0.5/3');
+
 					?>
 					<tr>
-						<td rowspan="2" class="td_img2"><img src="<?php echo $game_img?>" style='width:70px;'></td>
+						<td rowspan="2" class="td_img2">
+							<img src="<?php echo $thumb_url?>/<?php echo $tname?>">
+						</td>
 						<td class="td_addr"><?php echo $row['games_nm']?></td>
 						<!--
 						<td class="td_num_c3">

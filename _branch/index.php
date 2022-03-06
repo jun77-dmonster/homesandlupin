@@ -178,17 +178,20 @@ $r3 = sql_query("select * from {$DM['NOTICE_TABLE']} where notice_gubun in('B000
 						
 						<div></div>
 						
-						<!--<div class="txt-title">게임명 : <span class='games_nm'></span></div>-->
+						<div class="txt-title"><span class='room_no'></span>번 룸</div>
 
-						<!--
+						
 						<div class="txt-cont">
 							
+							<div class=""></div>
+							<!--
 							<span class="dis-cmt marT05">
 								<button type="button" class="crmBtn type-white">주문확인</button>
 							</span>
+							-->
 
 						</div>
-						-->
+						
 
 					</div>
 
@@ -315,7 +318,6 @@ $r5 = sql_query("SELECT t1.od_id, t1.branch_cd, t1.room_cd, t2.od_status, t2.od_
             and date_format(t2.od_time,'%Y-%m-%d') = '".G5_TIME_YMD."' and t2.od_status='주문'
             order by t2.od_time desc");
 ?>
-
 <div id="index_right">
 	
 	<div class="title_wrap">
@@ -412,7 +414,7 @@ $( document ).ready(function() {
 	//interval_order()
 	time_interval = setInterval(() => {
 		interval_order()
-	}, 10000);
+	}, 5000);
 });
 
 function interval_order(){
@@ -437,7 +439,7 @@ function interval_order(){
 			{
 				let order_data = json.order[0]
 				$('.order .txt-cont .game-image-area').prepend("<img src='"+"http://dmonster9995.ingyu7.gethompy.com/data/boardgames/"+order_data.games_img_file+"' style='width:130px;'>")
-				$('.order .room_cd').html(order_data.room_no)
+				$('.order .room_no').html(order_data.room_no)
 				$('.order .request_reg_dt').html(order_data.od_time)
 				$('.order .games_nm').html(order_data.games_nm)
 				$('.order #employee_uid').val(order_data.uid)

@@ -45,7 +45,7 @@ $sql = " select t1.*, t2.branch_nm {$sql_common} {$sql_search} {$sql_order} limi
 
 $result = sql_query($sql);
 
-$colspan="6";
+$colspan="7";
 
 ?>
 
@@ -177,7 +177,18 @@ $colspan="6";
 <script>
 function requestlist_submit(f){
 
-	
+	if (!is_checked("chk[]")) {
+        alert(document.pressed+" 하실 항목을 하나 이상 선택하세요.");
+        return false;
+    }
+
+    if(document.pressed == "선택삭제") {
+        if(!confirm("선택한 공지사항을 정말 삭제시키겠습니까?")) {
+            return false;
+        }
+    }
+
+    return true;
 
 }
 </script>

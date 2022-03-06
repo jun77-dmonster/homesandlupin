@@ -106,9 +106,9 @@ $colspan = 8;
 						</td>
 						<td class="td_num"><?php echo $row['uid'] ?></td>
 						<td class="td_code"><?php echo get_branch_name($row['branch_cd']) ?></td>
-						<td class="td_code"><?php echo $row['room_no']?></td>
+						<td class="td_code"><?php echo get_room_info($row['room_cd'])?>번룸</td>
 						<td><?php echo $row['customer_content'] ?></td>
-						<td class="td_category"><?php echo $row['write_gubun'] ?></td>
+						<td class="td_category"><?php echo ($row['write_gubun']=="app")?"APP":"QR"?></td>
 						<td class="td_category"><?php echo $row['write_ip'] ?></td>
 						<td class="td_datetime"><?php echo $row['customer_reg_dt'] ?></td>
 					</tr>
