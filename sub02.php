@@ -282,7 +282,11 @@ include "top.php";
                 if(num > 0) {
                     num--;
                 } else {
-                    num = 9;
+                    if($($(this).parent()).index() === 3) {
+                        num = 5;
+                    } else {
+                        num = 9;
+                    }
                 }
 
                 $($(this).parent().find(".time")).text(num);

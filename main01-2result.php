@@ -46,8 +46,8 @@ include "top.php";
   <div class="row h-100">
 
 <!--      overflow: hidden;-->
-      <div style="position: absolute; width: 1100px; height: 525px;  left:50%; transform: translateX(-50%); bottom: 0; z-index: 100;">
-          <canvas id='canvas' width='1100' height='525' style="margin-top: 25px;">
+      <div style="position: absolute; width: 1100px; height: 554px;  left:50%; transform: translateX(-50%); bottom: 20px; z-index: 100;">
+          <canvas id='canvas' width='1100' height='554' style="margin-top: 5px;">
               Canvas not supported, use another browser.
           </canvas>
           <div style="
@@ -71,7 +71,7 @@ include "top.php";
 <!--                top: 165px;-->
 <!--                transform: rotate(22deg);-->
 <!--            "/>-->
-          <img src="img/wheel/background.png" id="wheelBackgroundImage" alt="wheel_background" title="wheel_background">
+          <img src="img/wheel/background.png" id="wheelBackgroundImage" alt="wheel_background" title="wheel_background" style='height:990px !important;'>
 <!--          <div class="wheel-left-container"></div>-->
 
           <!--          <div class="wheel-right-container"></div>-->
@@ -80,15 +80,15 @@ include "top.php";
                class="startCircleClass"
                style="
                 position: absolute;
-                top: 325px;
-                left: 385px;
+                top: 365px !important;
+                left: 384px;
             "/>
 <!--          <div class="touch">touch!</div>-->
       </div>
 
         <div class="ruletbox">
 
-            <img src="img/homesSelctor.png" style=" z-index: 100; top:120px; position:absolute; left:520px;">
+            <img src="img/homesSelctor.png" style=" z-index: 100; top:42px; position:absolute; left:516px;">
 <!--            <img src="img/homesleft.png" style=" bottom:100px; position:absolute; left:30px;">-->
 <!--            <img src="img/startcircle_nostart.png" style=" bottom:-30px; position:absolute; left:390px;">-->
 <!--            <img src="img/homesright.png" style=" bottom:100px; position:absolute; left:620px;">-->
@@ -183,9 +183,9 @@ include "top.php";
                     let theWheel = new Winwheel({
                         //'numSegments'  : 10,         // Number of segments
                         'numSegments': arr.length,
-                        'outerRadius'  : 390,       // The size of the wheel.
+                        'outerRadius'  : 1100,       // The size of the wheel.
                         'centerX'      : 550,       // Used to position on the background correctly.
-                        'centerY'      : 500,
+                        'centerY'      : 505,
                         'textFontSize' : 17,        // Font size.
                         'textOrientation'   : 'curved',     // Note use of curved text.
                         'textAligment' : 'outer',

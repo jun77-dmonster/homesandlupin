@@ -83,7 +83,8 @@ li {list-style:none;}
     margin-bottom: 0;
     color: #fff;
     font-family: "NotoSansKR-Regular";
-    margin-left: 5px;
+    margin-left: 8px;
+    line-height: 20px;
 }
 .top-navigation-container {
     width: 450px;
@@ -1223,7 +1224,7 @@ li {list-style:none;}
         background-color: #53416b;
         font-family: NotoSansKR-Bold;
         color: #fff;
-        line-height: 72px;
+        line-height: 66px;
         border-radius: 16px;
         font-size: 24px;
         margin: 8px 6px;
@@ -1456,7 +1457,7 @@ li {list-style:none;}
         text-align: center;
         border: none;
         border-radius: 16px;
-        line-height: 1em;
+        line-height: 80px;
     }
 
     .startCircleClass {
@@ -1520,9 +1521,9 @@ li {list-style:none;}
     }
     .quick-tab-container > div {
         width: 117px;
-        height: 117px;
+        height: 121px;
         float: left;
-        margin-top: 16px;
+        margin-top: 12px;
         background-color: #8eaab5;
         border-radius: 16px;
         cursor: pointer;
@@ -1538,7 +1539,7 @@ li {list-style:none;}
         margin-bottom: 0;
         font-family: NotoSansKR-Bold;
         font-size: 36px;
-        line-height: 38px;
+        line-height: 32px;
         text-align: center;
         font-weight: bold;
     }
@@ -1650,7 +1651,8 @@ li {list-style:none;}
         font-size: 36px;
         width: 270px;
         margin: 0 10px;
-        line-height: 80px;
+        line-height: 14px;
+        padding: 1em 0;
     }
 
     .btn-timer-power,
@@ -2533,14 +2535,14 @@ li {list-style:none;}
     }
     .modal-game-youtube-btn-center {
         position: absolute;
-        width: 170px;
+        width: 185px;
         /*width: 185px;*/
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
     }
     .modal-game-youtube-btn-center img {
-        margin-top: 40px;
+        margin-top: 43px;
         margin-left: 6px;
         padding: 0 !important;
         float: right !important;

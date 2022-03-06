@@ -159,10 +159,10 @@ include "top.php";
 <div class="container-fluid h-100 wheel-container" >
     <div class="row h-100">
 
-        <div style="position: absolute; width: 1100px; height: 525px; overflow: hidden; left:50%; transform: translateX(-50%); bottom: 0; z-index: 100;">
-            <canvas id='canvas' width='1100' height='525'>
-                Canvas not supported, use another browser.
-            </canvas>
+        <div style="position: absolute; width: 1100px; height: 554px;  left:50%; transform: translateX(-50%); bottom: 20px; z-index: 100;">
+          <canvas id='canvas' width='1100' height='1100' style="margin-top: 5px;">
+              Canvas not supported, use another browser.
+          </canvas>
             <div style="
             /*background-color: black;*/
             width: 2px;
@@ -185,18 +185,19 @@ include "top.php";
 <!--                transform: rotate(22deg);-->
 <!--            "/>-->
             <img src="img/wheel/startcircle.png"
-                 id="startCircle"
-                 style="
+               id="startCircle"
+               class="startCircleClass"
+               style="
                 position: absolute;
-                top: 325px;
-                left: 385px;
+                top: 365px !important;
+                left: 384px;
             "/>
 <!--            <div class="touch">touch!</div>-->
         </div>
 
         <div class="ruletbox">
 
-            <img src="img/homesSelctor.png" style=" z-index: 100; top:95px; position:absolute; left:520px;">
+            <img src="img/homesSelctor.png" style=" z-index: 100; top:42px; position:absolute; left:516px;">
             <!--            <img src="img/homesleft.png" style=" bottom:100px; position:absolute; left:30px;">-->
             <!--            <img src="img/startcircle_nostart.png" style=" bottom:-30px; position:absolute; left:390px;">-->
             <!--            <img src="img/homesright.png" style=" bottom:100px; position:absolute; left:620px;">-->
@@ -423,8 +424,10 @@ include "top.php";
                     arrayPush();
 
                     function arrayPush() {
+                    
                         for(var i = 0; i < data.length; i++) {
                             if(arr.length < 10) {
+                                console.log(data[i].games_img_file.split('/')[0] + '/thumb-' + data[i].games_img_file.split('/')[1])
                                 arr.push({
                                     'image': "data/boardgames/" + data[i].games_img_file,
                                     'index': i,
@@ -469,9 +472,9 @@ include "top.php";
                         // 'drawText': false,
                         // 'imageDirection':'S',
                         'numSegments': arr.length,
-                        'outerRadius'  : 390,       // The size of the wheel.
+                        'outerRadius'  : 1100,       // The size of the wheel.
                         'centerX'      : 550,       // Used to position on the background correctly.
-                        'centerY'      : 500,
+                        'centerY'      : 505,
                         'textFontSize' : 17,        // Font size.
                         'textOrientation'   : 'curved',     // Note use of curved text.
                         'textAligment' : 'outer',
