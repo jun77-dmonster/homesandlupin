@@ -230,10 +230,7 @@ include "top.php";
                     transition: '.2s',
                     backgroundColor: '#fff',
                 });
-                $(".sub02-timer-container").css({
-                    transition: '.2s',
-                    backgroundColor: '#fff'
-                });
+
                 $(".up-arrow, .down-arrow").css({
                     display: 'block'
                 });
@@ -244,7 +241,7 @@ include "top.php";
                     top: '50px'
                 });
                 $(".sub02-quick-container").css({
-                    width: '20%'
+                    width: 'calc(100% - 1070px)'
                 });
 
                 // $(".time").css({

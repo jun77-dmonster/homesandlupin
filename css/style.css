@@ -1498,7 +1498,7 @@ li {list-style:none;}
         }
     }
     .sub02-quick-container {
-        width: 20%;
+        width: calc(100% - 1070px);
         height: 100%;
         float: left;
         background-color: #ebebeb;
