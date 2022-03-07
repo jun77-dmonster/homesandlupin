@@ -257,9 +257,16 @@ if(!empty($_GET['keyword']))
                             'onStateChange': onPlayerStateChange
                         }
                     });
-                    function bookmark()
+                    function bookmark(type)
                     {
-                        $("#bookmark-container").toggle();
+                        if(type === 2)
+                        {
+                            $("#bookmark-container").show();
+                        }
+                        else
+                        {
+                            $("#bookmark-container").hide();
+                        }
                     }
                     function onPlayerReady(event) {
                         // player = event.target;
@@ -269,7 +276,7 @@ if(!empty($_GET['keyword']))
                     }
                     var done = false;
                     function onPlayerStateChange(event) {
-                        bookmark();
+                        bookmark(event.data);
                         if (event.data == YT.PlayerState.PLAYING && !done) {
                             setTimeout(stopVideo, 6000);
                             done = true;
@@ -281,7 +288,7 @@ if(!empty($_GET['keyword']))
 
                     // when video ends
                     function onPlayerStateChange(event) {
-                        bookmark();
+                        bookmark(event.data);
                         if(event.data === 0) {
                             //동영상 끝난 후 이벤트
                             $(".player-200-popup").show();
