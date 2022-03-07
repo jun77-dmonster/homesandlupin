@@ -118,7 +118,7 @@ $(document).ready(function(e) {
     <div class="star"></div>
 </div>
 
-<img src="img/homesMainBg.jpg" usemap="#image-map" style="width: 100%; margin-top: -67px;">
+<img src="img/mainbg.png" usemap="#image-map" style="width: 100%; margin-top: -67px;">
 
 <map name="image-map">
     <area target="" id="use-info-link" alt="이용안내" title="이용안내" href="#" coords="551,719,464,802,348,800,320,748,311,715,296,655,295,617,307,616,368,615,423,615,477,616,506,616" shape="poly">
