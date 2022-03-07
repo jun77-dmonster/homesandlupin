@@ -32,7 +32,7 @@ if(!empty($_GET['keyword']))
         z-index: 30;
     }
     .bookmark-item-list-container-slide{
-        padding: 30px 0;
+        padding: 40px 0;
         margin:0 auto;
         width: 80%;
         font-size: 0;
@@ -76,7 +76,7 @@ if(!empty($_GET['keyword']))
         position: relative;
         padding: 5px 0;
         width: 100%;
-        height: 90px;
+        height: 100px;
         text-align: center;
         overflow: hidden;
         background: #000;
@@ -133,6 +133,7 @@ if(!empty($_GET['keyword']))
             </div>
         </div>
         <div class="player-container"  style="z-index: 0">
+            <div style="position:absolute;background-color:#000;width:100%;height:65px;z-index:99900"></div>
             <div id="player"></div>
         </div>
     </div>

@@ -101,7 +101,7 @@ $(document).ready(function(e) {
     </div>
     <div class="modal-use-info-movie-container">
         <div class="use-info-player-container">
-            <div style="position:absolute;background-color:#000;width:100%;height:100px;z-index:99900"></div>
+            <div style="position:absolute;background-color:#000;width:100%;height:65px;z-index:99900"></div>
             <div id="useinfoPlayer"></div>
         </div>
     </div>

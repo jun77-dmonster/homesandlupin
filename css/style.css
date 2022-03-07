@@ -765,6 +765,9 @@ li {list-style:none;}
         position: absolute;
         top: 16px;
     }
+    .modal-use-info-movie-popup-btn-close{
+        top:16px;
+    }
     .modal-wifi-btn-close div:first-child,
     .modal-use-info-popup-btn-close div:first-child,
     .modal-penalty-popup-btn-close div:first-child,
