@@ -118,6 +118,7 @@ $(document).ready(function(e) {
     <div class="star"></div>
 </div>
 
+<!-- need -->
 <img src="img/homesMainBg.jpg" usemap="#image-map" style="width: 100%; margin-top: -67px;">
 
 <map name="image-map">
