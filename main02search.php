@@ -240,9 +240,7 @@ include "top.php";
 
             $("#player").remove();
             $(".player-container").append("<div id='player'></div>");
-            console.log($(this));
             var youtube = $(this).attr("data-games_youtube");
-            console.log(youtube);
             if(youtube == "")
                 return false;
 
@@ -674,17 +672,15 @@ include "top.php";
                 data = shuffle(data);
 
                 $(".search-list-item-container:nth-child(3) > div:not(:first-child)").each(function(i, item){
-                    console.log(data[i]);
-                    console.log(data[i].item_nm.length);
                 
                     fontSize = '';
                     if(data[i].item_nm.length > 4)
                     {
-                        fontSize = "style=font-size:32px";
+                        fontSize = "style=font-size:28px";
                     }
                     else if(data[i].item_nm.length > 3)
                     {
-                        fontSize = "style=font-size:38px;";
+                        fontSize = "style=font-size:36px;";
                     }
                     
                     $(this).attr("data-item_cd", data[i].item_cd);
