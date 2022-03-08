@@ -438,63 +438,88 @@ if(!empty($_GET['keyword']))
 
                 var keyword = $(".y-scroll-container").data("keyword");
 
-                // var sql = "";
-                // if(keyword != "") {
-                //     sql = " games.games_nm LIKE '%" + keyword + "%' or games.games_hash_tag LIKE '%" + keyword + "%'";
-                // }
-
-                // $(".search-filter-item-container").each(function(i, item){
-                //     $($(this).find("div.active")).each(function(k, ktem){
-
-                //             switch(i) {
-                //                 case 0:
-                //                     if(sql == "")
-                //                         sql += " games.games_theme LIKE '%" + $(this).data("item_cd") + "%'";
-                //                     else
-                //                         sql += " OR games.games_theme LIKE '%" + $(this).data("item_cd") + "%'";
-
-                //                     break;
-                //                 case 1:
-                //                     if(sql == "")
-                //                         sql += " games.games_level='" + $(this).data("item_cd") + "'";
-                //                     else
-                //                         sql += " OR games.games_level='" + $(this).data("item_cd") + "'";
-
-                //                     break;
-                //                 case 2:
-                //                     if(sql == "")
-                //                         sql += " games.play_time='" + $(this).data("item_cd") + "'";
-                //                     else
-                //                         sql += " OR games.play_time='" + $(this).data("item_cd") + "'";
-
-                //                     break;
-                //                 case 3:
-                //                     if(sql == "")
-                //                         sql += " games.explain_time='" + $(this).data("item_cd") + "'";
-                //                     else
-                //                         sql += " OR games.explain_time='" + $(this).data("item_cd") + "'";
-
-                //                     break;
-                //                 case 4:
-                //                     var cnt = parseInt($(this).text().split("인")[0]);
-                //                     if(sql == "") {
-                //                         sql += " (games.recommend_player_min_cnt <= " + cnt + " AND games.recommend_player_max_cnt >= " + cnt + ")";
-                //                     } else {
-                //                         sql += " OR (games.recommend_player_min_cnt <= " + cnt + " AND games.recommend_player_max_cnt >= " + cnt + ")";
-                //                     }
-                                    
-                //                     break;
-                //             }
 
 
-                //     });
-                // });
+                var sql = "";
+                var type = 0;
+                $(".search-filter-item-container").each(function(i, item){
+                    $($(this).find("div.active")).each(function(k, ktem){
+                            switch(i) {
+                                case 0:
+                                    var cnt = parseInt($(this).text().split("인")[0]);
+                                    if(sql == "") {
+                                        sql += " (games.recommend_player_min_cnt <= " + cnt + " AND games.recommend_player_max_cnt >= " + cnt + ")";
+                                    } else {
+                                        sql += " OR (games.recommend_player_min_cnt <= " + cnt + " AND games.recommend_player_max_cnt >= " + cnt + ")";
+                                    }
+                                    break;
+                                case 1:
+                                    if(sql == ""){
+                                        sql += "  games.games_level='" + $(this).data("item_cd") + "'";
+                                    }
+                                    else {                                            
+                                        if(type === 0)
+                                        {
+                                            sql += " AND games.games_level='" + $(this).data("item_cd") + "'";
+                                        }
+                                        else
+                                        {
+                                            sql += " OR games.games_level='" + $(this).data("item_cd") + "'";
+                                        }
+                                    }
+                                    type = 1;
+                                    break;
+                                case 2:
+                                    if(sql == ""){
+                                        sql += "  games.games_theme LIKE '%" + $(this).data("item_cd") + "%'";
+                                    } else {    
+                                        if(type === 1)
+                                        {
+                                            sql += " AND games.games_theme LIKE '%" + $(this).data("item_cd") + "%'";
+                                        } else {
+                                            sql += " OR games.games_theme LIKE '%" + $(this).data("item_cd") + "%'";
+                                        }
+                                    }
+                                    type = 2;
+                                    break;
+                                case 3:
+                                    if(sql == ""){
+                                        sql += "  games.play_time='" + $(this).data("item_cd") + "'";
+                                    } else {    
+                                        if(type === 2)
+                                        {
+                                        sql += " AND games.play_time='" + $(this).data("item_cd") + "'";
+                                        } else {
+                                        sql += " OR games.play_time='" + $(this).data("item_cd") + "'";
+                                        }
+                                    }
+                                    type = 3;
+                                    break;
+                                case 4:
+                                    if(sql == "")
+                                    {
+                                        sql += "  games.explain_time='" + $(this).data("item_cd") + "'";
+                                    } else {    
+                                        if(type === 3)
+                                        {
+                                        sql += " AND games.explain_time='" + $(this).data("item_cd") + "'";
+                                        } else {
+                                        sql += " OR games.explain_time='" + $(this).data("item_cd") + "'";
+                                        }
+                                    }
+                                    type = 4;
+                                    break;
+                            }
+
+                    });
+                });
 
                 $.ajax({
                     type: 'POST',
                     url: 'ok/main03_ok.php?type=search',
-                    data: { keyword: keyword },
+                    data: { keyword: keyword, option: sql },
                     success: function(data) {
+                        console.log(data);
                         var data = JSON.parse(data);
                         $('.search-result-container div').remove();
 

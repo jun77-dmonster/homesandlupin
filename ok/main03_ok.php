@@ -75,17 +75,25 @@
 
                     if($row === null)
                     {
-                        $sql = "INSERT INTO DM_T_SEARCHWORD (branch_cd, room_cd, search_word, cnt, search_reg_dt) VALUES ('".$_SESSION['branch_cd']."', '".$_SESSION['room_cd']."', '".$keyword."', 1, NOW())";
-                        sql_query($sql);
+                        $countSql = "INSERT INTO DM_T_SEARCHWORD (branch_cd, room_cd, search_word, cnt, search_reg_dt) VALUES ('".$_SESSION['branch_cd']."', '".$_SESSION['room_cd']."', '".$keyword."', 1, NOW())";
+                        sql_query($countSql);
                     }
                     else
                     {
-                        $sql = "UPDATE  DM_T_SEARCHWORD set cnt = cnt+1 WHERE uid = '".$row['uid']."'";
-                        sql_query($sql);
+                        $countSql = "UPDATE  DM_T_SEARCHWORD set cnt = cnt+1 WHERE uid = '".$row['uid']."'";
+                        sql_query($countSql);
                     }
                 }
 
 
+            }
+
+            if(!empty($_POST['option'])){
+                $option = 'AND' . stripslashes($_POST['option']);
+            }
+            else
+            {
+                $option = '';
             }
 
             $where = stripslashes($sql);
@@ -116,7 +124,8 @@
                     DM_T_BRANCH_GAEMS AS branch
                 JOIN
                     DM_T_BOARD_GAMES AS games ON games.games_cd = branch.games_cd
-                WHERE games.games_delete_fl = 'F' AND branch.branch_cd ='".$_SESSION['branch_cd']."' AND (".$where.")";
+                WHERE games.games_delete_fl = 'F'
+                AND branch.branch_cd ='".$_SESSION['branch_cd']."' (".$option.") AND (".$where.")";
             else
                 $sql = "SELECT games.games_summaray,
                 games.games_youtube,
@@ -136,9 +145,21 @@
                 games.play_time,
                 games.explain_time,
                 games.search_filtering_play_cnt,
-                games.games_level FROM DM_T_BRANCH_GAEMS AS branch JOIN DM_T_BOARD_GAMES AS games ON games.games_cd = branch.games_cd  WHERE  games.games_delete_fl = 'F' AND branch.branch_cd ='".$_SESSION['branch_cd']."'";
+                games.games_level
+                FROM
+                    DM_T_BRANCH_GAEMS AS branch
+                JOIN
+                    DM_T_BOARD_GAMES AS games
+                ON
+                    games.games_cd = branch.games_cd
+                WHERE
+                    games.games_delete_fl = 'F'
+                AND
+                    branch.branch_cd ='".$_SESSION['branch_cd']."' $option";
 
+                    
             $result = sql_query($sql);
+            
 
             $arr = array();
 
