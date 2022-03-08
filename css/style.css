@@ -465,7 +465,7 @@ li {list-style:none;}
     }
 
     .search-result-genre{
-        margin-top: 8px;
+        margin-top: 6px !important;
         letter-spacing: -1px;
         font-size: 24px;
         line-height: 33px;
