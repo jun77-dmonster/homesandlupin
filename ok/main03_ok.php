@@ -32,22 +32,23 @@
             {
                 if(preg_match('/^[ㄱ-ㅎ]+/', mb_substr($keyword, 0, 1)))
                 {
-                    $sql = " games.games_nm LIKE '%" . $keyword . "%' or games.games_hash_tag LIKE '%" . $keyword . "%'";
+                    $sql = "";
+                    // $sql = "";
                     $consonant = ['ㄱ', 'ㄴ', 'ㄷ', 'ㄹ', 'ㅁ', 'ㅂ', 'ㅅ', 'ㅇ', 'ㅈ', 'ㅊ', 'ㅋ', 'ㅌ', 'ㅍ', 'ㅎ'];
-                    $consonantSql []= " OR (games.games_nm RLIKE '^(ㄱ|ㄲ)' OR ( games.games_nm >= '가' AND games.games_nm < '하' )) OR (games.games_hash_tag RLIKE '^(ㄱ|ㄲ)' OR ( games.games_hash_tag >= '가' AND games.games_hash_tag < '나' ))";
-                    $consonantSql []= " OR (games.games_nm RLIKE '^(ㄴ)' OR ( games.games_nm >= '나' AND games.games_nm < '다' )) OR (games.games_hash_tag RLIKE '^(ㄴ)' OR ( games.games_hash_tag >= '나' AND games.games_hash_tag < '다' ))";
-                    $consonantSql []= " OR (games.games_nm RLIKE '^(ㄷ|ㄸ)' OR ( games.games_nm >= '다' AND games.games_nm < '라' )) OR (games.games_hash_tag RLIKE '^(ㄷ|ㄸ)' OR ( games.games_hash_tag >= '다' AND games.games_hash_tag < '라' ))";
-                    $consonantSql []= " OR (games.games_nm RLIKE '^(ㄹ)' OR ( games.games_nm >= '라' AND games.games_nm < '마' )) OR (games.games_hash_tag RLIKE '^(ㄹ)' OR ( games.games_hash_tag >= '라' AND games.games_hash_tag < '마' ))";
-                    $consonantSql []= " OR (games.games_nm RLIKE '^(ㅁ)' OR ( games.games_nm >= '마' AND games.games_nm < '바' )) OR (games.games_hash_tag RLIKE '^(ㅁ)' OR ( games.games_hash_tag >= '마' AND games.games_hash_tag < '바' ))";
-                    $consonantSql []= " OR (games.games_nm RLIKE '^(ㅂ)' OR ( games.games_nm >= '바' AND games.games_nm < '사' )) OR (games.games_hash_tag RLIKE '^(ㅂ)' OR ( games.games_hash_tag >= '바' AND games.games_hash_tag < '사' ))";
-                    $consonantSql []= " OR (games.games_nm RLIKE '^(ㅅ|ㅆ)' OR ( games.games_nm >= '사' AND games.games_nm < '아' )) OR (games.games_hash_tag RLIKE '^(ㅅ|ㅆ)' OR ( games.games_hash_tag >= '사' AND games.games_hash_tag < '아' )) ";
-                    $consonantSql []= " OR (games.games_nm RLIKE '^(ㅇ)' OR ( games.games_nm >= '아' AND games.games_nm < '자' )) OR (games.games_hash_tag RLIKE '^(ㅇ)' OR ( games.games_hash_tag >= '아' AND games.games_hash_tag < '자' ))";
-                    $consonantSql []= " OR (games.games_nm RLIKE '^(ㅈ|ㅉ)' OR ( games.games_nm >= '자' AND games.games_nm < '차' )) OR (games.games_hash_tag RLIKE '^(ㅈ|ㅉ)' OR ( games.games_hash_tag >= '자' AND games.games_hash_tag < '차' ))";
-                    $consonantSql []= " OR (games.games_nm RLIKE '^(ㅊ)' OR ( games.games_nm >= '차' AND games.games_nm < '카' )) OR (games.games_hash_tag RLIKE '^(ㅊ)' OR ( games.games_hash_tag >= '차' AND games.games_hash_tag < '카' ))";
-                    $consonantSql []= " OR (games.games_nm RLIKE '^(ㅋ)' OR ( games.games_nm >= '카' AND games.games_nm < '타' )) OR (games.games_hash_tag RLIKE '^(ㅋ)' OR ( games.games_hash_tag >= '카' AND games.games_hash_tag < '타' ))";
-                    $consonantSql []= " OR (games.games_nm RLIKE '^(ㅌ)' OR ( games.games_nm >= '타' AND games.games_nm < '파' )) OR (games.games_hash_tag RLIKE '^(ㅌ)' OR ( games.games_hash_tag >= '타' AND games.games_hash_tag < '파' ))";
-                    $consonantSql []= " OR (games.games_nm RLIKE '^(ㅍ)' OR ( games.games_nm >= '파' AND games.games_nm < '하' )) OR (games.games_hash_tag RLIKE '^(ㅍ)' OR ( games.games_hash_tag >= '파' AND games.games_hash_tag < '하' ))";
-                    $consonantSql []= " OR (games.games_nm RLIKE '^(ㅎ)' OR ( games.games_nm >= '하') OR (gamse.games_hash_tag RLIKE '^(ㅎ)' OR ( gamse.games_hash_tag >= '하'))";
+                    $consonantSql []= " (games.games_nm between '가' and '깋') OR (games.games_hash_tag between '가' and '깋')";
+                    $consonantSql []= " (games.games_nm between '나' and '닣') OR (games.games_hash_tag between '나' and '닣')";
+                    $consonantSql []= " (games.games_nm between '다' and '딯') OR (games.games_hash_tag between '다' and '딯')";
+                    $consonantSql []= " (games.games_nm between '라' and '맇') OR (games.games_hash_tag between '라' and '맇')";
+                    $consonantSql []= " (games.games_nm between '마' and '밓') OR (games.games_hash_tag between '마' and '밓')";
+                    $consonantSql []= " (games.games_nm between '바' and '빟') OR (games.games_hash_tag between '바' and '빟')";
+                    $consonantSql []= " (games.games_nm between '사' and '싷') OR (games.games_hash_tag between '사' and '싷')";
+                    $consonantSql []= " (games.games_nm between '아' and '잏') OR (games.games_hash_tag between '아' and '잏')";
+                    $consonantSql []= " (games.games_nm between '자' and '짛') OR (games.games_hash_tag between '자' and '짛')";
+                    $consonantSql []= " (games.games_nm between '차' and '칳') OR (games.games_hash_tag between '차' and '칳')";
+                    $consonantSql []= " (games.games_nm between '카' and '킿') OR (games.games_hash_tag between '카' and '킿')";
+                    $consonantSql []= " (games.games_nm between '타' and '팋') OR (games.games_hash_tag between '타' and '팋')";
+                    $consonantSql []= " (games.games_nm between '파' and '핗') OR (games.games_hash_tag between '파' and '핗')";
+                    $consonantSql []= " (games.games_nm between '하' and '힣') OR (games.games_hash_tag between '하' and '힣')";
                     $consonantArray = [];
                     foreach($consonant as $key => $value)
                     {
@@ -65,8 +66,7 @@
                         *
                     FROM
                         DM_T_SEARCHWORD
-                    WHERE 1=1 
-                    AND branch_cd='".$_SESSION['branch_cd']."' 
+                    WHERE branch_cd='".$_SESSION['branch_cd']."' 
                     AND room_cd='".$_SESSION['room_cd']."' 
                     AND search_word = '".$keyword."'
                     AND DATE_FORMAT(search_reg_dt, '%Y-%m-%d') = '".date("Y-m-d", time())."'";
@@ -116,7 +116,7 @@
                     DM_T_BRANCH_GAEMS AS branch
                 JOIN
                     DM_T_BOARD_GAMES AS games ON games.games_cd = branch.games_cd
-                WHERE 1=1 AND (games.games_delete_fl = 'F' AND branch.branch_cd ='".$_SESSION['branch_cd']."') AND (".$where.")";
+                WHERE games.games_delete_fl = 'F' AND branch.branch_cd ='".$_SESSION['branch_cd']."' AND (".$where.")";
             else
                 $sql = "SELECT games.games_summaray,
                 games.games_youtube,
@@ -136,7 +136,7 @@
                 games.play_time,
                 games.explain_time,
                 games.search_filtering_play_cnt,
-                games.games_level FROM DM_T_BRANCH_GAEMS AS branch JOIN DM_T_BOARD_GAMES AS games ON games.games_cd = branch.games_cd  WHERE 1=1 AND games.games_delete_fl = 'F' AND branch.branch_cd ='".$_SESSION['branch_cd']."'";
+                games.games_level FROM DM_T_BRANCH_GAEMS AS branch JOIN DM_T_BOARD_GAMES AS games ON games.games_cd = branch.games_cd  WHERE  games.games_delete_fl = 'F' AND branch.branch_cd ='".$_SESSION['branch_cd']."'";
 
             $result = sql_query($sql);
 

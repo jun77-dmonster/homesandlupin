@@ -94,6 +94,17 @@ if(!empty($_GET['keyword']))
     .bookmark-item-time {
         display: none;
     }
+    .no-search-result-alert{
+        width: 100%;
+        text-align: center;
+        height: 215px;
+        text-align: center;
+        font-family:AggroM;
+        font-size:25px;
+        letter-spacing: -1px;
+        line-height:200px;
+
+    }
 </style>
 
 <div class="modal-search-player-bg"></div>
@@ -365,9 +376,6 @@ if(!empty($_GET['keyword']))
             })
 
             $(document).on("click", ".modal-popup-btn-close", function(){
-                // var duration = player.getDuration();
-                // player.seekTo(0, true);
-
                 $("#player").remove();
                 $(".modal-search-player-bg, .modal-search-player-popup, .player-200-popup").hide();
             })
@@ -488,7 +496,6 @@ if(!empty($_GET['keyword']))
                     data: { keyword: keyword },
                     success: function(data) {
                         var data = JSON.parse(data);
-
                         $('.search-result-container div').remove();
 
                         for(var i = 0; i < data.length; i++) {
@@ -554,6 +561,12 @@ if(!empty($_GET['keyword']))
                             $(".search-result-container").append(html);
 
 
+                        }
+
+                        // 검색 결과 없을 때
+                        if(data.length === 0)
+                        {
+                            $(".search-result-container").append("<div class='no-search-result-alert'>검색 결과가 없습니다.</div>");
                         }
 
                         $(".search-result-content-container").each(function(){
