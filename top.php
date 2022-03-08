@@ -44,6 +44,19 @@ if(!isset($_SESSION['branch_cd']) or !isset($_SESSION['branch_cdcommon'])){
         min-height: 576px;
     }
 </style>
+
+<div class="modal-order-success-blue-popup">
+    <p>
+        메뉴가 준비되었습니다!<br>
+        <span>계산서와 결제수단을 지참</span>해<br>
+        <span>카운터에서 픽업</span>해주세요:)
+    </p>
+    <div class="btn-order-success-container">
+        <button class="btn-order-success">확인</button>
+    </div>
+    <p>※계산서 미 지참시 픽업시 지연될 수 있으니,꼭! 확인 부탁드려요</p>
+</div>
+
 <div class="header">
     <div class="searchbox">
         <a href="index.php"><img src="img/home.png" style="float: left;"></a> 
@@ -134,6 +147,150 @@ if(!isset($_SESSION['branch_cd']) or !isset($_SESSION['branch_cdcommon'])){
 
 <script>
     $(function(){
+
+        var successOrderInterval;
+        var successOrderIntervalTime = 3000;
+
+        var successOrderDate = "";
+
+        var successOrderCartId = new Array();
+
+        // function AddComma(num)
+        // {
+        //     var regexp = /\B(?=(\d{3})+(?!\d))/g;
+        //     return num.toString().replace(regexp, ',');
+        // }
+
+        function getSuccessOrderData() {
+            return $.ajax({
+                type: "POST",
+                url: "ok/main04_ok.php?type=success_order",
+                async: false,
+                data: {},
+                success: function(data) {
+                    getSuccessOrderDataCallBack(data);
+                }
+            });
+        }
+
+        function getSuccessOrderDataCallBack(data) {
+            // console.log(data);
+            var data = JSON.parse(data);
+            console.log(data);
+
+            if(data.length > 0) {
+
+                var arrValues = data;
+                console.log(arrValues);
+                var arrCheckVal = new Array();
+
+                var chk = true;
+
+                for(var i = 0; i < arrValues.length; i++) {
+
+                    chk = true;
+
+                    for(var value in arrCheckVal) {
+                        if(arrCheckVal[value] == arrValues[i].od_id) {
+                            chk = false;
+                        }
+                    }
+
+                    if(chk)
+                        arrCheckVal.push(arrValues[i].od_id);
+                }
+
+
+                successOrderCartId = arrCheckVal;
+
+                $(".modal-order-success-blue-popup").show();
+            }
+        }
+
+        function setIntervalSuccessOrderPopup() {
+            getSuccessOrderData();
+            successOrderInterval = setInterval(function(){
+                getSuccessOrderData();
+            }, successOrderIntervalTime);
+        }
+
+        function setClearIntervalSuccessOrderPopup() {
+            return clearInterval(successOrderInterval);
+        }
+
+        setIntervalSuccessOrderPopup();
+
+        $(document).on("click", ".btn-order-success", function(event){
+
+            setClearIntervalSuccessOrderPopup();
+
+            var wherein = successOrderCartId.join(',');
+
+            console.log(wherein);
+
+            $.ajax({
+                type: 'POST',
+                url: 'ok/main04_ok.php?type=success_order_check',
+                data: {
+                    wherein: wherein,
+                },
+                success: function(data){
+                    console.log(data);
+                    // $(".modal-order-success-blue-popup").hide();
+                    $(".modal-order-success-blue-popup").hide();
+                    setIntervalSuccessOrderPopup();
+                }
+            });
+
+
+        })
+
+
+        // 메뉴 주문 완료 알림 팝업
+
+        // interval_order();
+        // var time_interval = setInterval(function(){
+        //     interval_order();
+        // }, 3000);
+        //
+        // function interval_order(){
+        //     let branch_cd = 'B9168'
+        //     $.ajax({
+        //         url: "ok/main04_ok.php?type=order_popup",
+        //         method: "POST",
+        //         dataType: "json"
+        //     }).done(function(json) {
+        //         console.log(json)
+        //         if(json.list || json.order){
+        //             if(json.list)
+        //             {
+        //                 let req_data = json.list[0]
+        //                 $('.request .txt-cont .game-image-area').prepend("<img src='"+"http://dmonster9995.ingyu7.gethompy.com/data/boardgames/"+req_data.games_img_file+"' style='width:130px;'>")
+        //                 $('.request .room_cd').html(req_data.room_no)
+        //                 $('.request .request_reg_dt').html(req_data.request_reg_dt)
+        //                 $('.request .games_nm').html(req_data.games_nm)
+        //                 $('.request #employee_uid').val(req_data.uid)
+        //             }
+        //             if(json.order)
+        //             {
+        //                 let order_data = json.order[0]
+        //                 $('.order .txt-cont .game-image-area').prepend("<img src='"+"http://dmonster9995.ingyu7.gethompy.com/data/boardgames/"+order_data.games_img_file+"' style='width:130px;'>")
+        //                 $('.order .room_no').html(order_data.room_no)
+        //                 $('.order .request_reg_dt').html(order_data.od_time)
+        //                 $('.order .games_nm').html(order_data.games_nm)
+        //                 $('.order #employee_uid').val(order_data.uid)
+        //             }
+        //             $(".ajax.popup_bg").show();
+        //             $(".ajax.popup").show(700);
+        //             clearInterval(time_interval);
+        //         }
+        //     })
+        // }
+
+        // 메뉴 주문 완료 알림 팝업
+
+
+
 
         $("#btn-wifi").click(function(event){
             $(".modal-wifi-popup, .modal-wifi-bg").toggle();
