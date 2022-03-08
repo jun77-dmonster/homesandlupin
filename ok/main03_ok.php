@@ -214,8 +214,8 @@
             }
             else
             {
-                $column = 'games_cd, branch_cd, room_cd, games_summary_cllick_cnt, count_reg_dt';
-                $update = 'games_summary_cllick_cnt = games_summary_cllick_cnt+1';
+                $column = 'games_cd, branch_cd, room_cd, games_summary_click_cnt, count_reg_dt';
+                $update = 'games_summary_click_cnt = games_summary_click_cnt+1';
             }
 
             if($row === null)

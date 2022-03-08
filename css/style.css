@@ -451,7 +451,7 @@ li {list-style:none;}
         font-size: 29px;
         font-weight: bold;
         text-align: center;
-        margin-top: 16px;
+        margin-top: 8px;
     }
 
     .search-result-info-footer {
@@ -462,6 +462,13 @@ li {list-style:none;}
         font-size: 12px;
         color: gray;
         margin-top: -2.5px;
+    }
+
+    .search-result-genre{
+        margin-top: 8px;
+        letter-spacing: -1px;
+        font-size: 24px;
+        line-height: 33px;
     }
 
     .search-result-text-container {

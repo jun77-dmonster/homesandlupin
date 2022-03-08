@@ -505,7 +505,14 @@ if(!empty($_GET['keyword']))
                                             html += "<div class='search-result-info-container'>";
                                                 html += "<div class='search-result-info'>";
                                                     html += "<div class='search-result-info-title'>추천인원</div>";
-                                                    html += "<div class='search-result-info-content'>" + data[i].recommend_player_min_cnt + "~" + data[i].recommend_player_max_cnt + "인</div>";
+                                                    if(data[i].recommend_player_min_cnt === data[i].recommend_player_max_cnt)
+                                                    {
+                                                        html += "<div class='search-result-info-content'>" + data[i].recommend_player_min_cnt + "인</div>";      
+                                                    }
+                                                    else
+                                                    {
+                                                        html += "<div class='search-result-info-content'>" + data[i].recommend_player_min_cnt + "~" + data[i].recommend_player_max_cnt + "인</div>";
+                                                    }
                                                     html += "<div class='search-result-info-footer'>가능인원: " + data[i].player_min_cnt + "~" + data[i].player_max_cnt + "</div>";
                                                 html += "</div>";
                                             html += "<div class='search-result-info'>";
@@ -518,7 +525,7 @@ if(!empty($_GET['keyword']))
                                             html += "</div>";
                                             html += "<div class='search-result-info'>";
                                                 html += "<div class='search-result-info-title'>장르</div>";
-                                                html += "<div class='search-result-info-content item_cd' data-item_cd='" + data[i].games_theme + "'></div>";
+                                                html += "<div class='search-result-info-content item_cd search-result-genre' data-item_cd='" + data[i].games_theme + "'></div>";
                                             html += "</div>";
                                             html += "<div class='search-result-info'>";
                                                 html += "<div class='search-result-info-title'>난이도</div>";
