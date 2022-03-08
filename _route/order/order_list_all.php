@@ -12,7 +12,7 @@ for ($i=0; $c1=sql_fetch_array($b1); $i++)
 }
 
 $sql_common = " from {$DM['ORDER_TABLE']} as t1 join ( select od_id, branch_cd, room_cd  from {$DM['CART_TABLE']} group by od_id ) as t2 on t1.od_id=t2.od_id ";
-$sql_search = " where (1) ";
+$sql_search = " where od_status IN('주문','접수','호출') ";
 
 if ($stx) {
     $sql_search .= " and ( ";
@@ -64,7 +64,7 @@ include_once(G5_PLUGIN_PATH.'/jquery-ui/datepicker.php');
 $sql = " select * {$sql_common} {$sql_search} {$sql_order} limit {$from_record}, {$rows} ";
 $result = sql_query($sql);
 
-$colspan="8";
+$colspan="9";
 ?>
 <script src="<?php echo G5_JS_URL ?>/jquery.dmonster_register.js"></script>
 <div class="box-view-wrap">
@@ -147,6 +147,7 @@ $colspan="8";
 						<th>금액</th>
 						<th>주문일자</th>
 						<th>룸호출일자</th>
+						<th>주문상태</th>
 						<th>관리</th>
 					</tr>
 					</thead>
@@ -162,10 +163,9 @@ $colspan="8";
 						<td class="td_paybybig td_price"><?php echo number_format($row['od_cart_price'])?> 원</td>
 						<td class="td_datetime"><?php echo $row['od_time']?></td>
 						<td class="td_datetime"><?php echo $row['od_room_call_time']?></td>
+						<td class="td_mng"><?php echo $row['od_status']?></td>
 						<td class="td_mng">
-							
 							<a href="./order_view.php?od_id=<?php echo $row['od_id']; ?>&amp;<?php echo $qstr; ?>" class="mng_mod btn btn_02">보기</a>
-
 						</td>
 					</tr>
 					<?php

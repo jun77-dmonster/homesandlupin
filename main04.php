@@ -66,13 +66,18 @@ include "top.php";
             }
         }
 
+
+
         $(function(){
 
             var basketTotalPrice = 0;
             var productList = [];
             var optionList = [];
             var optionNameList = [];
+
             var subjectArr = [];
+            var supplyArr = [];
+
             var optionNameList = [];
 
 
@@ -80,6 +85,9 @@ include "top.php";
 
 
             var optionData = [];
+
+
+
 
 
 
@@ -96,7 +104,11 @@ include "top.php";
                 $(".modal-bg, .modal-popup-cart-blue").hide();
             })
 
-            $(document).on("click", ".product-list-container > .product-list-item-container", function(event){
+
+
+            $(document).on("click", ".product-list-container > .product-list-item-container:not(.soldout)", function(event){
+
+
 
                 $(".modal-product-item-container > *").remove();
                 $(".basket-option-radio-container > *").remove();
@@ -122,10 +134,22 @@ include "top.php";
                 *
                 * */
 
-                var dataBeverageOptionSubject = $(event.currentTarget).data('beverage_option_subject').toString();
+
+                var dataBeverageOptionSubject = "";
+                var dataBeverageOptionSupplySubject = "";
+
+                if($(event.currentTarget).data('beverage_option_subject'))
+                    dataBeverageOptionSubject = $(event.currentTarget).data('beverage_option_subject').toString();
+
+                if($(event.currentTarget).data('beverage_supply_subject'))
+                    dataBeverageOptionSupplySubject = $(event.currentTarget).data('beverage_supply_subject').toString();
 
 
-                subjectArr = dataBeverageOptionSubject.split(",");
+                if(dataBeverageOptionSubject !== "null")
+                    subjectArr = dataBeverageOptionSubject.split(",");
+
+                if(dataBeverageOptionSupplySubject !== "null")
+                    supplyArr = dataBeverageOptionSupplySubject.split(",");
 
 
 
@@ -137,21 +161,30 @@ include "top.php";
                 // }
 
 
-                // var titleCheck = "(필수)";
                 var titleCheck = "";
 
-                for(var i = 0; i < subjectArr.length; i++) {
-                    // if(i === 0 && subjectArr[i] != "")
-                    //     titleCheck = "(필수)";
-                    //
-                    // if(i > 0 && subjectArr[i] != "")
-                    //     titleCheck = "(선택)";
-                    //
-                    // if(subjectArr[i] == "")
-                    //     titleCheck = "";
+                if(subjectArr.length > 0) {
+                    for (var i = 0; i < subjectArr.length; i++) {
+                        if(subjectArr[i]) {
+                            titleCheck = "(필수)";
+                            $(".basket-option-radio-container").append("<div class='modal-option-subject-container' data-beverage_cd='" + $(event.currentTarget).data('beverage_cd') + "'><p class='modal-option-subject-title option-title-0' data-title='" + subjectArr[i] + "'>" + subjectArr[i] + titleCheck + "</p></div>");
+                        } else {
+                            titleCheck = "";
+                        }
 
-                    if(subjectArr.length > 0 && subjectArr[0] != "")
-                        $(".basket-option-radio-container").append("<div class='modal-option-subject-container' data-beverage_cd='" + $(event.currentTarget).data('beverage_cd') + "'><p class='modal-option-subject-title option-title-0' data-title='"+ subjectArr[i] +"'>" + subjectArr[i] + titleCheck + "</p></div>");
+                    }
+                }
+
+                if(supplyArr.length > 0) {
+                    for (var i = 0; i < supplyArr.length; i++) {
+                        if(supplyArr[i]) {
+                            titleCheck = "(선택)";
+                            $(".basket-option-radio-container").append("<div class='modal-option-subject-container' data-beverage_cd='" + $(event.currentTarget).data('beverage_cd') + "'><p class='modal-option-subject-title option-title-0' data-title='" + supplyArr[i] + "'>" + supplyArr[i] + titleCheck + "</p></div>");
+                        } else {
+                            titleCheck = "";
+                        }
+
+                    }
                 }
 
 
@@ -179,53 +212,20 @@ include "top.php";
                             html += "<span class='checkmark'></span>";
                             html += "</label>";
 
-                            console.log(optionData[i].beverage_op_type);
-                            if(optionData[i].beverage_op_type == 0) {
-                                $($($(".modal-option-subject-container")[0]).find(".modal-option-subject-title")).text($($($(".modal-option-subject-container")[0]).find(".modal-option-subject-title")).data("title") + "(필수)");
-                                $($(".modal-option-subject-container")[0]).append(html);
-                            } else {
-                                $(".modal-option-subject-container").each(function(k, ktem){
-                                    console.log(ktem);
-                                    if($(ktem).find(".modal-option-subject-title").data("title") === optionSubject) {
-                                        $($(ktem).find(".modal-option-subject-title")).text($($(ktem).find(".modal-option-subject-title")).data("title") + "(선택)");
-                                        $(ktem).append(html);
+
+                            $(".modal-option-subject-container").each(function(k, ktem){
+                                if($(ktem).find(".modal-option-subject-title").data("title") === optionSubject) {
+                                    if(optionData[i].beverage_op_type == 0) {
+                                        $($(ktem).find(".modal-option-subject-title")).attr("data-beverage_op_type", 0).text($($(ktem).find(".modal-option-subject-title")).data("title") + "(필수)");
                                     } else {
-                                        $(ktem).remove();
+                                        $($(ktem).find(".modal-option-subject-title")).attr("data-beverage_op_type", 1).text($($(ktem).find(".modal-option-subject-title")).data("title") + "(선택)");
                                     }
-                                });
-                            }
+                                    $(ktem).append(html);
+                                } else {
+                                    // $(ktem).remove();
+                                }
+                            });
                         }
-
-                        // optionList = data;
-                        // console.log(optionNameList.length);
-
-                        // for(var i = 0; i < optionList.length; i++) {
-                        //     optionNameList.push(optionList[i].beverage_op_id.split(chr(30)));
-                        //     console.log(data[i]);
-                        // }
-                        // console.log(optionNameList.length);
-                        //
-                        //
-                        // var check = "";
-                        // console.log(optionNameList, data);
-                        // for(var i = 0; i < optionNameList.length; i++) {
-                        //
-                        //     if(optionNameList[i][0] == check)
-                        //         continue;
-                        //
-                        //     console.log(i, data[i]);
-                        //     var html = "<label class='radio-label'>";
-                        //     html += "<span data-name='" + optionNameList[i][0] + "'>" + optionNameList[i][0] + "(+" + data[i].beverage_op_price + ")</span>";
-                        //     html += "<input type='checkbox' name='option0' value='" + data[i].beverage_op_no + "' data-option='" + data[i].beverage_op_id + "' data-optionName='" + optionNameList[i][0] + "' data-price='" + data[i].beverage_op_price + "' autocomplete='off''>";
-                        //     html += "<span class='checkmark'></span>";
-                        //     html += "</label>";
-                        //
-                        //     $(".modal-option-subject-container").eq(0).append(html);
-                        //
-                        //     check = optionNameList[i][0];
-                        //
-                        // }
-
 
                         $(".basket-option-radio-container").append("<p class='modal-option-subject-title'>수량</p>");
                         var html = "<div class='count-container'>";
@@ -248,46 +248,59 @@ include "top.php";
 
             $(document).on("change", ".radio-label input", function(event){
 
+                var self = this;
 
-                var subjectIndex = $(event.target).parent().parent().index();
-
-                var nowIndex = subjectIndex + 1;
-
-                var checkboxIndex = $(event.target).parent().index();
-
-                if(subjectIndex == 0) {
-                    $(event.target).parent().siblings().find("input").each(function (i, item) {
-                        $(item).attr("checked", false);
-                    });
-
+                if($(this).parent().parent().find(".modal-option-subject-title").attr("data-beverage_op_type") == "0") {
+                    $($(this).parent().parent().find("input")).prop("checked", false);
+                    $(this).prop("checked", true);
                 }
 
-                if(!$(event.target).is(":checked")) {
-                    $($(".modal-option-subject-container").eq(nowIndex)).find("label").remove();
-                } else {
-                    $($(".modal-option-subject-container").eq(nowIndex)).find("label").remove();
 
+                // $($(this).parent().parent().find("input")).each(function(i, item){
+                //
+                //     $(item).prop("checked", false);
+                // });
+                // $(this).prop("checked", true);
 
-
-                    if(subjectArr.length - 1 === nowIndex) {
-                        var check = "";
-                        for(var i = 0; i < optionNameList.length; i++) {
-
-                            if(optionNameList[i][nowIndex] == check || $(event.target).attr("data-optionName") != optionNameList[i][nowIndex - 1])
-                                continue;
-
-                            var html = "<label class='radio-label' style='width: 100%;'>";
-                            html += "<span data-name='" + optionNameList[i][nowIndex] + "'>" + optionNameList[i][nowIndex] + "(+" + optionList[i].beverage_op_price + ")</span>";
-                            html += "<input type='checkbox' name='option0' data-optionname='" + optionNameList[i][nowIndex] + "' value='" + optionList[i].beverage_op_no + "' data-option='" + optionList[i].beverage_op_id + "' data-price='" + optionList[i].beverage_op_price + "' autocomplete='off''>";
-                            html += "<span class='checkmark'></span>";
-                            html += "</label>";
-
-                            $(".modal-option-subject-container").eq(nowIndex).append(html);
-
-                            check = optionNameList[i][nowIndex];
-                        }
-                    }
-                }
+                // var subjectIndex = $(event.target).parent().parent().index();
+                //
+                // var nowIndex = subjectIndex + 1;
+                //
+                // var checkboxIndex = $(event.target).parent().index();
+                //
+                // if(subjectIndex == 0) {
+                //     $(event.target).parent().siblings().find("input").each(function (i, item) {
+                //         $(item).attr("checked", false);
+                //     });
+                //
+                // }
+                //
+                // if(!$(event.target).is(":checked")) {
+                //     $($(".modal-option-subject-container").eq(nowIndex)).find("label").remove();
+                // } else {
+                //     $($(".modal-option-subject-container").eq(nowIndex)).find("label").remove();
+                //
+                //
+                //
+                //     if(subjectArr.length - 1 === nowIndex) {
+                //         var check = "";
+                //         for(var i = 0; i < optionNameList.length; i++) {
+                //
+                //             if(optionNameList[i][nowIndex] == check || $(event.target).attr("data-optionName") != optionNameList[i][nowIndex - 1])
+                //                 continue;
+                //
+                //             var html = "<label class='radio-label' style='width: 100%;'>";
+                //             html += "<span data-name='" + optionNameList[i][nowIndex] + "'>" + optionNameList[i][nowIndex] + "(+" + optionList[i].beverage_op_price + ")</span>";
+                //             html += "<input type='checkbox' name='option0' data-optionname='" + optionNameList[i][nowIndex] + "' value='" + optionList[i].beverage_op_no + "' data-option='" + optionList[i].beverage_op_id + "' data-price='" + optionList[i].beverage_op_price + "' autocomplete='off''>";
+                //             html += "<span class='checkmark'></span>";
+                //             html += "</label>";
+                //
+                //             $(".modal-option-subject-container").eq(nowIndex).append(html);
+                //
+                //             check = optionNameList[i][nowIndex];
+                //         }
+                //     }
+                // }
 
 
             })
@@ -298,9 +311,29 @@ include "top.php";
 
             $(document).on("click", ".basket-option-btn", function(event){
 
-                if($(".modal-option-subject-container").length > 0 && $(".modal-option-subject-container:nth-child(1) input:checked").length === 0) {
-                    return $(".modal-menu-blue-popup").stop().show(1).delay(1500).hide(1);
+                // if($(".modal-option-subject-container").length > 0 && $(".modal-option-subject-container:nth-child(1) input:checked").length === 0) {
+                //     return $(".modal-menu-blue-popup").stop().show(1).delay(1500).hide(1);
+                // }
+
+                if($(".modal-option-subject-container").length > 0) {
+                    var isPopup = true;
+
+                    $(".modal-option-subject-container").each(function(i, item){
+                        if($($(item).find(".modal-option-subject-title")).data("beverage_op_type") == "0") {
+                            isPopup = true;
+                            $($(item).find("input")).each(function(k, ktem){
+                                if($(ktem).prop("checked")) {
+                                    isPopup = false;
+                                }
+                            });
+                        }
+                    });
+
+                    if(isPopup) {
+                        return $(".modal-menu-blue-popup").stop().show(1).delay(1500).hide(1);
+                    }
                 }
+
 
                 var productPrice = parseInt($(".modal-product-item-container .product-price").data("price"));
                 var productNameKR = $(".modal-product-item-container .product-title-kr").text();
@@ -311,16 +344,20 @@ include "top.php";
                 var productSelectedOptionName = "";
                 var productOptionPrice = 0;
                 var io_id = "";
+                var productOptionPriceArr = [];
 
                 $(".basket-product-list-container > div").remove();
                 $(".radio-label").each(function(i, item){
                     if($($(item).find("input")).prop("checked")) {
                         console.log(parseInt($($(item).find("input")).data("price")), $($(item).find("input")).data("option") + ", ", $($(item).find("input")).data("option"), $($(item).find("span").eq(0)).text());
                         productOptionPrice += parseInt($($(item).find("input")).data("price"));
+                        productOptionPriceArr.push(parseInt($($(item).find("input")).data("price")));
                         productOptions += $($(item).find("input")).data("optionname") + "(+" + parseInt($($(item).find("input")).data("price")) + ")" + ", ";
                         productSelectedOptionName += $($(item).find("input")).data("option") + ", ";
                         productOptionFullName = $($(item).find("span").eq(0)).text();
-                        io_id += $($(item).find("input")).data("optionname") + chr(30);
+
+                        if($($(item).parent().find(".modal-option-subject-title")).data("beverage_op_type") == "0")
+                            io_id += $($(item).find("input")).data("optionname") + chr(30);
                     }
                 });
 
@@ -336,35 +373,59 @@ include "top.php";
                 $(".option-title-0").each(function(i, item){
                     ct_option += $(this).data("title") + ":";
 
+                    var count = 0;
+
                     $($($(item).parent()).find("label")).each(function(k, ktem){
                         console.log($(ktem).find("input").prop("checked"));
                         if($(ktem).find("input").prop("checked")) {
                             ct_option += $($(ktem).find("input")).data("optionname") + chr(30);
+                            count++;
                             // console.log($(ktem).data("optionname"));
                         }
                     });
 
-                    ct_option += "/";
+                    if(count > 0)
+                        ct_option += "/";
                 });
 
-                productList.push({
-                    productNameKR: productNameKR,
-                    productCount: productCount,
-                    productOptions: productOptions,
-                    productPrice: productPrice,
-                    productTotalPrice: productTotalPrice,
-                    productOptionFullName: productOptionFullName,
-                    productSelectedOptionName: productSelectedOptionName,
-                    productOptionPrice: productOptionPrice,
-                    productCd: $(".modal-product-item-container > div").data("beverage_cd"),
-                    productOptionTitle: $(".modal-option-subject-title").data("title"),
-                    ct_option: ct_option.substr(0, ct_option.length - 2),
-                    io_id: io_id
-                });
+                var isAdd = true;
+
+                for(var i = 0; i < productList.length; i++) {
+                    if(productList[i].productNameKR == productNameKR && productList[i].productOptions == productOptions && productList[i].productCd == $(".modal-product-item-container > div").data("beverage_cd")) {
+                        productList[i].productCount += productCount;
+                        productList[i].productPrice += productPrice;
+                        productList[i].productTotalPrice += productTotalPrice;
+
+                        isAdd = false;
+                        continue;
+                    }
+                }
+
+                if(isAdd || productList.length === 0) {
+                    productList.push({
+                        productNameKR: productNameKR,
+                        productCount: productCount,
+                        productOptions: productOptions,
+                        productPrice: productPrice,
+                        productTotalPrice: productTotalPrice,
+                        productOptionFullName: productOptionFullName,
+                        productSelectedOptionName: productSelectedOptionName,
+                        productOptionPrice: productOptionPrice,
+                        productCd: $(".modal-product-item-container > div").data("beverage_cd"),
+                        productOptionTitle: $(".modal-option-subject-title").data("title"),
+                        ct_option: ct_option.substr(0, ct_option.length - 1),
+                        io_id: io_id,
+                        productOptionPriceArr: productOptionPriceArr
+                    });
+                }
+
+                console.log(productList);
+
 
                 basketTotalPrice = 0;
 
                 for(var i = 0; i < productList.length; i++) {
+
                     var html = "<div class='basket-product-list-item-container'>";
                     html += "<div class='basket-product-item-header'>";
                     html += "<div class='basket-product-item-title'>" + productList[i].productNameKR + "</div>";
@@ -404,16 +465,82 @@ include "top.php";
                 html += "<div class='modal-check-btn-container'><button class='second-btn-order'>주문하기</button></div>";
 
                 $(".modal-popup").append(html);
+
+                $.ajax({
+                    type: "POST",
+                    url: "ok/main04_ok.php?type=branch_check_image",
+                    data: {},
+                    success: function(data) {
+                        if(data.length < 5) {
+                            $.ajax({
+                                type: "POST",
+                                url: "ok/main04_ok.php?type=corp_check_image",
+                                data: {},
+                                success: function (data1) {
+                                    if(data1.length < 5) {
+
+                                        $(".modal-check-img-container img").attr("src", "img/order/check.jpg");
+
+                                    } else {
+
+                                        var data1 = JSON.parse(data1);
+
+                                        $(".modal-check-img-container img").attr("src", "data/branch/" + data1[0].sc_basic_order_img);
+
+                                    }
+                                }
+                            });
+                        } else {
+
+                            var data = JSON.parse(data);
+
+                            $(".modal-check-img-container img").attr("src", "data/branch/" + data[0].guide_basic_order_img);
+
+                        }
+                    }
+                });
             })
 
             $(document).on("click", ".second-btn-order", function(event){
+
+                var orderProductList = [];
+
+                // for(var i = 0; i < productList.length; i++) {
+                //     var ctOptionArray = productList[i].ct_option.split("/");
+                //
+                //     for(var k = 0; k < ctOptionArray.length; k++) {
+                //         var title = ctOptionArray[k].split(":");
+                //
+                //         $(".modal-option-subject-title").each(function(j, jtem){
+                //             if($(jtem).data("title") == title[0]) {
+                //
+                //                 if($(jtem).attr("data-beverage_op_type") == "0") {
+                //                     productList[i].io_id = title[0] + chr(30) + title[1];
+                //                     productList[i].ct_option = "";
+                //                 } else {
+                //                     productList[i].ct_option = title[0] + ":" + title[1];
+                //                     productList[i].io_id = "";
+                //                 }
+                //
+                //
+                //                 productList[i].io_type = parseInt($(jtem).attr("data-beverage_op_type"));
+                //             }
+                //         });
+                //
+                //         console.log(productList[i]);
+                //     }
+                //
+                //     console.log(ctOptionArray);
+                // }
+
+                console.log(productList);
 
                 $.ajax({
                     type: "POST",
                     url: "ok/main04_ok.php?type=cart",
                     data: { productList: productList },
                     success: function(data) {
-
+                        console.log(data);
                         productList = [];
                         $(".total-price > div > span:nth-child(1)").text(0);
 
@@ -568,9 +695,20 @@ include "top.php";
                         $(".product-list-container div").remove();
 
                         for(var i = 0; i < data.length; i++) {
-                            var html = "<div class='product-list-item-container' data-beverage_cd='" + data[i].beverage_cd + "' data-beverage_option_subject='" + data[i].beverage_option_subject + "'>";
+
+                            var sold_out = "";
+
+                            if(data[i].sold_out_fl == 'T')
+                                sold_out = "soldout";
+                            else
+                                sold_out = "";
+
+                            var html = "<div class='product-list-item-container " + sold_out + "' data-beverage_cd='" + data[i].beverage_cd + "' data-beverage_option_subject='" + data[i].beverage_option_subject + "' data-beverage_supply_subject='" + data[i].beverage_supply_subject + "'>";
                                 html += "<div class='product-item-img'>";
-                                    html += "<img src='/data/beverage/" + data[i].beverage_file + "' alt='BEVERAGE' title='BEVERAGE'>";
+                                    if(data[i].sold_out_fl == 'T')
+                                        html += "<img src='/img/cart/soldout.png' alt='SOLDOUT' title='SOLDOUT'>";
+                                    else
+                                        html += "<img src='/data/beverage/" + data[i].beverage_file + "' alt='BEVERAGE' title='BEVERAGE'>";
                                 html += "</div>";
                                 html += "<div class='product-title-kr'>" + data[i].beverage_kor_nm + "</div>";
                                 html += "<div class='product-title-en'>" + data[i].beverage_eng_nm + "</div>";

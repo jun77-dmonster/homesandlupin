@@ -347,8 +347,10 @@ include "top.php";
         });
 
 
-
-        $(".search-list-item-container > div:not(:first-child)").click(function(event){
+        $(".search-list-item-container:first-child div:not(:first-child)").click(function(){
+            $(this).addClass("active").siblings().removeClass("active");
+        });
+        $(".search-list-item-container:not(:first-child) > div:not(:first-child)").click(function(event){
             $(this).toggleClass("active");
         });
         $(".search-btn-container button").click(function(){

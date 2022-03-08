@@ -3,8 +3,17 @@
   <component name="ChangeListManager">
     <list default="true" id="92d665e2-75c4-46b1-ae25-8aeac10dacbb" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/login/room_check.php" beforeDir="false" afterPath="$PROJECT_DIR$/login/room_check.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/roomchoice.php" beforeDir="false" afterPath="$PROJECT_DIR$/roomchoice.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_branch/admin.head.php" beforeDir="false" afterPath="$PROJECT_DIR$/_branch/admin.head.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_branch/css/admin.css" beforeDir="false" afterPath="$PROJECT_DIR$/_branch/css/admin.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_branch/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/_branch/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_branch/order/order_list.php" beforeDir="false" afterPath="$PROJECT_DIR$/_branch/order/order_list.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_route/order/order_list_all.php" beforeDir="false" afterPath="$PROJECT_DIR$/_route/order/order_list_all.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_route/order/order_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/_route/order/order_view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main02search.php" beforeDir="false" afterPath="$PROJECT_DIR$/main02search.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main04.php" beforeDir="false" afterPath="$PROJECT_DIR$/main04.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ok/main04_ok.php" beforeDir="false" afterPath="$PROJECT_DIR$/ok/main04_ok.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/top.php" beforeDir="false" afterPath="$PROJECT_DIR$/top.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,6 +48,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -54,7 +64,8 @@
       <workItem from="1644717720396" duration="93241000" />
       <workItem from="1645119404371" duration="136996000" />
       <workItem from="1646118631519" duration="58835000" />
-      <workItem from="1646383972044" duration="9060000" />
+      <workItem from="1646383972044" duration="63288000" />
+      <workItem from="1646651539899" duration="22570000" />
     </task>
     <servers />
   </component>

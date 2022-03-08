@@ -1,13 +1,11 @@
 <?php
-$sub_menu = '300200';
+$sub_menu = '300100';
 include_once('./_common.php');
 
 auth_check_menu($auth, $sub_menu, 'r');
 
-$g5['title'] = '주문 상세 보기';
+$g5['title'] = '주문 상세 현황';
 include_once ('../admin.head.php');
-
-
 
 $c1 = sql_fetch("select * from {$DM['CART_TABLE']} where od_id='{$od_id}'");
 
@@ -129,7 +127,7 @@ $result = sql_query($sql);
 </div>
 
 <div class="btn_fixed_top">
-    <a href="./order_list_all.php?<?php echo $qstr ?>" class="btn btn_02">목록</a>
+    <a href="./order_list.php?<?php echo $qstr ?>" class="btn btn_02">목록</a>
 </div>	
 
 <?

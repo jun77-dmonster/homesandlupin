@@ -10,14 +10,32 @@ if(function_exists('social_log_file_delete')){
 $g5['title'] = '관리자메인';
 include_once ('./admin.head.php');
 
-$r1 = sql_query("select * from {$DM['VOICE_CUSTOMER_TABLE']} where branch_cd='{$branch['branch_cd']}' order by customer_reg_dt desc limit 0, 5 ");
-$colspan = "3";
+/*
+$r4 = sql_query(" select t1.*, t2.* from {$DM['GAMES_REQUEST_DESCRIPTION_TABLE']} as t1 join {$DM['BOARD_GAMES_TABLE']} as t2 on t1.games_cd=t2.games_cd where t1.branch_cd='{$branch['branch_cd']}' and date_format(t1.request_reg_dt,'%Y-%m-%d') = '".G5_TIME_YMD."' and  t1.request_status='request' order by t1.request_reg_dt desc ");
+*/
+$r4 = sql_query("SELECT t1.od_id, t1.branch_cd, t1.room_cd, t2.od_status, t2.od_time, t3.room_no  
+            from ( SELECT  od_id, branch_cd, room_cd FROM {$DM['CART_TABLE']} GROUP BY od_id ) as t1 
+            join {$DM['ORDER_TABLE']} as t2 
+            on t1.od_id=t2.od_id
+			join ( select room_no, room_cd from {$DM['BRANCH_ROOM_TABLE']} where branch_cd='{$branch['branch_cd']}') AS t3
+			on t1.room_cd=t3.room_cd
+            where t1.branch_cd='{$branch['branch_cd']}' 
+            and date_format(t2.od_time,'%Y-%m-%d') = '".G5_TIME_YMD."' and t2.od_status='주문'
+            order by t2.od_time asc limit 0, 10");
 
-$r2 = sql_query("select * from {$DM['QNA_TABLE']} where branch_cd='{$branch['branch_cd']}' order by reg_dt desc limit 0, 5 ");
+$colspan1 = "4";
 
-$r3 = sql_query("select * from {$DM['NOTICE_TABLE']} where notice_gubun in('B0000','{$branch['branch_cd']}') order by reg_dt desc limit 0, 5 ");
+$r5 = sql_query("SELECT t1.od_id, t1.branch_cd, t1.room_cd, t2.od_status, t2.od_time, t3.room_no  
+            from ( SELECT  od_id, branch_cd, room_cd FROM {$DM['CART_TABLE']} GROUP BY od_id ) as t1 
+            join {$DM['ORDER_TABLE']} as t2 
+            on t1.od_id=t2.od_id
+			join ( select room_no, room_cd from {$DM['BRANCH_ROOM_TABLE']} where branch_cd='{$branch['branch_cd']}') AS t3
+			on t1.room_cd=t3.room_cd
+            where t1.branch_cd='{$branch['branch_cd']}' 
+            and date_format(t2.od_time,'%Y-%m-%d') = '".G5_TIME_YMD."' and t2.od_status='접수'
+            order by t2.od_time asc limit 0, 10");
+
 ?>
-
 <div class="popup_bg"></div>
 <div class="popup">
   
@@ -47,8 +65,8 @@ $r3 = sql_query("select * from {$DM['NOTICE_TABLE']} where notice_gubun in('B000
 		
 			<div class="cont-box-top">
 				<p class="tit" style='font-size:16px; font-weight:bold;'><?php echo get_room_info($call['room_cd'])?> 번룸 | 호출 시간 : <?php echo $call['request_reg_dt']?> </p>
-				
 			</div>
+
 			<div class="cont-box-bottom">
 				
 				<div style="text-align:center; padding-top:30px;">
@@ -93,8 +111,6 @@ $r3 = sql_query("select * from {$DM['NOTICE_TABLE']} where notice_gubun in('B000
 
 	</div>
   
-
-  
 </div>
 
 <div class="ajax popup_bg"></div>
@@ -126,8 +142,9 @@ $r3 = sql_query("select * from {$DM['NOTICE_TABLE']} where notice_gubun in('B000
 				<form name="frmEmployee" method="post" action="./index_employee_update.php" onsubmit="return frmEmployeeChk(this)" enctype="multipart/form-data">
 				<input type="hidden" name="employee_uid" id="employee_uid" value="">
 				
-				<div style="text-align:center; padding-top:30px;">
+				<div style="text-align:center; padding-top:0px;">
 					
+					<!--
 					<div class="list-box">
 						
 						<div class="txt-title">게임명 : <span class='games_nm'></span></div>
@@ -141,6 +158,20 @@ $r3 = sql_query("select * from {$DM['NOTICE_TABLE']} where notice_gubun in('B000
 							<span class="dis-cmt marT05">
 								<button type="submit" class="crmBtn type-white">직원확인</button>
 							</span>
+
+						</div>
+
+					</div>
+					--->
+
+					<div class="intro-cont type2">
+						
+						<div class="it-left">
+							
+							<span>게임 설명 요청</span>
+							<strong class="games_nm"></strong>
+
+							<button type="submit" class="btn-start2 btn-scroll">직원 확인</button>
 
 						</div>
 
@@ -169,31 +200,25 @@ $r3 = sql_query("select * from {$DM['NOTICE_TABLE']} where notice_gubun in('B000
 			</div>
 			<div class="cont-box-bottom">
 				
-				<form name="frmEmployee" method="post" action="./index_employee_update.php" onsubmit="return frmEmployeeChk(this)" enctype="multipart/form-data">
-				<input type="hidden" name="employee_uid" id="employee_uid" value="">
+				<form name="frmOrder" id="frmOrder" method="post" action="./index_order_update.php" onsubmit="return frmOrderChk(this)" enctype="multipart/form-data">
+				<input type="hidden" name="od_id" id="od_id" value="">
 				
-				<div style="text-align:center; padding-top:30px;">
+				<div style="text-align:center; padding-top:0px;">
 					
-					<div class="list-box">
+					<div class="intro-cont type2">
 						
-						<div></div>
-						
-						<div class="txt-title"><span class='room_no'></span>번 룸</div>
-
-						
-						<div class="txt-cont">
+						<div class="it-left">
 							
-							<div class=""></div>
-							<!--
-							<span class="dis-cmt marT05">
-								<button type="button" class="crmBtn type-white">주문확인</button>
-							</span>
-							-->
+							<span class="od_id"></span>
+							<strong class="room_no"></strong>
+
+							<button type="button" onclick="popOrder()" class="btn-start btn-scroll">오더 확인</button>
+							<button type="submit" class="btn-start2 btn-scroll">주문 접수</button>
 
 						</div>
-						
 
 					</div>
+					
 
 				</div>
 
@@ -216,159 +241,9 @@ $r3 = sql_query("select * from {$DM['NOTICE_TABLE']} where notice_gubun in('B000
 <div id="index_left">
 	
 	<div class="title_wrap">
-		<span class="table-tit">지점 문의</span>
-
+		<span class="table-tit">주문 요청</span>
 		<div class="btn-wrap-left" style='width:calc(100% - 80px);'>
-			<button type="button" class="crmBtn type-white" onclick="location.href='./business/branch_questions_list.php'">더보기</button>
-		</div>
-	</div>
-
-	<div class="content_wrap">
-
-		<table class="ncp_tbl marT15">
-		<thead>
-		
-		<tr>
-			<th>지점</th>
-			<th>제목</th>
-			<th>등록일자</th>
-			<th>답변</th>
-		</tr>
-		</thead>
-		<tbody>
-		<?php
-			for ($i=0; $row=sql_fetch_array($r2); $i++) {
-
-			switch($row['qna_status']){
-				case "Q" : $txt = "접수"; break;
-				case "C" : $txt = "답변대기"; break;
-				case "A" : $txt = "답변완료"; break;
-			}
-		?>
-		<tr>
-			<td class="td_category"><?php echo get_branch_name($row['branch_cd'])?></td>
-			<td class="td_addr"><a href="./business/branch_questions_view.php?uid=<?php echo $row['uid']?>"><?php echo $row['qna_subject']?></a></td>
-			<td class="td_datetime"><?php echo substr($row['reg_dt'],0,10)?></td>
-			<td class="td_mng"><?php echo $txt?></td>
-		</tr>
-		<?
-		}
-		if ($i == 0)
-		echo "<tr><td colspan=\"".$colspan."\" class=\"empty_table\">등록된 고객의 소리가 없습니다</td></tr>";
-
-		?>
-		</tbody>
-		</table>
-
-	</div>
-
-	<div class="title_wrap marT20">
-		<span class="table-tit">공지 사항</span>
-
-		<div class="btn-wrap-left" style='width:calc(100% - 80px);'>
-			<button type="button" class="crmBtn type-white" onclick="location.href='./business/notice_list.php'">더보기</button>
-		</div>
-	</div>
-
-	<div class="content_wrap">
-
-		<table class="ncp_tbl marT15">
-		<thead>
-		
-		<tr>
-			<th>구분</th>
-			<th>제목</th>
-			<th>등록일자</th>
-		</tr>
-		</thead>
-		<tbody>
-		<?php
-			for ($i=0; $row=sql_fetch_array($r3); $i++) {
-		?>
-		<tr>
-			<td class="td_category"><?php echo ($row['notice_gubun'])?"전체지점":""?></td>
-			<td class="td_addr"><a href="./business/branch_questions_view.php?uid=<?php echo $row['uid']?>"><?php echo $row['qna_subject']?></a></td>
-			<td class="td_datetime"><?php echo substr($row['reg_dt'],0,10)?></td>
-		</tr>
-		<?
-		}
-		if ($i == 0)
-		echo "<tr><td colspan=\"".$colspan."\" class=\"empty_table\">등록된 고객의 소리가 없습니다</td></tr>";
-
-		?>
-		</tbody>
-		</table>
-
-	</div>
-
-</div>
-
-<?
-$r4 = sql_query(" select t1.*, t2.* from {$DM['GAMES_REQUEST_DESCRIPTION_TABLE']} as t1 join {$DM['BOARD_GAMES_TABLE']} as t2 on t1.games_cd=t2.games_cd where t1.branch_cd='{$branch['branch_cd']}' and date_format(t1.request_reg_dt,'%Y-%m-%d') = '".G5_TIME_YMD."' and  t1.request_status='request' order by t1.request_reg_dt desc ");
-
-$colspan1 = "4";
-
-$r5 = sql_query("SELECT t1.od_id, t1.branch_cd, t1.room_cd, t2.od_status, t2.od_time, t3.room_no  
-            from ( SELECT  od_id, branch_cd, room_cd FROM {$DM['CART_TABLE']} GROUP BY od_id ) as t1 
-            join {$DM['ORDER_TABLE']} as t2 
-            on t1.od_id=t2.od_id
-			join ( select room_no, room_cd from {$DM['BRANCH_ROOM_TABLE']} where branch_cd='B9168') AS t3
-			on t1.room_cd=t3.room_cd
-            where t1.branch_cd='{$branch['branch_cd']}' 
-            and date_format(t2.od_time,'%Y-%m-%d') = '".G5_TIME_YMD."' and t2.od_status='주문'
-            order by t2.od_time desc");
-?>
-<div id="index_right">
-	
-	<div class="title_wrap">
-		<span class="table-tit">직원 호출 현황</span>
-		<div class="btn-wrap-left">
-			<button type="button" class="crmBtn type-white" onclick="location.href='#'">더보기</button>
-		</div>
-	</div>
-	
-	<div class="content_wrap">
-	
-		<table class="ncp_tbl marT15">
-		<thead>
-		<tr>
-			<th>룸번호</th>
-			<th>설명요청 게임</th>
-			<th>호출일자</th>
-			<th>관리</th>
-		</tr>
-		</thead>
-		<tbody id="employee_call" style='overflow-y:scroll'>
-		<?
-		for($i=0;$row=sql_fetch_array($r4);$i++){
-			$games_dir = G5_DATA_URL.'/boardgames';
-			$game_img = $games_dir."/".$row['games_img_file'];						
-		?>
-		<tr>
-			<td class="td_mng"><?php echo get_room_info($row['room_cd'])?> 번룸</td>
-			<td class="td_addr">
-				<img src="<?php echo $game_img?>" style='width:35px;'> <?php echo $row['games_nm']?>
-			</td>
-			<td class="td_datetime"><?php echo substr($row['request_reg_dt'],0,10)?></td>
-			<td class="td_mng">
-				<!--<a href="#" onclick="popCall('<?php echo $row['uid']?>')" class="btn btn_01">확인</a>-->
-				<a href="#" class="btn btn_01 modalPopup">확인</a>
-			</td>
-		</tr>
-		<?
-		}
-		if ($i == 0)
-		echo "<tr><td colspan=\"".$colspan1."\" class=\"empty_table\">등록된 직원 호출 현황이 없습니다</td></tr>";
-		?>
-		</tbody>
-		</table>
-
-	</div>
-
-	<div class="title_wrap marT20">
-		<span class="table-tit">주문 현황</span>
-		<div class="btn-wrap-left" style='width:calc(100% - 80px);'>
-			<button type="button" class="crmBtn type-white" onclick="location.href='#'">더보기</button>
+			<button type="button" class="crmBtn type-white" onclick="location.href='./order/order_list.php	'">더보기</button>
 		</div>
 	</div>
 
@@ -378,7 +253,50 @@ $r5 = sql_query("SELECT t1.od_id, t1.branch_cd, t1.room_cd, t2.od_status, t2.od_
 		<tr>
 			<th>룸</th>
 			<th>주문번호</th>
-			<th>주문일자</th>
+			<th>주문시간</th>
+			<th>관리</th>
+		</tr>
+		</thead>
+		<tbody id="order_call">
+		<?
+		for($i=0;$row=sql_fetch_array($r4);$i++){
+		?>
+		<tr>
+			<td class="td_mng"><?php echo $row['room_no']?>번</td>
+			<td><?php echo $row['od_id']?></td>
+			<td class="td_datetime"><?php echo substr($row['od_time'],10,10)?></td>
+			<td class="td_mng">
+				<a href="#" class="btn btn_01">접수</a>
+			</td>
+		</tr>
+		<?
+		}
+		if ($i == 0)
+		echo "<tr><td colspan=\"".$colspan1."\" class=\"empty_table\">등록된 주문 현황이 없습니다</td></tr>";
+		?>
+		</tbody>
+		</table>
+	</div>
+
+</div>
+
+
+<div id="index_right">
+
+	<div class="title_wrap">
+		<span class="table-tit">접수 현황</span>
+		<div class="btn-wrap-left" style='width:calc(100% - 80px);'>
+			<button type="button" class="crmBtn type-white" onclick="location.href='./order/order_list.php	'">더보기</button>
+		</div>
+	</div>
+
+	<div class="content_wrap">
+		<table class="ncp_tbl marT15">
+		<thead>
+		<tr>
+			<th>룸</th>
+			<th>주문번호</th>
+			<th>주문시간</th>
 			<th>호출</th>
 		</tr>
 		</thead>
@@ -389,9 +307,14 @@ $r5 = sql_query("SELECT t1.od_id, t1.branch_cd, t1.room_cd, t2.od_status, t2.od_
 		<tr>
 			<td class="td_mng"><?php echo $row['room_no']?>번</td>
 			<td><?php echo $row['od_id']?></td>
-			<td class="td_datetime"><?php echo $row['od_time']?></td>
+			<td class="td_datetime"><?php echo substr($row['od_time'],10,10)?></td>
 			<td class="td_mng">
-				<a href="#" class="btn btn_01 modalPopup">호출</a>
+				<!--<a href="#" class="btn btn_01 modalPopup">호출</a>-->
+				<?php if($row['od_status']=="접수"){?>
+				<button class="btn btn_01" onclick="location.href='./index_room_call.php?od_id=<?php echo $row['od_id']?>'" style='width:80px'>룸호출</button>
+				<?php }else{?>
+				<button class="btn btn_01" onclick="wait()" style='width:80px'>룸호출</button>
+				<?php }?>
 			</td>
 		</tr>
 		<?
@@ -413,9 +336,11 @@ var time_interval
 $( document ).ready(function() {
 	//interval_order()
 	time_interval = setInterval(() => {
-		interval_order()
+		interval_order();
+        console.log("interval");
 	}, 5000);
 });
+console.log("global");
 
 function interval_order(){
 	let branch_cd = 'B9168'
@@ -439,10 +364,11 @@ function interval_order(){
 			{
 				let order_data = json.order[0]
 				$('.order .txt-cont .game-image-area').prepend("<img src='"+"http://dmonster9995.ingyu7.gethompy.com/data/boardgames/"+order_data.games_img_file+"' style='width:130px;'>")
-				$('.order .room_no').html(order_data.room_no)
+				$('.order .room_no').html(order_data.room_no+"번룸 주문")
 				$('.order .request_reg_dt').html(order_data.od_time)
+				$('.order .od_id').html("주문번호 :	"+order_data.od_id)
 				$('.order .games_nm').html(order_data.games_nm)
-				$('.order #employee_uid').val(order_data.uid)
+				$('.order #od_id').val(order_data.od_id)
 			}
 			$(".ajax.popup_bg").show();
 			$(".ajax.popup").show(700);
@@ -488,6 +414,31 @@ function popCall(uid){
 
 }
 
+function popOrder(){
+	var f = document.frmOrder;
+
+	var _width	= '800';
+    var _height = '600';
+ 
+    // 팝업을 가운데 위치시키기 위해 아래와 같이 값 구하기
+    var _left = Math.ceil(( window.screen.width - _width )/2);
+    var _top = Math.ceil(( window.screen.height - _height )/2); 
+
+	var od_id = f.od_id.value;
+
+	href="./pop_order.php?od_id="+od_id;
+
+	var new_win = window.open(href, "pop_order", "left="+_left+",top="+_top+",width="+_width+", height="+_height+", scrollbars=1");
+    new_win.focus();
+	
+	//alert(f.od_id.value);
+}
+
+function wait(){
+
+	alert("직원의 오더 확인 후 룸 호출이 가능합니다");
+	
+}
 
 </script>
 <?php
